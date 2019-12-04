@@ -1,0 +1,5 @@
+COLORS:
+NAVY (dark blue): #00293C
+PEACOCK BLUE (light blue): #1E656D
+IVORY (light yellow): #F1F3CE
+CANDY APPLE (red): #F62A00 
