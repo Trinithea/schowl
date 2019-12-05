@@ -16,14 +16,16 @@
             app:layout_constraintTop_toBottomOf="@+id/logo"
             app:layout_constraintBottom_toTopOf="@+id/startButton" android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toEndOf="parent" android:layout_marginStart="8dp"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"/>
     <ImageView
-            android:layout_width="407dp"
-            android:layout_height="368dp" app:srcCompat="@drawable/ic_logo_owl_smaller_ears"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp" app:srcCompat="@drawable/ic_logo_owl_cropped"
             android:id="@+id/logo"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/textView" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"/>
+            android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp" android:layout_marginTop="8dp" android:layout_marginBottom="8dp"/>
     <Button
             android:text="@string/start_test"
             android:layout_width="200dp"
@@ -32,6 +34,7 @@
             android:id="@+id/startButton" app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView" app:layout_constraintHorizontal_bias="0.5"
             android:background="@drawable/circle_button_red" android:textSize="48sp"
-            android:textColor="#FFFFFF" android:fontFamily="monospace"/>
+            android:textColor="#FFFFFF" android:fontFamily="monospace" android:layout_marginBottom="32dp"
+            android:layout_marginTop="16dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
