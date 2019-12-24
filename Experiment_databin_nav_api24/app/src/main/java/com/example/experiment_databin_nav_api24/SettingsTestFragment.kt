@@ -7,6 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.databinding.DataBindingUtil
+import com.example.experiment_databin_nav_api24.databinding.FragmentCategoriesBinding
+import com.example.experiment_databin_nav_api24.databinding.FragmentSettingstestBinding
 
 
 class SettingsTestFragment : Fragment() {
@@ -16,7 +19,9 @@ class SettingsTestFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_settingstest, container, false)
+        val binding: FragmentSettingstestBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_settingstest,container,false)
+        return binding.root
+
     }
 
 

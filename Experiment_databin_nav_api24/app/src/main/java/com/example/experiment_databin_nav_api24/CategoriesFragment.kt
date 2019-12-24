@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.databinding.DataBindingUtil
+import com.example.experiment_databin_nav_api24.databinding.FragmentCategoriesBinding
 
 class CategoriesFragment : Fragment() {
 
@@ -14,7 +16,9 @@ class CategoriesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_categories, container, false)
+       val binding: FragmentCategoriesBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_categories,container,false)
+        return binding.root
+
     }
 
 
