@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/navigation" app:startDestination="@id/settingsTestFragment">
+
+    <fragment android:id="@+id/settingsTestFragment"
+              android:name="com.example.experiment_databin_nav_api24.SettingsTestFragment"
+              android:label="SettingsTestFragment"/>
+</navigation>
