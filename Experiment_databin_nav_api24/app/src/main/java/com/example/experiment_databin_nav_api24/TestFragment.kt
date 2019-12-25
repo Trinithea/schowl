@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.example.experiment_databin_nav_api24.databinding.FragmentCategoriesBinding
 import com.example.experiment_databin_nav_api24.databinding.FragmentTestBinding
@@ -18,6 +19,7 @@ class TestFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val binding: FragmentTestBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_test,container,false)
+        (activity as AppCompatActivity).supportActionBar?.title = "TEST"
         return binding.root
 
     }
