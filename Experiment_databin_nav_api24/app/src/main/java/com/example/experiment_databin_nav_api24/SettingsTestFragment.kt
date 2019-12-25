@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import com.example.experiment_databin_nav_api24.databinding.FragmentCategoriesBinding
 import com.example.experiment_databin_nav_api24.databinding.FragmentSettingstestBinding
 
@@ -23,14 +25,16 @@ class SettingsTestFragment : Fragment() {
 
         (activity as AppCompatActivity).supportActionBar?.title = "CREATE YOUR TEST"
         return binding.root
-
-
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater?.inflate(R.menu.confirm_menu,menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        return super.onOptionsItemSelected(item)
     }
 
 }
