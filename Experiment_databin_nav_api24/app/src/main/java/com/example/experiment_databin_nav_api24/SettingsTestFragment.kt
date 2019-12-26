@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
+import androidx.navigation.ui.NavigationUI
 import com.example.experiment_databin_nav_api24.databinding.FragmentCategoriesBinding
 import com.example.experiment_databin_nav_api24.databinding.FragmentSettingstestBinding
 
@@ -33,8 +34,9 @@ class SettingsTestFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
-        return super.onOptionsItemSelected(item)
+        return NavigationUI.onNavDestinationSelected(item!!,
+            view!!.findNavController())
+                || super.onOptionsItemSelected(item)
     }
 
 }
