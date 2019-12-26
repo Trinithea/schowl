@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item
+            android:id="@+id/editQuestionFragment"
+            android:icon="@drawable/ic_icon_edit"
+            android:orderInCategory="100"
+            android:title="Category" app:showAsAction="always"/>
+    <item
+            android:id="@+id/action_remove"
+            android:icon="@drawable/ic_icon_remove"
+            android:orderInCategory="100"
+            android:title="Category" app:showAsAction="always"/>
+    <item
+            android:id="@+id/settingsTestFragment"
+            android:icon="@drawable/icon_experiment_white"
+            android:orderInCategory="100"
+            android:title="Category" app:showAsAction="always"/>
+
+</menu>

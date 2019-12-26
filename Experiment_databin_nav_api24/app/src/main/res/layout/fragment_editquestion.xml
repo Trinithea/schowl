@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
 <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".MainActivity">
@@ -11,7 +9,8 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent" android:id="@+id/LytEditQuestion"
-            android:scrollbarAlwaysDrawVerticalTrack="false" android:fadeScrollbars="true">
+            android:scrollbarAlwaysDrawVerticalTrack="false" android:fadeScrollbars="true"
+            android:background="@drawable/ic_owl_background_op24">
         <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -31,15 +30,15 @@
                 android:layout_marginTop="16dp" android:layout_marginLeft="16dp" android:layout_marginRight="16dp"
                 android:hint="@string/write_solution"/>
         <SeekBar
-                style="@android:style/Widget.DeviceDefault.SeekBar"
                 android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:max="10"
-                android:progress="5"
-                android:id="@+id/SkbDifficulty" android:thumb="@drawable/ic_icon_triangle"
-                app:tickMark="@drawable/ic_icon_line" android:layout_marginLeft="16dp"
-                android:layout_marginTop="16dp" android:layout_marginRight="16dp"
-        />
+                android:layout_height="wrap_content"
+                android:id="@+id/skbMaxDif" android:max="10"
+                style="@android:style/Widget.Material.SeekBar.Discrete" android:progress="3"
+                app:layout_constraintTop_toBottomOf="@+id/LblMinDif"
+                app:layout_constraintBottom_toTopOf="@+id/LblMaxDif" app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
+                app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp" android:layout_marginTop="16dp"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

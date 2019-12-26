@@ -2,7 +2,7 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:android="http://schemas.android.com/apk/res/android" >
     <item
             android:id="@+id/testFragment"
-            android:icon="@android:drawable/ic_menu_send"
+            android:icon="@drawable/ic_icon_confirm"
             android:orderInCategory="100"
             android:title="Confirm" app:showAsAction="always"/>
 
