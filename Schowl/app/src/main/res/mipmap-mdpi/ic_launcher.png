@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AndroidLayouts">
+    <shared>
+      <config />
+    </shared>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="71abbbdb-c6e5-4e2f-b799-75a1c4744a5c" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../Experiment_databin_nav_api24/app/src/main/java/com/example/experiment_databin_nav_api24/CategoriesFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Experiment_databin_nav_api24/app/src/main/java/com/example/experiment_databin_nav_api24/CategoriesFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Experiment_databin_nav_api24/app/src/main/java/com/example/experiment_databin_nav_api24/QuestionsFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Experiment_databin_nav_api24/app/src/main/java/com/example/experiment_databin_nav_api24/QuestionsFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Experiment_databin_nav_api24/app/src/main/java/com/example/experiment_databin_nav_api24/SubjectsFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Experiment_databin_nav_api24/app/src/main/java/com/example/experiment_databin_nav_api24/SubjectsFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Experiment_databin_nav_api24/app/src/main/java/com/example/experiment_databin_nav_api24/TestFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Experiment_databin_nav_api24/app/src/main/java/com/example/experiment_databin_nav_api24/TestFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Experiment_databin_nav_api24/app/src/main/res/layout/fragment_subjects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Experiment_databin_nav_api24/app/src/main/res/layout/fragment_subjects.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Experiment_databin_nav_api24/app/src/main/res/layout/fragment_test.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Experiment_databin_nav_api24/app
