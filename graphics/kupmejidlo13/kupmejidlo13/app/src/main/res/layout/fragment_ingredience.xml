@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright 2018, The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.android.navigation.IngredienceFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/gameOverConstraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/background_light">
+
+        <Button
+            android:id="@+id/btn_jidelnicek3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/roundedbutton_red"
+            android:fontFamily="@font/annie_use_your_telescope"
+            android:text="Jídelníček"
+            android:textSize="20dp"
+            app:layout_constraintEnd_toStartOf="@+id/btn_ingr3"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btn_ingr3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/roundedbutton_ice"
+            android:fontFamily="@font/annie_use_your_telescope"
+            android:text="@string/ingredience"
+            android:textSize="20dp"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toStartOf="@+id/btn_nakupak3"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btn_jidelnicek3"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btn_nakupak3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/roundedbutton_orange"
+            android:fontFamily="@font/annie_use_your_telescope"
+            android:text="Nákup"
+            android:textSize="20dp"
+            app:layout_constraintEnd_toStartOf="@+id/btn_pozn3"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btn_ingr3"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btn_pozn3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/roundedbutton_yellow"
+            android:fontFamily="@font/annie_use_your_telescope"
+            android:text="@string/button_notes"
+            android:textSize="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btn_nakupak3"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/label_ingredience"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/question_horizontal_margin"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="@dimen/question_horizontal_margin"
+            android:fontFamily="@font/annie_use_your_telescope"
+            android:foregroundGravity="center|center_horizontal"
+            android:gravity="center|center_horizontal|center_vertical"
+            android:text="@string/ingredience"
+            android:textSize="44sp"
+            android:textStyle="bold"
+            android:typeface="normal"
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@+id/label_vyber_jidlo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_jidelnicek3"
+            app:layout_constraintVertical_chainStyle="spread" />
+
+        <Button
+            android:id="@+id/tryAgainButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/vertical_margin"
+            android:layout_marginEnd="@dimen/vertical_margin"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/roundedbutton_orange"
+            android:fontFamily="@font/annie_use_your_telescope"
+            android:paddingStart="@dimen/button_padding"
+            android:paddingEnd="@dimen/button_padding"
+            android:text="@string/submit_button"
+            android:textColor="@android:color/background_dark"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/scroll_ingr"
+            app:layout_constraintVertical_chainStyle="spread" />
+
+        <Spinner
+            android:id="@+id/spinner_jidla"
+            android:layout_width="0dp"
+            android:layout_height="66dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/roundedbutton_yellow"
+            android:dropDownWidth="wrap_content"
+            android:popupBackground="@drawable/roundedbutton_ice"
+            android:spinnerMode="dropdown"
+            app:layout_constraintBottom_toTopOf="@+id/scroll_ingr"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/label_vyber_jidlo" />
+
+        <TextView
+            android:id="@+id/label_vyber_jidlo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/annie_use_your_telescope"
+            android:text="@string/vyber_jidlo_z_jidelnicku"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toTopOf="@+id/spinner_jidla"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/label_ingredience"
+            app:layout_constraintVertical_chainStyle="spread" />
+
+        <ScrollView
+            android:id="@+id/scroll_ingr"
+            android:layout_width="415dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:paddingLeft="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/tryAgainButton"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spinner_jidla">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/txt_ingr"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:ems="10"
+                    android:fontFamily="@font/annie_use_your_telescope"
+                    android:gravity="start|top"
+                    android:hint="@string/sem_napis_ingr"
+                    android:inputType="textMultiLine"
+                    android:textSize="24sp" />
+            </LinearLayout>
+        </ScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

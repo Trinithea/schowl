@@ -21,8 +21,8 @@
 
     <string name="select_subject">SELECT SUBJECT</string>
     <string name="select_category">SELECT CATEGORY</string>
-    <string name="min_difficulty">Minimum difficulty:</string>
-    <string name="max_difficulty">Maximum difficulty:</string>
+    <string name="min_difficulty">MINIMUM DIFFICULTY:</string>
+    <string name="max_difficulty">MAXIMUM DIFFICULTY:</string>
 
     <string name="show_solution">SHOW SOLUTION</string>
     <string name="next">NEXT</string>

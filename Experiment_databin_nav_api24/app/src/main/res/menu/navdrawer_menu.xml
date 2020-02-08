@@ -7,5 +7,5 @@
           android:icon="@drawable/icon_subject"/>
     <item android:title="@string/menu_settings" android:id="@+id/settingsFragment"
           android:icon="@drawable/icon_settings"/>
-    <item android:title="@string/menu_about" android:id="@+id/aboutFagment" android:icon="@drawable/icon_about"/>
+    <item android:title="@string/menu_about" android:id="@+id/aboutFragment" android:icon="@drawable/icon_about"/>
 </menu>

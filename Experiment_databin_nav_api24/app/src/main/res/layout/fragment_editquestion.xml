@@ -1,44 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools">
-<androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".MainActivity">
-    <LinearLayout
-            android:orientation="vertical"
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/LytMain"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" android:id="@+id/LytEditQuestion"
-            android:scrollbarAlwaysDrawVerticalTrack="false" android:fadeScrollbars="true"
-            android:background="@drawable/ic_owl_background_op24">
-        <EditText
-                android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/navyBlue"
+            tools:context=".MainActivity">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/btnSent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="textMultiLine"
-                android:gravity="start|top"
-                android:ems="10"
-                android:id="@+id/EdtQuestion" android:typeface="monospace" android:textSize="24sp"
-                android:layout_marginTop="16dp" android:layout_marginLeft="16dp" android:layout_marginRight="16dp"
-                android:hint="@string/ask_a_question"/>
-        <EditText
-                android:layout_width="match_parent"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:background="@color/appleRed"
+                android:clickable="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:srcCompat="@drawable/ic_icon_confirm" />
+
+        <LinearLayout
+                android:id="@+id/linearLayout3"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="textMultiLine"
-                android:gravity="start|top"
-                android:ems="10"
-                android:id="@+id/EdtSolution" android:typeface="monospace" android:textSize="24sp"
-                android:layout_marginTop="16dp" android:layout_marginLeft="16dp" android:layout_marginRight="16dp"
-                android:hint="@string/write_solution"/>
-        <SeekBar
-                android:layout_width="match_parent"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="monospace"
+                    android:text="YOUR QUESTION"
+                    android:textColor="@color/ivoryYellow"
+                    android:textSize="24sp" />
+
+            <EditText
+                    android:id="@+id/editText2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/peacockBlue"
+                    android:ems="10"
+                    android:gravity="start|top"
+                    android:inputType="textMultiLine"
+                    android:textColor="@color/ivoryYellow"
+                    android:textSize="18sp" />
+        </LinearLayout>
+
+        <LinearLayout
+                android:id="@+id/linearLayout2"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/skbMaxDif" android:max="10"
-                style="@android:style/Widget.Material.SeekBar.Discrete" android:progress="3"
-                app:layout_constraintTop_toBottomOf="@+id/LblMinDif"
-                app:layout_constraintBottom_toTopOf="@+id/LblMaxDif" app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
-                app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
-                android:layout_marginStart="8dp" android:layout_marginTop="16dp"/>
-    </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+
+            <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="monospace"
+                    android:text="CORRECT SOLUTION"
+                    android:textColor="@color/ivoryYellow"
+                    android:textSize="24sp" />
+
+            <EditText
+                    android:id="@+id/editText3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/peacockBlue"
+                    android:ems="10"
+                    android:gravity="start|top"
+                    android:inputType="textMultiLine"
+                    android:textColor="@color/ivoryYellow"
+                    android:textSize="18sp" />
+        </LinearLayout>
+
+        <LinearLayout
+                android:id="@+id/linearLayout4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+            <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="monospace"
+                    android:text="DIFFICULTY"
+                    android:textColor="@color/ivoryYellow"
+                    android:textSize="24sp" />
+
+            <SeekBar
+                    android:id="@+id/seekBar"
+                    android:layout_width="234dp"
+                    android:layout_height="33dp"
+                    android:max="10" />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

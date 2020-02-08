@@ -3,124 +3,194 @@
         xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".MainActivity" android:id="@+id/constraintLayout"
-            android:background="@drawable/ic_owl_background_op24" android:isScrollContainer="false"
-            android:fadeScrollbars="false" android:nestedScrollingEnabled="false"
-            android:scrollbarAlwaysDrawHorizontalTrack="false" android:scrollbarAlwaysDrawVerticalTrack="false">
+            android:background="@drawable/ic_owl_background_op24"
+            android:fadeScrollbars="false"
+            android:isScrollContainer="false"
+            android:nestedScrollingEnabled="false"
+            android:scrollbarAlwaysDrawHorizontalTrack="false"
+            android:scrollbarAlwaysDrawVerticalTrack="false"
+            tools:context=".MainActivity">
+
         <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/LytSelectSubject"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:id="@+id/LytSelectSubject"
-                app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toTopOf="@+id/LytSelectCategory">
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toTopOf="@+id/LytSelectCategory"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                    android:text="@string/select_subject"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:id="@+id/LblSubject"
-                    android:textSize="30sp" app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toTopOf="@+id/SpnSubject" app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
-                    app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
-                    android:layout_marginStart="8dp" app:fontFamily="monospace" android:textColor="@color/navyBlue"/>
-            <Spinner
-                    android:layout_width="255dp"
-                    android:layout_height="62dp" android:id="@+id/SpnSubject"
-                    style="@style/Widget.AppCompat.Spinner.Underlined"
-                    app:layout_constraintTop_toBottomOf="@+id/LblSubject"
-                    app:layout_constraintBottom_toTopOf="@+id/SwitchAll" app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
-                    app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
-                    android:layout_marginStart="8dp"/>
-            <Switch
-                    android:text="All categories  "
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/SwitchAll"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:text="@string/select_subject"
+                    android:textColor="@color/navyBlue"
+                    android:textSize="30sp"
+                    app:fontFamily="monospace"
+                    app:layout_constraintBottom_toTopOf="@+id/SpnSubject"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            <Spinner
+                    android:id="@+id/SpnSubject"
+                    style="@style/Widget.AppCompat.Spinner.Underlined"
+                    android:layout_width="255dp"
+                    android:layout_height="62dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    app:layout_constraintBottom_toTopOf="@+id/SwitchAllCategories"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/LblSubject" />
+
+            <Switch
+                    android:id="@+id/SwitchAllCategories"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:text="All categories  "
+                    android:textColor="@color/peacockBlue"
+                    android:textSize="24sp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/SpnSubject"
-                    app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
-                    android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginEnd="8dp" android:layout_marginRight="8dp" android:textSize="24sp"
-                    android:textColor="@color/peacockBlue"/>
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/SpnSubject" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+
         <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/LytSelectCategory"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:id="@+id/LytSelectCategory"
-                app:layout_constraintTop_toBottomOf="@+id/LytSelectSubject"
-                app:layout_constraintBottom_toTopOf="@+id/LytSetDifficulty">
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toTopOf="@+id/LytSetDifficulty"
+                app:layout_constraintTop_toBottomOf="@+id/LytSelectSubject">
 
             <TextView
-                    android:text="@string/select_category"
+                    android:id="@+id/LblCategory"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/LblCategory"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toTopOf="@+id/spinner2" android:textSize="30sp"
-                    app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
-                    android:layout_marginRight="8dp" app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginLeft="8dp" android:layout_marginStart="8dp" app:fontFamily="monospace"
-                    android:textColor="@color/navyBlue"/>
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:text="@string/select_category"
+                    android:textColor="@color/navyBlue"
+                    android:textSize="30sp"
+                    app:fontFamily="monospace"
+                    app:layout_constraintBottom_toTopOf="@+id/SpnCategory"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
             <Spinner
-                    android:layout_width="255dp"
-                    android:layout_height="62dp" android:id="@+id/spinner2"
+                    android:id="@+id/SpnCategory"
                     style="@style/Widget.AppCompat.Spinner.Underlined"
+                    android:layout_width="255dp"
+                    android:layout_height="62dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/LblCategory"
-                    app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
-                    android:layout_marginRight="8dp" app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginLeft="8dp" android:layout_marginStart="8dp"/>
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/LblCategory" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+
         <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/LytSetDifficulty"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:id="@+id/LytSetDifficulty" android:layout_marginTop="8dp"
-                app:layout_constraintTop_toBottomOf="@+id/LytSelectCategory"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/LytSelectCategory"
                 tools:layout_editor_absoluteX="-244dp">
 
-            <TextView
-                    android:text="@string/min_difficulty"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/LblMinDif"
-                    app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toTopOf="@+id/SkbMaxDif"
-                    app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
-                    android:layout_marginRight="8dp" app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginLeft="8dp" android:layout_marginStart="8dp" android:textSize="30sp"
-                    app:fontFamily="monospace" android:layout_marginTop="16dp" android:textColor="@color/navyBlue"/>
             <SeekBar
-                    android:layout_width="339dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/SkbMinDif" android:max="10"
-                    style="@android:style/Widget.Material.SeekBar.Discrete" android:progress="8"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/LblMaxDif" app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginEnd="8dp"
+                    android:id="@+id/SkbMinDif"
+                    android:layout_width="271dp"
+                    android:layout_height="37dp"
+                    android:max="10"
+                    app:layout_constraintBottom_toTopOf="@+id/LblMaxDif"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginStart="8dp" android:layout_marginTop="16dp"
-                    android:layout_marginBottom="16dp"/>
+                    app:layout_constraintTop_toBottomOf="@+id/LblMinDif" />
+
             <TextView
-                    android:text="@string/max_difficulty"
+                    android:id="@+id/LblMinDif"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/LblMaxDif"
-                    app:layout_constraintTop_toBottomOf="@+id/SkbMaxDif"
-                    app:layout_constraintBottom_toTopOf="@+id/SkbMinDif" app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
-                    app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
-                    android:layout_marginStart="8dp" android:textSize="30sp" app:fontFamily="monospace"
-                    android:layout_marginTop="16dp" android:textColor="@color/navyBlue"/>
+                    android:text="@string/min_difficulty"
+                    android:textColor="@color/navyBlue"
+                    android:textSize="30sp"
+                    app:fontFamily="monospace"
+                    app:layout_constraintBottom_toTopOf="@+id/SkbMinDif"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                    android:id="@+id/LblCurrentMinDif"
+                    android:layout_width="wrap_content"
+                    android:layout_height="37dp"
+                    android:fontFamily="serif-monospace"
+                    android:text="0"
+                    android:textSize="30sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/SkbMinDif"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/SkbMinDif"
+                    app:layout_constraintTop_toTopOf="@+id/SkbMinDif" />
+
+            <TextView
+                    android:id="@+id/LblCurrentMaxDif"
+                    android:layout_width="wrap_content"
+                    android:layout_height="37dp"
+                    android:fontFamily="serif-monospace"
+                    android:text="0"
+                    android:textSize="30sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/SkbMaxDif"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/SkbMaxDif"
+                    app:layout_constraintTop_toTopOf="@+id/SkbMaxDif"
+                    app:layout_constraintVertical_bias="1.0" />
+
             <SeekBar
-                    android:layout_width="336dp"
+                    android:id="@+id/SkbMaxDif"
+                    android:layout_width="271dp"
+                    android:layout_height="37dp"
+                    android:max="10"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/LblMaxDif" />
+
+            <TextView
+                    android:id="@+id/LblMaxDif"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/SkbMaxDif" android:max="10"
-                    style="@android:style/Widget.Material.SeekBar.Discrete" android:progress="3"
-                    app:layout_constraintTop_toBottomOf="@+id/LblMinDif"
-                    app:layout_constraintBottom_toTopOf="@+id/LblMaxDif" app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
-                    app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
-                    android:layout_marginStart="8dp" android:layout_marginTop="16dp"/>
+                    android:text="@string/max_difficulty"
+                    android:textColor="@color/navyBlue"
+                    android:textSize="30sp"
+                    app:fontFamily="monospace"
+                    app:layout_constraintBottom_toTopOf="@+id/SkbMaxDif"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/SkbMinDif" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

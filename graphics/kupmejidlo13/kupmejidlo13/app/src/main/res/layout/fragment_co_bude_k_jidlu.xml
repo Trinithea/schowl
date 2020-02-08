@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright 2018, The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.android.navigation.CoBudeKJidluFragment">
+
+    <data>
+
+        <variable
+            name="game"
+            type="com.example.android.navigation.CoBudeKJidluFragment" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/frameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/questionText"
+                android:layout_width="344dp"
+                android:layout_height="62dp"
+                android:layout_marginStart="@dimen/question_horizontal_margin"
+                android:layout_marginEnd="@dimen/question_horizontal_margin"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/annie_use_your_telescope"
+                android:foregroundGravity="center|center_horizontal"
+                android:gravity="center|center_horizontal|center_vertical"
+                android:text="CO BUDE K JÍDLU?"
+                android:textSize="44sp"
+                android:textStyle="bold"
+                android:typeface="normal"
+                android:visibility="visible"
+                app:layout_constraintBottom_toTopOf="@+id/btn_po"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_ingr"
+                app:layout_constraintVertical_bias="0.714" />
+
+            <Button
+                android:id="@+id/submitButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/question_horizontal_margin"
+                android:layout_marginEnd="@dimen/question_horizontal_margin"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/roundedbutton_yellow"
+                android:fontFamily="@font/annie_use_your_telescope"
+                android:text="@string/submit_button"
+                android:textSize="30sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editText3" />
+
+            <Button
+                android:id="@+id/btn_po"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="124dp"
+                android:background="@drawable/circlebutton_ice"
+                android:fontFamily="@font/annie_use_your_telescope"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:text="@string/button_po"
+                android:textSize="30sp"
+                app:layout_constraintEnd_toStartOf="@+id/btn_ut"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/btn_Čt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="124dp"
+                android:background="@drawable/circlebutton_ice"
+                android:fontFamily="@font/annie_use_your_telescope"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:text="@string/button_ct"
+                android:textSize="30sp"
+                app:layout_constraintEnd_toStartOf="@+id/btn_pa"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/btn_st"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/btn_pa"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="124dp"
+                android:background="@drawable/circlebutton_ice"
+                android:fontFamily="@font/annie_use_your_telescope"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:text="@string/button_pa"
+                android:textSize="30sp"
+                app:layout_constraintEnd_toStartOf="@+id/btn_so"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/btn_Čt"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/btn_so"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="124dp"
+                android:background="@drawable/circlebutton_ice"
+                android:fontFamily="@font/annie_use_your_telescope"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:text="@string/button_so"
+                android:textSize="30sp"
+                app:layout_constraintEnd_toStartOf="@+id/btn_ne"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/btn_pa"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/btn_ut"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="124dp"
+                android:background="@drawable/circlebutton_ice"
+                android:fontFamily="@font/annie_use_your_telescope"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:text="@string/button_ut"
+                android:textSize="30sp"
+                app:layout_constraintEnd_toStartOf="@+id/btn_st"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/btn_po"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/btn_st"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="124dp"
+                android:background="@drawable/circlebutton_ice"
+                android:fontFamily="@font/annie_use_your_telescope"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:text="@string/button_st"
+                android:textSize="30sp"
+                app:layout_constraintEnd_toStartOf="@+id/btn_Čt"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/btn_ut"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/btn_ne"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="124dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/circlebutton_ice"
+                android:fontFamily="@font/annie_use_your_telescope"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:text="@string/button_ne"
+                android:textSize="30sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/btn_so"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="@font/annie_use_your_telescope"
+                android:text="@string/label_sn"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/editText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_po" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="@font/annie_use_your_telescope"
+                android:text="@string/label_ve"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/editText3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editText2" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="@font/annie_use_your_telescope"
+                android:text="@string/label_ob"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/editText2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editText" />
+
+            <EditText
+                android:id="@+id/editText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:ems="10"
+                android:fontFamily="@font/annie_use_your_telescope"
+                android:gravity="center|center_horizontal|center_vertical"
+                android:hint="Co bude k snídani?"
+                android:inputType="textShortMessage|textLongMessage"
+                android:textSize="30sp"
+                app:layout_constraintBottom_toTopOf="@+id/textView3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+            <EditText
+                android:id="@+id/editText2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:ems="10"
+                android:fontFamily="@font/annie_use_your_telescope"
+                android:foregroundGravity="center|center_horizontal"
+                android:gravity="center|center_horizontal|center_vertical"
+                android:hint="Co bude k obědu?"
+                android:inputType="textShortMessage|textLongMessage"
+                android:textSize="30sp"
+                app:layout_constraintBottom_toTopOf="@+id/textView2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+            <EditText
+                android:id="@+id/editText3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:ems="10"
+                android:fontFamily="@font/annie_use_your_telescope"
+                android:foregroundGravity="center|center_horizontal"
+                android:gravity="center|center_horizontal|center_vertical"
+                android:hint="Co bude k večeři?"
+                android:inputType="textShortMessage|textLongMessage"
+                android:textSize="30sp"
+                app:layout_constraintBottom_toTopOf="@+id/submitButton"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+            <Button
+                android:id="@+id/btn_jidelnicek"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/roundedbutton_red"
+                android:fontFamily="@font/annie_use_your_telescope"
+                android:text="Jídelníček"
+                android:textSize="20dp"
+                android:visibility="invisible"
+                app:layout_constraintEnd_toStartOf="@+id/btn_ingr"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/btn_ingr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/roundedbutton_ice"
+                android:fontFamily="@font/annie_use_your_telescope"
+                android:text="@string/ingredience"
+                android:textSize="20dp"
+                app:layout_constraintEnd_toStartOf="@+id/btn_nakupak"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/btn_jidelnicek"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/btn_nakupak"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/roundedbutton_orange"
+                android:fontFamily="@font/annie_use_your_telescope"
+                android:text="Nákup"
+                android:textSize="20dp"
+                app:layout_constraintEnd_toStartOf="@+id/btn_pozn"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/btn_ingr"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/btn_pozn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/roundedbutton_yellow"
+                android:fontFamily="@font/annie_use_your_telescope"
+                android:text="@string/button_notes"
+                android:textSize="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/btn_nakupak"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</layout>

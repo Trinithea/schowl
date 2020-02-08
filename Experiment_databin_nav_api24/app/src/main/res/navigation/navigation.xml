@@ -31,4 +31,8 @@
     <fragment android:id="@+id/action_edit_category"
               android:name="com.example.experiment_databin_nav_api24.EditQuestionFragment"
               android:label="EditQuestionFragment"/>
+    <fragment
+            android:id="@+id/settingsFragment"
+            android:name="com.example.experiment_databin_nav_api24.SettingsFragment"
+            android:label="SettingsFragment" />
 </navigation>

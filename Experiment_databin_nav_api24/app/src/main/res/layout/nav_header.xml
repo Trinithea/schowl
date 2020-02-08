@@ -5,10 +5,13 @@
                                                    android:layout_height="192dp" android:id="@+id/navHeader">
 
     <ImageView
+            android:id="@+id/owl"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" app:srcCompat="@drawable/ic_logo_owl_cropped"
-            android:id="@+id/owl" app:layout_constraintTop_toTopOf="parent"
+            android:layout_height="wrap_content"
+            android:background="@color/brighterNavyBlue"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"
-            android:background="@color/navyBlue"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_logo_owl_cropped" />
 </androidx.constraintlayout.widget.ConstraintLayout>
