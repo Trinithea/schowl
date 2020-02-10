@@ -30,7 +30,11 @@
     </fragment>
     <fragment android:id="@+id/action_edit_category"
               android:name="com.example.experiment_databin_nav_api24.EditQuestionFragment"
-              android:label="EditQuestionFragment"/>
+              android:label="EditQuestionFragment">
+        <action
+                android:id="@+id/action_action_edit_category_to_questionsFragment"
+                app:destination="@id/questionsFragment" />
+    </fragment>
     <fragment
             android:id="@+id/settingsFragment"
             android:name="com.example.experiment_databin_nav_api24.SettingsFragment"

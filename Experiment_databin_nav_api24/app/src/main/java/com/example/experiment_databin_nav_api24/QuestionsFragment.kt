@@ -57,6 +57,10 @@ class QuestionsFragment : Fragment() {
         btnQuestion.setOnClickListener{
                 view: View ->
             Navigation.findNavController(view).navigate(R.id.action_questionsFragment_to_editQuestionFragment)
+            var question=Button(activity)
+            question.setText("Question")//TODO
+
+            binding.LytQuestions.addView(question)
         }
         binding.LytQuestions.addView(btnQuestion)
     }
