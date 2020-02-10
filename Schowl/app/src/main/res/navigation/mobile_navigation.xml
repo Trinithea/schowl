@@ -9,4 +9,8 @@
         android:id="@+id/nav_settings"
         android:name="cz.cizlmazna.schowl.ui.settings.SettingsFragment"
         android:label="SettingsFragment" />
+    <fragment
+        android:id="@+id/nav_about"
+        android:name="cz.cizlmazna.schowl.ui.about.AboutFragment"
+        android:label="AboutFragment" />
 </navigation>
