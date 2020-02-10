@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+            android:id="@+id/LytMain"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/navyBlue"
+            android:orientation="vertical">
+
+        <ScrollView
+                android:id="@+id/ScTest"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                    <TextView
+                            android:id="@+id/LblNumberOfQuestion"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginRight="16dp"
+                            android:text="1/10"
+                            android:textColor="@color/ivoryYellow"
+                            android:textSize="18sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                            android:id="@+id/LblQuestion"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="48dp"
+                            android:fontFamily="monospace"
+                            android:text="Question?"
+                            android:textColor="@color/ivoryYellow"
+                            android:textSize="36sp"
+                            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    <LinearLayout
+                            android:id="@+id/linearLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="32dp"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toTopOf="@+id/BtnShowSolution"
+                            app:layout_constraintTop_toBottomOf="@+id/LblQuestion">
+
+                        <TextView
+                                android:id="@+id/LblMyAnswer"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="monospace"
+                                android:text="My answer:"
+                                android:textColor="@color/ivoryYellow"
+                                android:textSize="30sp" />
+
+                        <EditText
+                                android:id="@+id/TxtAnswer"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="24dp"
+                                android:layout_marginRight="24dp"
+                                android:backgroundTint="@color/gray"
+                                android:ems="10"
+                                android:fontFamily="monospace"
+                                android:gravity="start|top"
+                                android:inputType="textMultiLine"
+                                android:textColor="@color/ivoryYellow"
+                                android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <Button
+                            android:id="@+id/BtnShowSolution"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="32dp"
+                            android:background="@drawable/transparent"
+                            android:fontFamily="monospace"
+                            android:text="@string/show_solution"
+                            android:textColor="@color/peacockBlue"
+                            android:textSize="18sp"
+                            app:layout_constraintBottom_toTopOf="@+id/LblSolution"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+                    <TextView
+                            android:id="@+id/LblSolution"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="32dp"
+                            android:fontFamily="monospace"
+                            android:text="This is the solution."
+                            android:textColor="@color/ivoryYellow"
+                            android:textSize="14sp"
+                            android:visibility="invisible"
+                            app:layout_constraintBottom_toTopOf="@+id/LytEditNext"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/BtnShowSolution" />
+
+                    <LinearLayout
+                            android:id="@+id/LytEditNext"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="32dp"
+                            android:gravity="center|center_horizontal|center_vertical"
+                            android:orientation="horizontal"
+                            android:visibility="invisible"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/LblSolution"
+                            tools:layout_editor_absoluteX="0dp">
+
+                        <Button
+                                android:id="@+id/BtnEditQuestion"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="24dp"
+                                android:layout_marginBottom="8dp"
+                                android:background="@drawable/transparent"
+                                android:fontFamily="monospace"
+                                android:foregroundGravity="center_vertical|center|center_horizontal"
+                                android:text="Edit question"
+                                android:textColor="@color/peacockBlue"
+                                android:textSize="18sp" />
+
+                        <Button
+                                android:id="@+id/BtnNext"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="8dp"
+                                android:background="@drawable/transparent"
+                                android:fontFamily="monospace"
+                                android:text="@string/next"
+                                android:textColor="@color/appleRed"
+                                android:textSize="18sp" />
+                    </LinearLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</layout>
