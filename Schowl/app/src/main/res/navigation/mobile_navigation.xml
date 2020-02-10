@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_settings">
+    app:startDestination="@+id/nav_test">
 
     <fragment
         android:id="@+id/nav_settings"
@@ -13,4 +13,48 @@
         android:id="@+id/nav_about"
         android:name="cz.cizlmazna.schowl.ui.about.AboutFragment"
         android:label="AboutFragment" />
+    <fragment
+        android:id="@+id/testFragment"
+        android:name="cz.cizlmazna.schowl.ui.test.TestFragment"
+        android:label="TestFragment" />
+    <fragment
+        android:id="@+id/nav_test"
+        android:name="cz.cizlmazna.schowl.ui.test.TestSetupFragment"
+        android:label="TestSetupFragment">
+        <action
+            android:id="@+id/action_testSetupFragment_to_testFragment"
+            app:destination="@id/testFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_subjects"
+        android:name="cz.cizlmazna.schowl.ui.subjects.SubjectsFragment"
+        android:label="SubjectsFragment" >
+        <action
+            android:id="@+id/action_subjectsFragment_to_categoriesFragment"
+            app:destination="@id/categoriesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/categoriesFragment"
+        android:name="cz.cizlmazna.schowl.ui.subjects.CategoriesFragment"
+        android:label="CategoriesFragment" >
+        <action
+            android:id="@+id/action_categoriesFragment_to_questionsFragment"
+            app:destination="@id/questionsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/questionsFragment"
+        android:name="cz.cizlmazna.schowl.ui.subjects.QuestionsFragment"
+        android:label="QuestionsFragment" >
+        <action
+            android:id="@+id/action_questionsFragment_to_editQuestionFragment"
+            app:destination="@id/editQuestionFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/editQuestionFragment2"
+        android:name="cz.cizlmazna.schowl.ui.subjects.EditQuestionFragment"
+        android:label="EditQuestionFragment" >
+        <action
+            android:id="@+id/action_editQuestionFragment_to_questionsFragment"
+            app:destination="@id/questionsFragment" />
+    </fragment>
 </navigation>
