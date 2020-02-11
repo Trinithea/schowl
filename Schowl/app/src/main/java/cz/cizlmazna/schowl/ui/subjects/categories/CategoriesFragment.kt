@@ -103,7 +103,6 @@ class CategoriesFragment : Fragment() {
         btnNewCategory.layoutParams = params
 
         btnNewCategory.background = ContextCompat.getDrawable(context!!, R.drawable.transparent)
-        btnNewCategory.setTextColor(ContextCompat.getColor(context!!, R.color.white) )
         btnNewCategory.text = category.name
 
         btnNewCategory.gravity = Gravity.START
