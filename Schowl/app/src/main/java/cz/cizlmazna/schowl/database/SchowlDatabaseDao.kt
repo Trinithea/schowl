@@ -1,5 +1,6 @@
 package cz.cizlmazna.schowl.database
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 
 @Dao
@@ -42,11 +43,11 @@ interface SchowlDatabaseDao {
     fun deleteQuestion(question: Question)
 
     @Query("SELECT * FROM subjects_table")
-    fun getAllSubjects(): List<Subject> // TODO make this LiveData?
+    fun getAllSubjects(): LiveData<List<Subject>>
 
     @Query("SELECT * FROM categories_table WHERE subject_id = :subjectId")
-    fun getCategories(subjectId: Long): List<Category>
+    fun getCategories(subjectId: Long): LiveData<List<Category>>
 
     @Query("SELECT * FROM questions_table WHERE category_id = :categoryId")
-    fun getQuestions(categoryId: Long): List<Question>
+    fun getQuestions(categoryId: Long): LiveData<List<Question>>
 }

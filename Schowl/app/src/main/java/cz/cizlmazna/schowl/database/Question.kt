@@ -6,7 +6,7 @@ import androidx.room.*
 data class Question(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
-    var id: Long,
+    var id: Long = 0L,
 
     @ColumnInfo(name = "question_text")
     var questionText: String,
