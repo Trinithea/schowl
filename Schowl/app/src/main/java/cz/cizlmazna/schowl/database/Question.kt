@@ -1,11 +1,8 @@
 package cz.cizlmazna.schowl.database
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.ForeignKey
-import androidx.room.PrimaryKey
+import androidx.room.*
 
-@Entity(tableName = "questions_table", foreignKeys = [ForeignKey(entity = Category::class, parentColumns = ["id"], childColumns = ["category_id"], onDelete = ForeignKey.CASCADE)])
+@Entity(tableName = "questions_table", foreignKeys = [ForeignKey(entity = Category::class, parentColumns = ["id"], childColumns = ["category_id"], onDelete = ForeignKey.CASCADE)], indices = [Index(value = ["category_id"])])
 data class Question(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")

@@ -24,13 +24,13 @@ interface SchowlDatabaseDao {
     fun updateQuestion(question: Question)
 
     @Query("SELECT * FROM subjects_table WHERE id = :id")
-    fun getSubject(id: Long)
+    fun getSubject(id: Long): Subject
 
     @Query("SELECT * FROM categories_table WHERE id = :id")
-    fun getCategory(id: Long)
+    fun getCategory(id: Long): Category
 
     @Query("SELECT * FROM questions_table WHERE id = :id")
-    fun getQuestion(id: Long)
+    fun getQuestion(id: Long): Question
 
     @Delete
     fun deleteSubject(subject: Subject)
