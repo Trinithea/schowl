@@ -4,6 +4,7 @@ package cz.cizlmazna.schowl.ui.subjects
 import android.os.Bundle
 import android.view.*
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import android.widget.TextView
@@ -28,8 +29,9 @@ class QuestionsFragment : Fragment() {
         (activity as AppCompatActivity).supportActionBar?.title = "QUESTIONS"
         setHasOptionsMenu(true)
         binding.btnAddQuestion.setOnClickListener {
-                view: View ->
-            Navigation.findNavController(view).navigate(R.id.action_questionsFragment_to_editQuestionFragment)
+              //  view: View ->
+       //     Navigation.findNavController(view).navigate(R.id.action_questionsFragment_to_editQuestionFragment)
+            addQuestion(binding)
         }
         return binding.root
 
@@ -45,6 +47,7 @@ class QuestionsFragment : Fragment() {
 
     private fun addQuestion( binding: FragmentQuestionsBinding){
         val btnQuestion = Button(activity)
+        var btnRemove = ImageButton(activity)
         val params = LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.MATCH_PARENT)
         params.weight = 1f
 
@@ -52,7 +55,7 @@ class QuestionsFragment : Fragment() {
 
         btnQuestion.background = resources.getDrawable(R.drawable.transparent)
         btnQuestion.setTextColor(getResources().getColor(R.color.white) )
-
+        btnQuestion.translationZ = 3f
         btnQuestion.gravity = Gravity.START
         btnQuestion.setOnClickListener{
                 view: View ->
@@ -62,6 +65,15 @@ class QuestionsFragment : Fragment() {
 
             binding.LytQuestions.addView(question)
         }
+        btnQuestion.setText("Question")
+        btnRemove.layoutParams = params
+        btnRemove.setImageResource(R.drawable.ic_icon_remove)
+        btnRemove.background= resources.getDrawable(R.drawable.transparent)
+        btnRemove.setOnClickListener{
+            binding.LytQuestions.removeView(btnQuestion)
+            binding.LytRemoves.removeView(btnRemove)
+        }
+        binding.LytRemoves.addView(btnRemove)
         binding.LytQuestions.addView(btnQuestion)
     }
 }

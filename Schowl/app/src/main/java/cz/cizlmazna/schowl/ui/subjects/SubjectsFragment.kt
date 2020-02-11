@@ -37,7 +37,8 @@ class SubjectsFragment : Fragment() {
             val mDialogView =
                 LayoutInflater.from(activity).inflate(R.layout.add_subject_dialog, null)
             val mBuilder =
-                AlertDialog.Builder(activity).setView(mDialogView).setTitle("ADD SUBJECT")
+                AlertDialog.Builder(activity).setView(mDialogView)
+            mDialogView.TxtName.hint = "Name of subject"
             val mAlertDialog = mBuilder.show()
 
             mDialogView.BtnAdd.setOnClickListener {
@@ -99,7 +100,7 @@ class SubjectsFragment : Fragment() {
             val mDialogView =
                 LayoutInflater.from(activity).inflate(R.layout.add_subject_dialog, null)
             val mBuilder =
-                AlertDialog.Builder(activity).setView(mDialogView).setTitle("EDIT SUBJECT") // TODO Hardcoded string
+                AlertDialog.Builder(activity).setView(mDialogView)
             val mAlertDialog = mBuilder.show()
             mDialogView.TxtName.setText(name)
             mDialogView.BtnAdd.setText("EDIT")

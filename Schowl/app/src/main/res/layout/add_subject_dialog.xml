@@ -16,7 +16,6 @@
         android:layout_weight="1"
         android:backgroundTint="@color/peacockBlue"
         android:ems="10"
-        android:hint="Name of subject"
         android:inputType="textPersonName"
         android:textColor="@color/ivoryYellow"
         android:textColorHint="@color/peacockBlue" />
