@@ -99,11 +99,17 @@ class SubjectsFragment : Fragment() {
         )
         params.weight = 1f
 
-        btnNewSubject.layoutParams = params
 
+<<<<<<< HEAD
         btnNewSubject.background = ContextCompat.getDrawable(context!!, R.drawable.transparent)
         btnNewSubject.setTextColor(ContextCompat.getColor(context!!, R.color.white))
         btnNewSubject.text = subject.name
+=======
+        btnNewSubject.layoutParams = params
+        btnNewSubject.background = resources.getDrawable(R.drawable.transparent)
+        btnNewSubject.setTextColor(getResources().getColor(R.color.white))
+        btnNewSubject.setText(name)
+>>>>>>> master
 
         btnNewSubject.gravity = Gravity.START
         btnNewSubject.setOnClickListener { view: View ->
@@ -140,8 +146,17 @@ class SubjectsFragment : Fragment() {
 
         btnTest.layoutParams = params
         btnTest.setImageResource(R.drawable.ic_test)
+<<<<<<< HEAD
         btnTest.background = ContextCompat.getDrawable(context!!, R.drawable.transparent)
         //TODO setOnClickListener (test)
+=======
+        btnTest.background = resources.getDrawable(R.drawable.transparent)
+        //TODO setOnClickListener
+        btnTest.setOnClickListener{
+                view: View ->
+            Navigation.findNavController(view).navigate(R.id.action_nav_subjects_to_nav_test)
+        }
+>>>>>>> master
 
         binding.LytItems.addView(btnNewSubject)
         newLyt.addView(btnEdit)
