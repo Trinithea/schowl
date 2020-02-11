@@ -79,8 +79,6 @@ class SubjectsFragment : Fragment() {
 //    }
 
     private fun generateSubjectsList(subjects: List<Subject>) {
-       // binding.LytItems.removeAllViews()
-        // binding.LytOptions.removeAllViews()
         binding.llMain.removeAllViews()
         for (subject in subjects) {
             addSubject(subject)
@@ -142,8 +140,6 @@ class SubjectsFragment : Fragment() {
         btnRemove.setImageResource(R.drawable.ic_remove_yellow)
         btnRemove.background = ContextCompat.getDrawable(context!!, R.drawable.transparent)
         btnRemove.setOnClickListener {
-//            binding.LytItems.removeView(btnNewSubject)
-//            binding.LytOptions.removeView(newLyt)
             viewModel.removeSubject(subject)
         }
 
@@ -152,11 +148,9 @@ class SubjectsFragment : Fragment() {
         btnTest.background = ContextCompat.getDrawable(context!!, R.drawable.transparent)
         btnTest.setOnClickListener{
                 view: View ->
-            Navigation.findNavController(view).navigate(cz.cizlmazna.schowl.R.id.action_nav_subjects_to_nav_test)
+            Navigation.findNavController(view).navigate(R.id.action_nav_subjects_to_nav_test)
         }
 
-
-        //binding.LytItems.addView(btnNewSubject)
         optionsLyt.addView(btnEdit)
         optionsLyt.addView(btnRemove)
         optionsLyt.addView(btnTest)
@@ -172,8 +166,6 @@ class SubjectsFragment : Fragment() {
             btnNewSubject.layoutParams = param
         }
 
-        btnNewSubject.setId(R.id.buttonInConstLyt)
-        optionsLyt.setId(R.id.llInConstLyt)
         mainLyt.setId(View.generateViewId())
         btnNewSubject.setId(View.generateViewId())
         optionsLyt.setId(View.generateViewId())
@@ -189,10 +181,7 @@ class SubjectsFragment : Fragment() {
         set.connect(optionsLyt.id,ConstraintSet.BOTTOM,ConstraintSet.PARENT_ID,ConstraintSet.BOTTOM)
         set.applyTo(mainLyt)
 
-        // newLyt.addView(binding.LytOptions)
-        //binding.LytOptions.addView(optionsLyt)
         binding.llMain.addView(mainLyt)
-        //Toast.makeText(activity,"Subject added.",Toast.LENGTH_SHORT).show()
     }
 
     fun dpToPx(dp: Int): Int {

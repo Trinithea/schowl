@@ -1,14 +1,18 @@
 package cz.cizlmazna.schowl.ui.subjects.categories
 
 
+import android.app.Activity
 import android.app.AlertDialog
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.view.*
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -21,6 +25,7 @@ import cz.cizlmazna.schowl.database.Category
 import cz.cizlmazna.schowl.database.SchowlDatabase
 import cz.cizlmazna.schowl.databinding.FragmentCategoriesBinding
 import kotlinx.android.synthetic.main.add_subject_dialog.view.*
+import kotlinx.android.synthetic.main.fragment_subjects.*
 
 class CategoriesFragment : Fragment() {
 
@@ -71,8 +76,7 @@ class CategoriesFragment : Fragment() {
     }
 
     private fun generateCategoriesList(categories: List<Category>) {
-        binding.LytItems.removeAllViews()
-        binding.LytOptions.removeAllViews()
+        llMain.removeAllViews()
         for (category in categories) {
             addCategory(category)
         }
@@ -88,14 +92,15 @@ class CategoriesFragment : Fragment() {
     }
 
     private fun addCategory(category: Category){
-        val newLyt = LinearLayout(activity)
+        val optionsLyt = LinearLayout(activity)
         val btnNewCategory = Button(activity)
         val btnEdit=ImageButton(activity)
         val btnRemove=ImageButton(activity)
         val btnTest=ImageButton(activity)
-        val ll: LinearLayout.LayoutParams=LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT)
-        newLyt.layoutParams = ll
-        newLyt.orientation = LinearLayout.HORIZONTAL
+        val ll: LinearLayout.LayoutParams=LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.MATCH_PARENT)
+        optionsLyt.layoutParams = ll
+        optionsLyt.orientation = LinearLayout.HORIZONTAL
+        val mainLyt = ConstraintLayout(activity)
 
         val params = LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.MATCH_PARENT)
         params.weight = 1f
@@ -145,14 +150,42 @@ class CategoriesFragment : Fragment() {
             Navigation.findNavController(view).navigate(R.id.action_categoriesFragment_to_testFragment)
         }
 
-        binding.LytItems.addView(btnNewCategory)
-        newLyt.addView(btnEdit)
-        newLyt.addView(btnRemove)
-        newLyt.addView(btnTest)
+        optionsLyt.addView(btnEdit)
+        optionsLyt.addView(btnRemove)
+        optionsLyt.addView(btnTest)
+        if(category.name.length >27){
+            val displayMetrics = DisplayMetrics()
+            (context as Activity).windowManager
+                .defaultDisplay
+                .getMetrics(displayMetrics)
+            val width = displayMetrics.widthPixels
+            val param = LinearLayout.LayoutParams(dpToPx(260),
+                ViewGroup.LayoutParams.MATCH_PARENT
+            )
+            btnNewCategory.layoutParams = param
+        }
 
+        mainLyt.setId(View.generateViewId())
+        btnNewCategory.setId(View.generateViewId())
+        optionsLyt.setId(View.generateViewId())
+
+        mainLyt.addView(btnNewCategory)
+        mainLyt.addView(optionsLyt)
+        val set = ConstraintSet()
+        set.clone(mainLyt)
+        set.connect(btnNewCategory.id, ConstraintSet.LEFT, ConstraintSet.PARENT_ID, ConstraintSet.LEFT)
+        set.connect(btnNewCategory.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP)
+        set.connect(optionsLyt.id, ConstraintSet.RIGHT, ConstraintSet.PARENT_ID, ConstraintSet.RIGHT)
+        set.connect(optionsLyt.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP)
+        set.connect(optionsLyt.id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM)
+        set.applyTo(mainLyt)
         // newLyt.addView(binding.LytOptions)
-        binding.LytOptions.addView(newLyt)
+        binding.llMain.addView(mainLyt)
 
         //Toast.makeText(activity,"Subject added.",Toast.LENGTH_SHORT).show()
+    }
+    fun dpToPx(dp: Int): Int {
+        val displayMetrics = context!!.resources.displayMetrics
+        return Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT))
     }
 }

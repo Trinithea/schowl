@@ -1,7 +1,9 @@
 package cz.cizlmazna.schowl.ui.subjects.categories.questions
 
 
+import android.app.Activity
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.view.*
 import android.widget.Button
 import android.widget.ImageButton
@@ -9,6 +11,8 @@ import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -46,7 +50,6 @@ class QuestionsFragment : Fragment() {
 
         (activity as AppCompatActivity).supportActionBar?.title = "QUESTIONS"
 
-        setHasOptionsMenu(true)
         binding.btnAddQuestion.setOnClickListener { view: View ->
             Navigation.findNavController(view).navigate(QuestionsFragmentDirections.actionQuestionsFragmentToEditQuestionFragment(viewModel.categoryId, -1))
         }
@@ -62,8 +65,7 @@ class QuestionsFragment : Fragment() {
     }
 
     private fun generateQuestionsList(questions: List<Question>) {
-        binding.LytQuestions.removeAllViews()
-        binding.LytRemoves.removeAllViews()
+        binding.llMain.removeAllViews()
         for (question in questions) {
             addQuestion(question)
         }
@@ -83,7 +85,7 @@ class QuestionsFragment : Fragment() {
         val btnRemove = ImageButton(activity)
         val params = LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.MATCH_PARENT)
         params.weight = 1f
-
+        val mainLyt = ConstraintLayout(activity)
         btnQuestion.layoutParams = params
 
         btnQuestion.background = ContextCompat.getDrawable(context!!, R.drawable.transparent)
@@ -99,6 +101,17 @@ class QuestionsFragment : Fragment() {
         }
 
         btnQuestion.text = question.questionText
+        if(btnQuestion.text.length >27){
+            val displayMetrics = DisplayMetrics()
+            (context as Activity).windowManager
+                .defaultDisplay
+                .getMetrics(displayMetrics)
+            val width = displayMetrics.widthPixels
+            val param = LinearLayout.LayoutParams(dpToPx(260),
+                ViewGroup.LayoutParams.MATCH_PARENT
+            )
+            btnQuestion.layoutParams = param
+        }
         btnRemove.layoutParams = params
         btnRemove.setImageResource(R.drawable.ic_remove_yellow)
         btnRemove.background= ContextCompat.getDrawable(context!!, R.drawable.transparent)
@@ -107,7 +120,25 @@ class QuestionsFragment : Fragment() {
 //            binding.LytQuestions.removeView(btnQuestion)
 //            binding.LytRemoves.removeView(btnRemove)
         }
-        binding.LytQuestions.addView(btnQuestion)
-        binding.LytRemoves.addView(btnRemove)
+
+        mainLyt.setId(View.generateViewId())
+        btnQuestion.setId(View.generateViewId())
+        btnRemove.setId(View.generateViewId())
+
+        mainLyt.addView(btnQuestion)
+        mainLyt.addView(btnRemove)
+        val set = ConstraintSet()
+        set.clone(mainLyt)
+        set.connect(btnQuestion.id, ConstraintSet.LEFT, ConstraintSet.PARENT_ID, ConstraintSet.LEFT)
+        set.connect(btnQuestion.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP)
+        set.connect(btnRemove.id, ConstraintSet.RIGHT, ConstraintSet.PARENT_ID, ConstraintSet.RIGHT)
+        set.connect(btnRemove.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP)
+        set.connect(btnRemove.id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM)
+        set.applyTo(mainLyt)
+        binding.llMain.addView(mainLyt)
+    }
+    fun dpToPx(dp: Int): Int {
+        val displayMetrics = context!!.resources.displayMetrics
+        return Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT))
     }
 }
