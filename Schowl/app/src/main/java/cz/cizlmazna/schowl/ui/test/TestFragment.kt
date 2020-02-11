@@ -51,7 +51,7 @@ class TestFragment : Fragment() {
     }
 
     //TODO use this function at the end of the test
-    private fun showTestCompletedDialog{
+    private fun showTestCompletedDialog(){
         val mDialogView =
             LayoutInflater.from(activity).inflate(R.layout.test_completed_dialog, null)
         val mBuilder =

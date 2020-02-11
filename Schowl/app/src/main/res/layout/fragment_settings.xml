@@ -12,19 +12,19 @@
                 android:background="@color/navyBlue">
 
             <Switch
-                    android:id="@+id/SwitchDarkMode"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginTop="32dp"
-                    android:fontFamily="monospace"
-                    android:showText="false"
-                    android:text="Dark mode "
-                    android:textColor="@color/ivoryYellow"
-                    android:textSize="30sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:checked="true" />
+                android:id="@+id/SwitchDarkMode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="32dp"
+                android:fontFamily="monospace"
+                android:showText="false"
+                android:text="Dark mode "
+                android:textColor="@color/ivoryYellow"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:checked="true" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>

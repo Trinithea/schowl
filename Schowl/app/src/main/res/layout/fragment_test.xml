@@ -37,18 +37,18 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                            android:id="@+id/LblQuestion"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="48dp"
-                            android:fontFamily="monospace"
-                            android:text="Question?"
-                            android:textColor="@color/ivoryYellow"
-                            android:textSize="36sp"
-                            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                        android:id="@+id/LblQuestion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="48dp"
+                        android:fontFamily="monospace"
+                        android:text="Question?"
+                        android:textColor="@color/ivoryYellow"
+                        android:textSize="24sp"
+                        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <LinearLayout
                             android:id="@+id/linearLayout"
@@ -61,13 +61,13 @@
                             app:layout_constraintTop_toBottomOf="@+id/LblQuestion">
 
                         <TextView
-                                android:id="@+id/LblMyAnswer"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="monospace"
-                                android:text="My answer:"
-                                android:textColor="@color/ivoryYellow"
-                                android:textSize="30sp" />
+                            android:id="@+id/LblMyAnswer"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="monospace"
+                            android:text="My answer:"
+                            android:textColor="@color/ivoryYellow"
+                            android:textSize="18sp" />
 
                         <EditText
                                 android:id="@+id/TxtAnswer"
