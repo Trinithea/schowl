@@ -35,7 +35,7 @@
                         android:id="@+id/buttonInConstLyt"
                         android:layout_width="200dp"
                         android:layout_height="wrap_content"
-                        android:text="Button"
+                        android:text=" kdfkd gdngkldnsg dsgkldkg d jg kldsngd sgds g"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 

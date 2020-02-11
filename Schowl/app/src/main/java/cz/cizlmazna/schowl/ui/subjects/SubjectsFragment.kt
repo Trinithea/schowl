@@ -89,11 +89,10 @@ class SubjectsFragment : Fragment() {
         val btnRemove = ImageButton(activity)
         val btnTest = ImageButton(activity)
         val ll: LinearLayout.LayoutParams = LinearLayout.LayoutParams(
-            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT,
             ViewGroup.LayoutParams.MATCH_PARENT
         )
         val mainLyt = ConstraintLayout(activity)
-        val set = ConstraintSet()
 
         optionsLyt.layoutParams = ll
         optionsLyt.orientation = LinearLayout.HORIZONTAL
@@ -106,9 +105,7 @@ class SubjectsFragment : Fragment() {
 
         btnNewSubject.layoutParams = params
         btnNewSubject.background = ContextCompat.getDrawable(context!!, R.drawable.transparent)
-        if(subject.name.length >27){
-            btnNewSubject.layoutParams.width =200
-        }
+
         btnNewSubject.text = subject.name
 
         btnNewSubject.gravity = Gravity.START
@@ -151,7 +148,9 @@ class SubjectsFragment : Fragment() {
                 view: View ->
             Navigation.findNavController(view).navigate(R.id.action_nav_subjects_to_nav_test)
         }
-
+        if(subject.name.length >27){
+            btnNewSubject.layoutParams.width =200
+        }
 
         //binding.LytItems.addView(btnNewSubject)
         optionsLyt.addView(btnEdit)
@@ -160,15 +159,19 @@ class SubjectsFragment : Fragment() {
 
         btnNewSubject.setId(R.id.buttonInConstLyt)
         optionsLyt.setId(R.id.llInConstLyt)
-
+        mainLyt.setId(View.generateViewId())
+        btnNewSubject.setId(View.generateViewId())
+        optionsLyt.setId(View.generateViewId())
 
         mainLyt.addView(btnNewSubject)
         mainLyt.addView(optionsLyt)
-        set.connect(btnNewSubject.id,ConstraintSet.LEFT,mainLyt.id,ConstraintSet.LEFT)
-        set.connect(btnNewSubject.id,ConstraintSet.TOP,mainLyt.id,ConstraintSet.TOP)
-        set.connect(optionsLyt.id,ConstraintSet.RIGHT,mainLyt.id,ConstraintSet.RIGHT)
-        set.connect(optionsLyt.id,ConstraintSet.TOP,mainLyt.id,ConstraintSet.TOP)
-        set.connect(optionsLyt.id,ConstraintSet.BOTTOM,mainLyt.id,ConstraintSet.BOTTOM)
+        val set =ConstraintSet()
+        set.clone(mainLyt)
+        set.connect(btnNewSubject.id,ConstraintSet.LEFT,ConstraintSet.PARENT_ID,ConstraintSet.LEFT)
+        set.connect(btnNewSubject.id,ConstraintSet.TOP,ConstraintSet.PARENT_ID,ConstraintSet.TOP)
+        set.connect(optionsLyt.id,ConstraintSet.RIGHT,ConstraintSet.PARENT_ID,ConstraintSet.RIGHT)
+        set.connect(optionsLyt.id,ConstraintSet.TOP,ConstraintSet.PARENT_ID,ConstraintSet.TOP)
+        set.connect(optionsLyt.id,ConstraintSet.BOTTOM,ConstraintSet.PARENT_ID,ConstraintSet.BOTTOM)
         set.applyTo(mainLyt)
 
         // newLyt.addView(binding.LytOptions)
