@@ -85,19 +85,20 @@
                     </LinearLayout>
 
                     <Button
-                            android:id="@+id/BtnShowSolution"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="32dp"
-                            android:background="@drawable/transparent"
-                            android:fontFamily="monospace"
-                            android:text="@string/show_solution"
-                            android:textColor="@color/peacockBlue"
-                            android:textSize="18sp"
-                            app:layout_constraintBottom_toTopOf="@+id/LblSolution"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+                        android:id="@+id/BtnShowSolution"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="32dp"
+                        android:background="@drawable/transparent"
+                        android:fontFamily="monospace"
+                        android:text="@string/show_solution"
+                        android:textColor="@color/peacockBlue"
+                        android:textSize="18sp"
+                        android:translationZ="3dp"
+                        app:layout_constraintBottom_toTopOf="@+id/LblSolution"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
                     <TextView
                             android:id="@+id/LblSolution"
@@ -127,28 +128,30 @@
                             tools:layout_editor_absoluteX="0dp">
 
                         <Button
-                                android:id="@+id/BtnEditQuestion"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginRight="24dp"
-                                android:layout_marginBottom="8dp"
-                                android:background="@drawable/transparent"
-                                android:fontFamily="monospace"
-                                android:foregroundGravity="center_vertical|center|center_horizontal"
-                                android:text="Edit question"
-                                android:textColor="@color/peacockBlue"
-                                android:textSize="18sp" />
+                            android:id="@+id/BtnEditQuestion"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="24dp"
+                            android:layout_marginBottom="8dp"
+                            android:background="@drawable/transparent"
+                            android:fontFamily="monospace"
+                            android:foregroundGravity="center_vertical|center|center_horizontal"
+                            android:text="Edit question"
+                            android:textColor="@color/peacockBlue"
+                            android:textSize="18sp"
+                            android:translationZ="3dp" />
 
                         <Button
-                                android:id="@+id/BtnNext"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="8dp"
-                                android:background="@drawable/transparent"
-                                android:fontFamily="monospace"
-                                android:text="@string/next"
-                                android:textColor="@color/appleRed"
-                                android:textSize="18sp" />
+                            android:id="@+id/BtnNext"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="8dp"
+                            android:background="@drawable/transparent"
+                            android:fontFamily="monospace"
+                            android:text="@string/next"
+                            android:textColor="@color/appleRed"
+                            android:textSize="18sp"
+                            android:translationZ="3dp" />
                     </LinearLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
