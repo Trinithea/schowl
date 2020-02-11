@@ -100,7 +100,6 @@ class SubjectsFragment : Fragment() {
         params.weight = 1f
 
         btnNewSubject.background = ContextCompat.getDrawable(context!!, R.drawable.transparent)
-        btnNewSubject.setTextColor(ContextCompat.getColor(context!!, R.color.white))
         btnNewSubject.text = subject.name
         btnNewSubject.layoutParams = params
 
@@ -111,7 +110,7 @@ class SubjectsFragment : Fragment() {
 
 
         btnEdit.layoutParams = params
-        btnEdit.setImageResource(R.drawable.ic_icon_edit)
+        btnEdit.setImageResource(R.drawable.ic_edit_yellow)
         btnEdit.background = ContextCompat.getDrawable(context!!, R.drawable.transparent)
         btnEdit.setOnClickListener {
             val mDialogView =
@@ -129,7 +128,7 @@ class SubjectsFragment : Fragment() {
         }
 
         btnRemove.layoutParams = params
-        btnRemove.setImageResource(R.drawable.ic_icon_remove)
+        btnRemove.setImageResource(R.drawable.ic_remove_yellow)
         btnRemove.background = ContextCompat.getDrawable(context!!, R.drawable.transparent)
         btnRemove.setOnClickListener {
 //            binding.LytItems.removeView(btnNewSubject)
@@ -138,7 +137,7 @@ class SubjectsFragment : Fragment() {
         }
 
         btnTest.layoutParams = params
-        btnTest.setImageResource(R.drawable.ic_test)
+        btnTest.setImageResource(R.drawable.ic_test_yellow)
         btnTest.background = ContextCompat.getDrawable(context!!, R.drawable.transparent)
         btnTest.setOnClickListener{
                 view: View ->

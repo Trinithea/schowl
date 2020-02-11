@@ -70,7 +70,6 @@ class CategoriesFragment : Fragment() {
         btnNewCategory.layoutParams = params
 
         btnNewCategory.background = resources.getDrawable(R.drawable.transparent)
-        btnNewCategory.setTextColor(getResources().getColor(R.color.white) )
         btnNewCategory.setText(name)
 
         btnNewCategory.gravity = Gravity.START
@@ -81,7 +80,7 @@ class CategoriesFragment : Fragment() {
 
 
         btnEdit.layoutParams = params
-        btnEdit.setImageResource(R.drawable.ic_icon_edit)
+        btnEdit.setImageResource(R.drawable.ic_edit_yellow)
         btnEdit.background= resources.getDrawable(R.drawable.transparent)
         btnEdit.setOnClickListener{
             val mDialogView = LayoutInflater.from(activity).inflate(R.layout.add_subject_dialog,null)
@@ -97,7 +96,7 @@ class CategoriesFragment : Fragment() {
         }
 
         btnRemove.layoutParams = params
-        btnRemove.setImageResource(R.drawable.ic_icon_remove)
+        btnRemove.setImageResource(R.drawable.ic_remove_yellow)
         btnRemove.background= resources.getDrawable(R.drawable.transparent)
         btnRemove.setOnClickListener{
             binding.LytItems.removeView(btnNewCategory)
@@ -105,7 +104,7 @@ class CategoriesFragment : Fragment() {
         }
 
         btnTest.layoutParams = params
-        btnTest.setImageResource(R.drawable.ic_test)
+        btnTest.setImageResource(R.drawable.ic_test_yellow)
         btnTest.background= resources.getDrawable(R.drawable.transparent)
         //TODO setOnClickListener
         btnTest.setOnClickListener{

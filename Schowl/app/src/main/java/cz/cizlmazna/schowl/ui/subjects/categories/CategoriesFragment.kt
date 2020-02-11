@@ -113,7 +113,7 @@ class CategoriesFragment : Fragment() {
         }
 
         btnEdit.layoutParams = params
-        btnEdit.setImageResource(R.drawable.ic_icon_edit)
+        btnEdit.setImageResource(R.drawable.ic_edit_yellow)
         btnEdit.background= ContextCompat.getDrawable(context!!, R.drawable.transparent)
         btnEdit.setOnClickListener{
             val mDialogView = LayoutInflater.from(activity).inflate(R.layout.add_subject_dialog,null)
@@ -130,7 +130,7 @@ class CategoriesFragment : Fragment() {
         }
 
         btnRemove.layoutParams = params
-        btnRemove.setImageResource(R.drawable.ic_icon_remove)
+        btnRemove.setImageResource(R.drawable.ic_remove_yellow)
         btnRemove.background= ContextCompat.getDrawable(context!!, R.drawable.transparent)
         btnRemove.setOnClickListener{
             viewModel.removeCategory(category)
@@ -139,7 +139,7 @@ class CategoriesFragment : Fragment() {
         }
 
         btnTest.layoutParams = params
-        btnTest.setImageResource(R.drawable.ic_test)
+        btnTest.setImageResource(R.drawable.ic_test_yellow)
         btnTest.background= ContextCompat.getDrawable(context!!, R.drawable.transparent)
         btnTest.setOnClickListener{
                 view: View ->

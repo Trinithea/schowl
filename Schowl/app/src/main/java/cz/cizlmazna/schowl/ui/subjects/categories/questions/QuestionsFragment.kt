@@ -54,7 +54,6 @@ class QuestionsFragment : Fragment() {
         btnQuestion.layoutParams = params
 
         btnQuestion.background = resources.getDrawable(R.drawable.transparent)
-        btnQuestion.setTextColor(getResources().getColor(R.color.white) )
         btnQuestion.translationZ = 3f
         btnQuestion.gravity = Gravity.START
         btnQuestion.setOnClickListener{
@@ -67,7 +66,7 @@ class QuestionsFragment : Fragment() {
         }
         btnQuestion.setText("Question")
         btnRemove.layoutParams = params
-        btnRemove.setImageResource(R.drawable.ic_icon_remove)
+        btnRemove.setImageResource(R.drawable.ic_remove_yellow)
         btnRemove.background= resources.getDrawable(R.drawable.transparent)
         btnRemove.setOnClickListener{
             binding.LytQuestions.removeView(btnQuestion)
