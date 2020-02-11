@@ -24,8 +24,7 @@ import android.util.DisplayMetrics
 
 import android.app.Activity
 import android.util.TypedValue
-
-
+import kotlinx.android.synthetic.main.remove_dialog.view.*
 
 
 class SubjectsFragment : Fragment() {
@@ -140,7 +139,19 @@ class SubjectsFragment : Fragment() {
         btnRemove.setImageResource(R.drawable.ic_remove_yellow)
         btnRemove.background = ContextCompat.getDrawable(context!!, R.drawable.transparent)
         btnRemove.setOnClickListener {
-            viewModel.removeSubject(subject)
+            val mDialogView =
+                LayoutInflater.from(activity).inflate(R.layout.remove_dialog, null)
+            val mBuilder =
+                AlertDialog.Builder(activity).setView(mDialogView)
+            val mAlertDialog = mBuilder.show()
+            mDialogView.txtMessage.setText("Do you really want to remove " + subject.name + "?")
+            mDialogView.btnRemove.setOnClickListener {
+                mAlertDialog.dismiss()
+                viewModel.removeSubject(subject)
+            }
+            mDialogView.btnCancel.setOnClickListener {
+                mAlertDialog.dismiss()
+            }
         }
 
         btnTest.layoutParams = params

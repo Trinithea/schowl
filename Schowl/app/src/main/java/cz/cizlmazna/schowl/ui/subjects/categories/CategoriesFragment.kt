@@ -26,6 +26,7 @@ import cz.cizlmazna.schowl.database.SchowlDatabase
 import cz.cizlmazna.schowl.databinding.FragmentCategoriesBinding
 import kotlinx.android.synthetic.main.add_subject_dialog.view.*
 import kotlinx.android.synthetic.main.fragment_subjects.*
+import kotlinx.android.synthetic.main.remove_dialog.view.*
 
 class CategoriesFragment : Fragment() {
 
@@ -136,10 +137,20 @@ class CategoriesFragment : Fragment() {
         btnRemove.layoutParams = params
         btnRemove.setImageResource(R.drawable.ic_remove_yellow)
         btnRemove.background= ContextCompat.getDrawable(context!!, R.drawable.transparent)
-        btnRemove.setOnClickListener{
-            viewModel.removeCategory(category)
-//            binding.LytItems.removeView(btnNewCategory)
-//            binding.LytOptions.removeView(newLyt)
+        btnRemove.setOnClickListener {
+            val mDialogView =
+                LayoutInflater.from(activity).inflate(R.layout.remove_dialog, null)
+            val mBuilder =
+                AlertDialog.Builder(activity).setView(mDialogView)
+            val mAlertDialog = mBuilder.show()
+            mDialogView.txtMessage.setText("Do you really want to remove " + category.name + "?")
+            mDialogView.btnRemove.setOnClickListener {
+                mAlertDialog.dismiss()
+                viewModel.removeCategory(category)
+            }
+            mDialogView.btnCancel.setOnClickListener {
+                mAlertDialog.dismiss()
+            }
         }
 
         btnTest.layoutParams = params

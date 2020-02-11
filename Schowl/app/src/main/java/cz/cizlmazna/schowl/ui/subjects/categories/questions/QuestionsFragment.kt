@@ -2,6 +2,7 @@ package cz.cizlmazna.schowl.ui.subjects.categories.questions
 
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.*
@@ -24,6 +25,7 @@ import cz.cizlmazna.schowl.R
 import cz.cizlmazna.schowl.database.Question
 import cz.cizlmazna.schowl.database.SchowlDatabase
 import cz.cizlmazna.schowl.databinding.FragmentQuestionsBinding
+import kotlinx.android.synthetic.main.remove_dialog.view.*
 
 
 class QuestionsFragment : Fragment() {
@@ -115,10 +117,20 @@ class QuestionsFragment : Fragment() {
         btnRemove.layoutParams = params
         btnRemove.setImageResource(R.drawable.ic_remove_yellow)
         btnRemove.background= ContextCompat.getDrawable(context!!, R.drawable.transparent)
-        btnRemove.setOnClickListener{
-            viewModel.removeQuestion(question)
-//            binding.LytQuestions.removeView(btnQuestion)
-//            binding.LytRemoves.removeView(btnRemove)
+        btnRemove.setOnClickListener {
+            val mDialogView =
+                LayoutInflater.from(activity).inflate(R.layout.remove_dialog, null)
+            val mBuilder =
+                AlertDialog.Builder(activity).setView(mDialogView)
+            val mAlertDialog = mBuilder.show()
+            mDialogView.txtMessage.setText("Do you really want to remove this question?")
+            mDialogView.btnRemove.setOnClickListener {
+                mAlertDialog.dismiss()
+                viewModel.removeQuestion(question)
+            }
+            mDialogView.btnCancel.setOnClickListener {
+                mAlertDialog.dismiss()
+            }
         }
 
         mainLyt.setId(View.generateViewId())
