@@ -89,8 +89,8 @@ class SubjectsFragment : Fragment() {
         val btnRemove = ImageButton(activity)
         val btnTest = ImageButton(activity)
         val ll: LinearLayout.LayoutParams = LinearLayout.LayoutParams(
-            ViewGroup.LayoutParams.WRAP_CONTENT,
-            ViewGroup.LayoutParams.MATCH_PARENT
+            ViewGroup.LayoutParams.WRAP_CONTENT, // width
+            ViewGroup.LayoutParams.MATCH_PARENT // height
         )
         val mainLyt = ConstraintLayout(activity)
 
@@ -149,7 +149,11 @@ class SubjectsFragment : Fragment() {
             Navigation.findNavController(view).navigate(R.id.action_nav_subjects_to_nav_test)
         }
         if(subject.name.length >27){
-            btnNewSubject.layoutParams.width =200
+         //   btnNewSubject.layoutParams.width =400
+            val param = LinearLayout.LayoutParams(600,
+                ViewGroup.LayoutParams.MATCH_PARENT
+            )
+            btnNewSubject.layoutParams = param
         }
 
         //binding.LytItems.addView(btnNewSubject)
