@@ -50,9 +50,9 @@ class CategoriesFragment : Fragment() {
 
         binding.btnAddCategory.setOnClickListener {
             val mDialogView = LayoutInflater.from(activity).inflate(R.layout.add_subject_dialog,null)
-            val mBuilder = AlertDialog.Builder(activity).setView(mDialogView).setTitle("ADD CATEGORY") // TODO hardcoded string
+            val mBuilder = AlertDialog.Builder(activity).setView(mDialogView)
             val mAlertDialog = mBuilder.show()
-            mDialogView.BtnAdd.hint = "Add category"
+            mDialogView.TxtName.hint = "Name of category"
             mDialogView.BtnAdd.setOnClickListener{
                 mAlertDialog.dismiss()
                 val name = mDialogView.TxtName.text.toString()
@@ -117,7 +117,7 @@ class CategoriesFragment : Fragment() {
         btnEdit.background= ContextCompat.getDrawable(context!!, R.drawable.transparent)
         btnEdit.setOnClickListener{
             val mDialogView = LayoutInflater.from(activity).inflate(R.layout.add_subject_dialog,null)
-            val mBuilder = AlertDialog.Builder(activity).setView(mDialogView).setTitle("EDIT CATEGORY")
+            val mBuilder = AlertDialog.Builder(activity).setView(mDialogView)
             val mAlertDialog = mBuilder.show()
             mDialogView.TxtName.setText(category.name)
             mDialogView.BtnAdd.text = "EDIT"

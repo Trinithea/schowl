@@ -25,6 +25,20 @@
                         android:layout_height="match_parent"
                         android:background="@color/navyBlue">
 
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:id="@+id/btnSent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:background="@color/appleRed"
+                        android:clickable="true"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/LytSetDifficulty"
+                        app:srcCompat="@drawable/ic_icon_confirm" />
+
                     <androidx.constraintlayout.widget.ConstraintLayout
                             android:id="@+id/LytSetDifficulty"
                             android:layout_width="match_parent"
@@ -168,57 +182,57 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/LytSelectSubject"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="80dp"
-                            android:layout_marginBottom="32dp"
-                            app:layout_constraintBottom_toTopOf="@+id/LytSelectCategory"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent">
+                        android:id="@+id/LytSelectSubject"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="32dp"
+                        android:layout_marginBottom="32dp"
+                        app:layout_constraintBottom_toTopOf="@+id/LytSelectCategory"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
 
                         <TextView
-                                android:id="@+id/LblSubject"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="8dp"
-                                android:layout_marginEnd="8dp"
-                                android:text="@string/select_subject"
-                                android:textColor="@color/ivoryYellow"
-                                android:textSize="30sp"
-                                app:fontFamily="monospace"
-                                app:layout_constraintBottom_toTopOf="@+id/SpnSubject"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                            android:id="@+id/LblSubject"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="@string/select_subject"
+                            android:textColor="@color/ivoryYellow"
+                            android:textSize="30sp"
+                            app:fontFamily="monospace"
+                            app:layout_constraintBottom_toTopOf="@+id/SpnSubject"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
                         <Spinner
-                                android:id="@+id/SpnSubject"
-                                style="@style/Widget.AppCompat.Spinner.Underlined"
-                                android:layout_width="255dp"
-                                android:layout_height="62dp"
-                                android:layout_marginStart="8dp"
-                                android:layout_marginEnd="8dp"
-                                android:backgroundTint="@color/peacockBlue"
-                                app:layout_constraintBottom_toTopOf="@+id/SwitchAllCategories"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/LblSubject" />
+                            android:id="@+id/SpnSubject"
+                            style="@style/Widget.AppCompat.Spinner.Underlined"
+                            android:layout_width="255dp"
+                            android:layout_height="62dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:backgroundTint="@color/peacockBlue"
+                            app:layout_constraintBottom_toTopOf="@+id/SwitchAllCategories"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/LblSubject" />
 
                         <Switch
-                                android:id="@+id/SwitchAllCategories"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="8dp"
-                                android:layout_marginEnd="8dp"
-                                android:text="All categories  "
-                                android:textColor="@color/ivoryYellow"
-                                android:textSize="24sp"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/SpnSubject" />
+                            android:id="@+id/SwitchAllCategories"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="All categories  "
+                            android:textColor="@color/ivoryYellow"
+                            android:textSize="24sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/SpnSubject" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>

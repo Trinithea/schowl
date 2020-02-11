@@ -44,8 +44,11 @@ class SubjectsFragment : Fragment() {
         (activity as AppCompatActivity).supportActionBar?.title = "SUBJECTS" // TODO hardcoded string
 
         binding.btnAddSubject.setOnClickListener {
-            val mDialogView = LayoutInflater.from(activity).inflate(R.layout.add_subject_dialog, null)
-            val mBuilder = AlertDialog.Builder(activity).setView(mDialogView).setTitle("ADD SUBJECT")
+            val mDialogView =
+                LayoutInflater.from(activity).inflate(R.layout.add_subject_dialog, null)
+            val mBuilder =
+                AlertDialog.Builder(activity).setView(mDialogView)
+            mDialogView.TxtName.hint = "Name of subject"
             val mAlertDialog = mBuilder.show()
 
             mDialogView.BtnAdd.setOnClickListener {
@@ -112,8 +115,10 @@ class SubjectsFragment : Fragment() {
         btnEdit.setImageResource(R.drawable.ic_icon_edit)
         btnEdit.background = ContextCompat.getDrawable(context!!, R.drawable.transparent)
         btnEdit.setOnClickListener {
-            val mDialogView = LayoutInflater.from(activity).inflate(R.layout.add_subject_dialog, null)
-            val mBuilder = AlertDialog.Builder(activity).setView(mDialogView).setTitle("EDIT SUBJECT") // TODO Hardcoded string
+            val mDialogView =
+                LayoutInflater.from(activity).inflate(R.layout.add_subject_dialog, null)
+            val mBuilder =
+                AlertDialog.Builder(activity).setView(mDialogView)
             val mAlertDialog = mBuilder.show()
             mDialogView.TxtName.setText(subject.name)
             mDialogView.BtnAdd.text = "EDIT"
