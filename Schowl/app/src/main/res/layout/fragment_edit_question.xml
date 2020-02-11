@@ -2,6 +2,12 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="editQuestionViewModel"
+            type="cz.cizlmazna.schowl.ui.subjects.categories.questions.EditQuestionViewModel" />
+    </data>
+
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -62,7 +68,7 @@
                             android:textSize="24sp" />
 
                         <EditText
-                            android:id="@+id/editText2"
+                            android:id="@+id/TxtQuestion"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:backgroundTint="@color/peacockBlue"
@@ -70,7 +76,8 @@
                             android:gravity="start|top"
                             android:inputType="textMultiLine"
                             android:textColor="@color/ivoryYellow"
-                            android:textSize="18sp" />
+                            android:textSize="18sp"
+                            android:text="@{editQuestionViewModel.questionText}"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -98,7 +105,7 @@
                                 android:textSize="24sp" />
 
                         <EditText
-                                android:id="@+id/editText3"
+                                android:id="@+id/TxtAnswer"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:backgroundTint="@color/peacockBlue"
@@ -106,7 +113,8 @@
                                 android:gravity="start|top"
                                 android:inputType="textMultiLine"
                                 android:textColor="@color/ivoryYellow"
-                                android:textSize="18sp" />
+                                android:textSize="18sp"
+                                android:text="@{editQuestionViewModel.answerText}"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -134,10 +142,11 @@
                                 android:textSize="24sp" />
 
                         <SeekBar
-                                android:id="@+id/seekBar"
+                                android:id="@+id/SbrDifficulty"
                                 android:layout_width="234dp"
                                 android:layout_height="33dp"
-                                android:max="10" />
+                                android:max="10"
+                                android:progress="@{editQuestionViewModel.difficulty}"/>
                     </LinearLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
