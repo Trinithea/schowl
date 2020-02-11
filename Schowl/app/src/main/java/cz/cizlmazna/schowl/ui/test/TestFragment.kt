@@ -1,6 +1,7 @@
 package cz.cizlmazna.schowl.ui.test
 
 
+import android.app.AlertDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,6 +13,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
 import cz.cizlmazna.schowl.R
 import cz.cizlmazna.schowl.databinding.FragmentTestBinding
+import kotlinx.android.synthetic.main.test_completed_dialog.view.*
 
 class TestFragment : Fragment() {
 
@@ -46,6 +48,18 @@ class TestFragment : Fragment() {
         binding.LblSolution.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
         binding.LytMain.background=ContextCompat.getDrawable(context!!, R.color.white)
         binding.TxtAnswer.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
+    }
+
+    //TODO use this function at the end of the test
+    private fun showTestCompletedDialog{
+        val mDialogView =
+            LayoutInflater.from(activity).inflate(R.layout.test_completed_dialog, null)
+        val mBuilder =
+            AlertDialog.Builder(activity).setView(mDialogView)
+        val mAlertDialog = mBuilder.show()
+        mDialogView.btnSetup.setOnClickListener {
+            //TODO navigation to tes setup
+        }
     }
 
 
