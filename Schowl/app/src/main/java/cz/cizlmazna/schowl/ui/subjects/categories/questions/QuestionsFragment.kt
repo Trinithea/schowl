@@ -48,7 +48,7 @@ class QuestionsFragment : Fragment() {
 
         setHasOptionsMenu(true)
         binding.btnAddQuestion.setOnClickListener { view: View ->
-            Navigation.findNavController(view).navigate(QuestionsFragmentDirections.actionQuestionsFragmentToEditQuestionFragment(viewModel.categoryId, -1))
+            Navigation.findNavController(view).navigate(QuestionsFragmentDirections.actionQuestionsFragmentToEditQuestionFragment(arguments.categoryId, -1))
         }
 
         binding.lifecycleOwner = this
@@ -91,7 +91,7 @@ class QuestionsFragment : Fragment() {
         btnQuestion.gravity = Gravity.START
         btnQuestion.setOnClickListener{
                 view: View ->
-            Navigation.findNavController(view).navigate(QuestionsFragmentDirections.actionQuestionsFragmentToEditQuestionFragment(viewModel.categoryId, question.id))
+            Navigation.findNavController(view).navigate(QuestionsFragmentDirections.actionQuestionsFragmentToEditQuestionFragment(question.categoryId, question.id))
 //            val question=Button(activity)
 //            question.text = "Question" // TODO hardcoded string
 //

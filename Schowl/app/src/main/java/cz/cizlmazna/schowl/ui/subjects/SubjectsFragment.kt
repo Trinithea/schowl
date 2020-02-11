@@ -141,7 +141,7 @@ class SubjectsFragment : Fragment() {
         btnTest.background = ContextCompat.getDrawable(context!!, R.drawable.transparent)
         btnTest.setOnClickListener{
                 view: View ->
-            Navigation.findNavController(view).navigate(R.id.action_nav_subjects_to_nav_test)
+            Navigation.findNavController(view).navigate(SubjectsFragmentDirections.actionNavSubjectsToNavTest(subject.id, -1))
         }
 
         binding.LytItems.addView(btnNewSubject)

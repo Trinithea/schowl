@@ -8,7 +8,7 @@ import kotlinx.coroutines.*
 
 class QuestionsViewModel(
     private val database: SchowlDatabaseDao,
-    val categoryId: Long
+    categoryId: Long
 ) : ViewModel() {
 
     private var viewModelJob = Job()

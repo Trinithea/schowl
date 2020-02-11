@@ -9,19 +9,34 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import cz.cizlmazna.schowl.R
+import cz.cizlmazna.schowl.database.SchowlDatabase
 import cz.cizlmazna.schowl.databinding.FragmentTestBinding
 
 class TestFragment : Fragment() {
 
     private lateinit var binding: FragmentTestBinding
 
+    private lateinit var viewModel: TestViewModel
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_test, container, false)
+
+        val application = requireNotNull(this.activity).application
+
+        val arguments = TestFragmentArgs.fromBundle(arguments!!)
+
+        val databaseDao = SchowlDatabase.getInstance(application).schowlDatabaseDao
+
+        val viewModelFactory = TestViewModelFactory(databaseDao, arguments.categoryIds)
+
+        viewModel = ViewModelProvider(this, viewModelFactory).get(TestViewModel::class.java)
+
         (activity as AppCompatActivity).supportActionBar?.title = "TEST"
 
         binding.BtnShowSolution.setOnClickListener{
@@ -32,7 +47,7 @@ class TestFragment : Fragment() {
         //setLayout(true)
         binding.BtnNext.setOnClickListener {
                 view: View ->
-            Navigation.findNavController(view).navigate(R.id.action_testFragment_self)
+//            Navigation.findNavController(view).navigate(TestFragmentDirections.actionTestFragmentSelf())
         }
 
         return binding.root

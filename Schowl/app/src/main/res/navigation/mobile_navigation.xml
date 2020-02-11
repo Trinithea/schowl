@@ -17,9 +17,9 @@
         android:id="@+id/testFragment"
         android:name="cz.cizlmazna.schowl.ui.test.TestFragment"
         android:label="TestFragment" >
-        <action
-            android:id="@+id/action_testFragment_self"
-            app:destination="@id/testFragment" />
+        <argument
+            android:name="categoryIds"
+            app:argType="long[]" />
     </fragment>
     <fragment
         android:id="@+id/nav_test"
@@ -28,6 +28,12 @@
         <action
             android:id="@+id/action_testSetupFragment_to_testFragment"
             app:destination="@id/testFragment" />
+        <argument
+            android:name="subjectId"
+            app:argType="long" />
+        <argument
+            android:name="categoryId"
+            app:argType="long" />
     </fragment>
     <fragment
         android:id="@+id/nav_subjects"
@@ -51,8 +57,8 @@
             android:id="@+id/action_categoriesFragment_to_questionsFragment"
             app:destination="@id/questionsFragment" />
         <action
-            android:id="@+id/action_categoriesFragment_to_testFragment"
-            app:destination="@id/testFragment" />
+            android:id="@+id/action_categoriesFragment_to_nav_test"
+            app:destination="@id/nav_test" />
     </fragment>
     <fragment
         android:id="@+id/questionsFragment"

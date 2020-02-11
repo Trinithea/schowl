@@ -93,33 +93,34 @@
                                 app:layout_constraintTop_toTopOf="@+id/SkbMinDif" />
 
                         <TextView
-                                android:id="@+id/LblCurrentMaxDif"
-                                android:layout_width="wrap_content"
-                                android:layout_height="37dp"
-                                android:layout_marginEnd="8dp"
-                                android:fontFamily="sans-serif-smallcaps"
-                                android:text="0"
-                                android:textColor="@color/ivoryYellow"
-                                android:textSize="30sp"
-                                app:layout_constraintBottom_toBottomOf="@+id/SkbMaxDif"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintHorizontal_bias="0.5"
-                                app:layout_constraintStart_toEndOf="@+id/SkbMaxDif"
-                                app:layout_constraintTop_toTopOf="@+id/SkbMaxDif"
-                                app:layout_constraintVertical_bias="1.0" />
+                            android:id="@+id/LblCurrentMaxDif"
+                            android:layout_width="wrap_content"
+                            android:layout_height="37dp"
+                            android:layout_marginEnd="8dp"
+                            android:fontFamily="sans-serif-smallcaps"
+                            android:text="10"
+                            android:textColor="@color/ivoryYellow"
+                            android:textSize="30sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/SkbMaxDif"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toEndOf="@+id/SkbMaxDif"
+                            app:layout_constraintTop_toTopOf="@+id/SkbMaxDif"
+                            app:layout_constraintVertical_bias="1.0" />
 
                         <SeekBar
-                                android:id="@+id/SkbMaxDif"
-                                android:layout_width="271dp"
-                                android:layout_height="37dp"
-                                android:backgroundTint="@color/white"
-                                android:max="10"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintEnd_toStartOf="@+id/LblCurrentMaxDif"
-                                app:layout_constraintHorizontal_bias="0.5"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/LblMaxDif" />
+                            android:id="@+id/SkbMaxDif"
+                            android:layout_width="271dp"
+                            android:layout_height="37dp"
+                            android:backgroundTint="@color/white"
+                            android:max="10"
+                            android:progress="10"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/LblCurrentMaxDif"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/LblMaxDif" />
 
                         <TextView
                                 android:id="@+id/LblMaxDif"
