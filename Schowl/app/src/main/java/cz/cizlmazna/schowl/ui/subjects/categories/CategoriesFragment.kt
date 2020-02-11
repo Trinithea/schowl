@@ -46,7 +46,7 @@ class CategoriesFragment : Fragment() {
 
         (activity as AppCompatActivity).supportActionBar?.title = "CATEGORIES" // TODO hardcoded string, also also should include Subject name
 
-      
+
 
         binding.btnAddCategory.setOnClickListener {
             val mDialogView = LayoutInflater.from(activity).inflate(R.layout.add_subject_dialog,null)

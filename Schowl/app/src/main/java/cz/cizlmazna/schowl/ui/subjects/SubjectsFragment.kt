@@ -10,11 +10,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import kotlinx.android.synthetic.main.add_subject_dialog.view.*
 import android.widget.LinearLayout
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
-import androidx.navigation.navArgs
 import cz.cizlmazna.schowl.R
 import cz.cizlmazna.schowl.database.SchowlDatabase
 import cz.cizlmazna.schowl.database.Subject
@@ -72,8 +73,9 @@ class SubjectsFragment : Fragment() {
 //    }
 
     private fun generateSubjectsList(subjects: List<Subject>) {
-        binding.LytItems.removeAllViews()
-        binding.LytOptions.removeAllViews()
+       // binding.LytItems.removeAllViews()
+        // binding.LytOptions.removeAllViews()
+        binding.llMain.removeAllViews()
         for (subject in subjects) {
             addSubject(subject)
         }
@@ -81,7 +83,7 @@ class SubjectsFragment : Fragment() {
 
     private fun addSubject(subject: Subject) {
 
-        val newLyt = LinearLayout(activity)
+        val optionsLyt = LinearLayout(activity)
         val btnNewSubject = Button(activity)
         val btnEdit = ImageButton(activity)
         val btnRemove = ImageButton(activity)
@@ -90,8 +92,11 @@ class SubjectsFragment : Fragment() {
             ViewGroup.LayoutParams.MATCH_PARENT,
             ViewGroup.LayoutParams.MATCH_PARENT
         )
-        newLyt.layoutParams = ll
-        newLyt.orientation = LinearLayout.HORIZONTAL
+        val mainLyt = ConstraintLayout(activity)
+        val set = ConstraintSet()
+
+        optionsLyt.layoutParams = ll
+        optionsLyt.orientation = LinearLayout.HORIZONTAL
 
         val params = LinearLayout.LayoutParams(
             ViewGroup.LayoutParams.WRAP_CONTENT,
@@ -99,9 +104,12 @@ class SubjectsFragment : Fragment() {
         )
         params.weight = 1f
 
-        btnNewSubject.background = ContextCompat.getDrawable(context!!, R.drawable.transparent)
-        btnNewSubject.text = subject.name
         btnNewSubject.layoutParams = params
+        btnNewSubject.background = ContextCompat.getDrawable(context!!, R.drawable.transparent)
+        if(subject.name.length >27){
+            btnNewSubject.layoutParams.width =200
+        }
+        btnNewSubject.text = subject.name
 
         btnNewSubject.gravity = Gravity.START
         btnNewSubject.setOnClickListener { view: View ->
@@ -144,14 +152,28 @@ class SubjectsFragment : Fragment() {
             Navigation.findNavController(view).navigate(R.id.action_nav_subjects_to_nav_test)
         }
 
-        binding.LytItems.addView(btnNewSubject)
-        newLyt.addView(btnEdit)
-        newLyt.addView(btnRemove)
-        newLyt.addView(btnTest)
+
+        //binding.LytItems.addView(btnNewSubject)
+        optionsLyt.addView(btnEdit)
+        optionsLyt.addView(btnRemove)
+        optionsLyt.addView(btnTest)
+
+        btnNewSubject.setId(R.id.buttonInConstLyt)
+        optionsLyt.setId(R.id.llInConstLyt)
+
+
+        mainLyt.addView(btnNewSubject)
+        mainLyt.addView(optionsLyt)
+        set.connect(btnNewSubject.id,ConstraintSet.LEFT,mainLyt.id,ConstraintSet.LEFT)
+        set.connect(btnNewSubject.id,ConstraintSet.TOP,mainLyt.id,ConstraintSet.TOP)
+        set.connect(optionsLyt.id,ConstraintSet.RIGHT,mainLyt.id,ConstraintSet.RIGHT)
+        set.connect(optionsLyt.id,ConstraintSet.TOP,mainLyt.id,ConstraintSet.TOP)
+        set.connect(optionsLyt.id,ConstraintSet.BOTTOM,mainLyt.id,ConstraintSet.BOTTOM)
+        set.applyTo(mainLyt)
 
         // newLyt.addView(binding.LytOptions)
-        binding.LytOptions.addView(newLyt)
-
+        //binding.LytOptions.addView(optionsLyt)
+        binding.llMain.addView(mainLyt)
         //Toast.makeText(activity,"Subject added.",Toast.LENGTH_SHORT).show()
     }
 }
