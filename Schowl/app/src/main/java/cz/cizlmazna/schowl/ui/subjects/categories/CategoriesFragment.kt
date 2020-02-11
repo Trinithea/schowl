@@ -140,17 +140,11 @@ class CategoriesFragment : Fragment() {
 
         btnTest.layoutParams = params
         btnTest.setImageResource(R.drawable.ic_test)
-<<<<<<< HEAD:Schowl/app/src/main/java/cz/cizlmazna/schowl/ui/subjects/categories/CategoriesFragment.kt
         btnTest.background= ContextCompat.getDrawable(context!!, R.drawable.transparent)
-        //TODO setOnClickListener (test)
-=======
-        btnTest.background= resources.getDrawable(R.drawable.transparent)
-        //TODO setOnClickListener
         btnTest.setOnClickListener{
                 view: View ->
             Navigation.findNavController(view).navigate(R.id.action_categoriesFragment_to_testFragment)
         }
->>>>>>> master:Schowl/app/src/main/java/cz/cizlmazna/schowl/ui/subjects/CategoriesFragment.kt
 
         binding.LytItems.addView(btnNewCategory)
         newLyt.addView(btnEdit)
