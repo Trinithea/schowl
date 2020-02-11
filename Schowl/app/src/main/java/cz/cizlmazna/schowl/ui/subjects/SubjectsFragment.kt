@@ -20,6 +20,12 @@ import cz.cizlmazna.schowl.R
 import cz.cizlmazna.schowl.database.SchowlDatabase
 import cz.cizlmazna.schowl.database.Subject
 import cz.cizlmazna.schowl.databinding.FragmentSubjectsBinding
+import android.util.DisplayMetrics
+
+import android.app.Activity
+import android.util.TypedValue
+
+
 
 
 class SubjectsFragment : Fragment() {
@@ -146,20 +152,25 @@ class SubjectsFragment : Fragment() {
         btnTest.background = ContextCompat.getDrawable(context!!, R.drawable.transparent)
         btnTest.setOnClickListener{
                 view: View ->
-            Navigation.findNavController(view).navigate(R.id.action_nav_subjects_to_nav_test)
+            Navigation.findNavController(view).navigate(cz.cizlmazna.schowl.R.id.action_nav_subjects_to_nav_test)
         }
-        if(subject.name.length >27){
-         //   btnNewSubject.layoutParams.width =400
-            val param = LinearLayout.LayoutParams(600,
-                ViewGroup.LayoutParams.MATCH_PARENT
-            )
-            btnNewSubject.layoutParams = param
-        }
+
 
         //binding.LytItems.addView(btnNewSubject)
         optionsLyt.addView(btnEdit)
         optionsLyt.addView(btnRemove)
         optionsLyt.addView(btnTest)
+        if(subject.name.length >27){
+            val displayMetrics = DisplayMetrics()
+            (context as Activity).windowManager
+                .defaultDisplay
+                .getMetrics(displayMetrics)
+            val width = displayMetrics.widthPixels
+            val param = LinearLayout.LayoutParams(dpToPx(260),
+                ViewGroup.LayoutParams.MATCH_PARENT
+            )
+            btnNewSubject.layoutParams = param
+        }
 
         btnNewSubject.setId(R.id.buttonInConstLyt)
         optionsLyt.setId(R.id.llInConstLyt)
@@ -182,5 +193,10 @@ class SubjectsFragment : Fragment() {
         //binding.LytOptions.addView(optionsLyt)
         binding.llMain.addView(mainLyt)
         //Toast.makeText(activity,"Subject added.",Toast.LENGTH_SHORT).show()
+    }
+
+    fun dpToPx(dp: Int): Int {
+        val displayMetrics = context!!.resources.displayMetrics
+        return Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT))
     }
 }
