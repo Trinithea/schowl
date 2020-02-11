@@ -27,7 +27,7 @@ class TestFragment : Fragment() {
             binding.LblSolution.visibility = View.VISIBLE
             binding.LytEditNext.visibility = View.VISIBLE
         }
-        setLayout(true)
+        //setLayout(true)
 
         return binding.root
     }

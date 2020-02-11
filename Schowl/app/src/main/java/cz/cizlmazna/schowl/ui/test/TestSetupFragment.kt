@@ -37,7 +37,7 @@ class TestSetupFragment : Fragment() {
 
         setHasOptionsMenu(true)
 
-        setLayout(Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES)
+        //setLayout(Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_NO)
 
         setSeekBarListener(binding.LblCurrentMinDif, binding.SkbMinDif)
         setSeekBarListener(binding.LblCurrentMaxDif, binding.SkbMaxDif)
