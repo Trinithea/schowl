@@ -108,6 +108,10 @@ class CategoriesFragment : Fragment() {
         btnTest.setImageResource(R.drawable.ic_test)
         btnTest.background= resources.getDrawable(R.drawable.transparent)
         //TODO setOnClickListener
+        btnTest.setOnClickListener{
+                view: View ->
+            Navigation.findNavController(view).navigate(R.id.action_categoriesFragment_to_testFragment)
+        }
 
         binding.LytItems.addView(btnNewCategory)
         newLyt.addView(btnEdit)

@@ -36,6 +36,9 @@
         <action
             android:id="@+id/action_subjectsFragment_to_categoriesFragment"
             app:destination="@id/categoriesFragment" />
+        <action
+            android:id="@+id/action_nav_subjects_to_nav_test"
+            app:destination="@id/nav_test" />
     </fragment>
     <fragment
         android:id="@+id/categoriesFragment"
@@ -44,6 +47,9 @@
         <action
             android:id="@+id/action_categoriesFragment_to_questionsFragment"
             app:destination="@id/questionsFragment" />
+        <action
+            android:id="@+id/action_categoriesFragment_to_testFragment"
+            app:destination="@id/testFragment" />
     </fragment>
     <fragment
         android:id="@+id/questionsFragment"
