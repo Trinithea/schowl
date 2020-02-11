@@ -35,8 +35,11 @@ class TestSetupFragment : Fragment() {
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_test_setup, container, false)
 
-        setHasOptionsMenu(true)
-
+       // setHasOptionsMenu(true)
+        binding.btnSent.setOnClickListener {
+                view: View ->
+            Navigation.findNavController(view).navigate(R.id.action_testSetupFragment_to_testFragment)
+        }
         //setLayout(Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_NO)
 
         setSeekBarListener(binding.LblCurrentMinDif, binding.SkbMinDif)

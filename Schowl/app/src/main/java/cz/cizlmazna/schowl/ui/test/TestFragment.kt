@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.Navigation
 import cz.cizlmazna.schowl.R
 import cz.cizlmazna.schowl.databinding.FragmentTestBinding
 
@@ -24,10 +25,15 @@ class TestFragment : Fragment() {
         (activity as AppCompatActivity).supportActionBar?.title = "TEST"
 
         binding.BtnShowSolution.setOnClickListener{
+            binding.BtnShowSolution.visibility = View.GONE
             binding.LblSolution.visibility = View.VISIBLE
             binding.LytEditNext.visibility = View.VISIBLE
         }
         //setLayout(true)
+        binding.BtnNext.setOnClickListener {
+                view: View ->
+            Navigation.findNavController(view).navigate(R.id.action_testFragment_self)
+        }
 
         return binding.root
     }
