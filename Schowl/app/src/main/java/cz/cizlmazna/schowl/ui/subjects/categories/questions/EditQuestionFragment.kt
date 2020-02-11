@@ -9,25 +9,43 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import cz.cizlmazna.schowl.R
+import cz.cizlmazna.schowl.database.SchowlDatabase
 import cz.cizlmazna.schowl.databinding.FragmentEditQuestionBinding
 
 class EditQuestionFragment : Fragment() {
+
+    private lateinit var binding: FragmentEditQuestionBinding
+
+    private lateinit var viewModel: EditQuestionViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding: FragmentEditQuestionBinding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_edit_question, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_edit_question, container, false)
+
+        val application = requireNotNull(this.activity).application
+
+        val arguments = EditQuestionFragmentArgs.fromBundle(arguments!!)
+
+        val databaseDao = SchowlDatabase.getInstance(application).schowlDatabaseDao
+
+        val viewModelFactory = EditQuestionViewModelFactory(databaseDao, arguments.categoryId, arguments.questionId)
+
+        viewModel = ViewModelProvider(this, viewModelFactory).get(EditQuestionViewModel::class.java)
+
+        binding.editQuestionViewModel = viewModel
+        binding.lifecycleOwner = this
+
         (activity as AppCompatActivity).supportActionBar?.title = "EDIT QUESTION" // TODO hardcoded string
 
         binding.btnSent.setOnClickListener {
-            //TODO some Live data magic
-                view: View ->
-            Navigation.findNavController(view)
-                .navigate(R.id.action_editQuestionFragment_to_questionsFragment)
+            view: View ->
+            viewModel.confirm(binding.TxtQuestion.text.toString(), binding.TxtAnswer.text.toString(), binding.SbrDifficulty.progress.toByte())
+            Navigation.findNavController(view).navigate(EditQuestionFragmentDirections.actionEditQuestionFragmentToQuestionsFragment(viewModel.categoryId))
         }
         return binding.root
     }

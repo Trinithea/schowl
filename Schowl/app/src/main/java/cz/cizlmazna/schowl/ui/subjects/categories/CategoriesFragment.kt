@@ -108,7 +108,7 @@ class CategoriesFragment : Fragment() {
         btnNewCategory.gravity = Gravity.START
         btnNewCategory.setOnClickListener{
                 view: View ->
-            Navigation.findNavController(view).navigate(R.id.action_categoriesFragment_to_questionsFragment)
+            Navigation.findNavController(view).navigate(CategoriesFragmentDirections.actionCategoriesFragmentToQuestionsFragment(category.id))
         }
 
         btnEdit.layoutParams = params

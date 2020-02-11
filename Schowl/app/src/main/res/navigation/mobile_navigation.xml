@@ -60,14 +60,25 @@
         android:label="QuestionsFragment" >
         <action
             android:id="@+id/action_questionsFragment_to_editQuestionFragment"
-            app:destination="@id/editQuestionFragment2" />
+            app:destination="@id/editQuestionFragment" />
+        <argument
+            android:name="categoryId"
+            app:argType="long" />
     </fragment>
     <fragment
-        android:id="@+id/editQuestionFragment2"
+        android:id="@+id/editQuestionFragment"
         android:name="cz.cizlmazna.schowl.ui.subjects.categories.questions.EditQuestionFragment"
         android:label="EditQuestionFragment" >
         <action
             android:id="@+id/action_editQuestionFragment_to_questionsFragment"
-            app:destination="@id/questionsFragment" />
+            app:destination="@id/questionsFragment"
+            app:popUpTo="@+id/questionsFragment"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="categoryId"
+            app:argType="long" />
+        <argument
+            android:name="questionId"
+            app:argType="long" />
     </fragment>
 </navigation>
