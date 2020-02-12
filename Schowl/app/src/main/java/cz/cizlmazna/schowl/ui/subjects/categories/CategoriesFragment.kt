@@ -50,7 +50,7 @@ class CategoriesFragment : Fragment() {
 
         viewModel = ViewModelProvider(this, viewModelFactory).get(CategoriesViewModel::class.java)
 
-        (activity as AppCompatActivity).supportActionBar?.title = "CATEGORIES" // TODO hardcoded string, also also should include Subject name
+        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.categories) // TODO hardcoded string, also also should include Subject name
 
 
 
@@ -58,7 +58,7 @@ class CategoriesFragment : Fragment() {
             val mDialogView = LayoutInflater.from(activity).inflate(R.layout.add_subject_dialog,null)
             val mBuilder = AlertDialog.Builder(activity).setView(mDialogView)
             val mAlertDialog = mBuilder.show()
-            mDialogView.TxtName.hint = "Name of category"
+            mDialogView.TxtName.hint = getString(R.string.name_of_category)
             mDialogView.BtnAdd.setOnClickListener{
                 mAlertDialog.dismiss()
                 val name = mDialogView.TxtName.text.toString()
@@ -125,7 +125,7 @@ class CategoriesFragment : Fragment() {
             val mBuilder = AlertDialog.Builder(activity).setView(mDialogView)
             val mAlertDialog = mBuilder.show()
             mDialogView.TxtName.setText(category.name)
-            mDialogView.BtnAdd.text = "EDIT"
+            mDialogView.BtnAdd.text = getString(R.string.edit)
 
             mDialogView.BtnAdd.setOnClickListener{
                 mAlertDialog.dismiss()
@@ -143,7 +143,7 @@ class CategoriesFragment : Fragment() {
             val mBuilder =
                 AlertDialog.Builder(activity).setView(mDialogView)
             val mAlertDialog = mBuilder.show()
-            mDialogView.txtMessage.setText("Do you really want to remove " + category.name + "?")
+            mDialogView.txtMessage.setText(getString(R.string.remove_dalog) + category.name + "?")
             mDialogView.btnRemove.setOnClickListener {
                 mAlertDialog.dismiss()
                 viewModel.removeCategory(category)

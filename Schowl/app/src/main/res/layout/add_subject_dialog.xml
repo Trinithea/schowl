@@ -26,6 +26,6 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:background="@android:color/transparent"
-        android:text="ADD"
+        android:text="@string/add"
         android:textColor="@color/appleRed" />
 </LinearLayout>

@@ -81,56 +81,56 @@
                     </LinearLayout>
 
                     <LinearLayout
-                            android:id="@+id/linearLayout2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="16dp"
-                            android:layout_marginTop="64dp"
-                            android:layout_marginRight="16dp"
-                            android:layout_marginBottom="64dp"
-                            android:gravity="center"
-                            android:orientation="vertical"
-                            app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+                        android:id="@+id/linearLayout2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_marginBottom="64dp"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
 
                         <TextView
-                                android:id="@+id/textView2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="monospace"
-                                android:text="CORRECT SOLUTION"
-                                android:textColor="@color/ivoryYellow"
-                                android:textSize="24sp" />
+                            android:id="@+id/textView2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="monospace"
+                            android:text="@string/correct_solution"
+                            android:textColor="@color/ivoryYellow"
+                            android:textSize="24sp" />
 
                         <EditText
-                                android:id="@+id/TxtAnswer"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:backgroundTint="@color/peacockBlue"
-                                android:ems="10"
-                                android:gravity="start|top"
-                                android:inputType="textMultiLine"
-                                android:textColor="@color/ivoryYellow"
-                                android:textSize="18sp"
-                                android:text="@{editQuestionViewModel.answerText}"/>
+                            android:id="@+id/TxtAnswer"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/peacockBlue"
+                            android:ems="10"
+                            android:gravity="start|top"
+                            android:inputType="textMultiLine"
+                            android:text="@{editQuestionViewModel.answerText}"
+                            android:textColor="@color/ivoryYellow"
+                            android:textSize="18sp" />
                     </LinearLayout>
 
                     <LinearLayout
-                            android:id="@+id/linearLayout4"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="16dp"
-                            android:layout_marginTop="64dp"
-                            android:layout_marginRight="16dp"
-                            android:layout_marginBottom="128dp"
-                            android:gravity="center"
-                            android:orientation="vertical"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+                        android:id="@+id/linearLayout4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_marginBottom="128dp"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
                         <TextView
                             android:id="@+id/textView3"
@@ -139,7 +139,7 @@
                             android:layout_marginLeft="48dp"
                             android:layout_marginRight="48dp"
                             android:fontFamily="monospace"
-                            android:text="DIFFICULTY"
+                            android:text="@string/difficulty"
                             android:textColor="@color/ivoryYellow"
                             android:textSize="24sp" />
 

@@ -19,7 +19,7 @@
                 android:layout_marginTop="32dp"
                 android:fontFamily="monospace"
                 android:showText="false"
-                android:text="Dark mode "
+                android:text="@string/dark_mode"
                 android:textColor="@color/ivoryYellow"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"

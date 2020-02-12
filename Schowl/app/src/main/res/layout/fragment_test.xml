@@ -65,7 +65,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="monospace"
-                            android:text="My answer:"
+                            android:text="@string/my_answer"
                             android:textColor="@color/ivoryYellow"
                             android:textSize="18sp" />
 
@@ -136,7 +136,7 @@
                             android:background="@drawable/transparent"
                             android:fontFamily="monospace"
                             android:foregroundGravity="center_vertical|center|center_horizontal"
-                            android:text="Edit question"
+                            android:text="@string/edit_question"
                             android:textColor="@color/peacockBlue"
                             android:textSize="18sp"
                             android:translationZ="3dp" />

@@ -50,7 +50,7 @@ class QuestionsFragment : Fragment() {
 
         viewModel = ViewModelProvider(this, viewModelFactory).get(QuestionsViewModel::class.java)
 
-        (activity as AppCompatActivity).supportActionBar?.title = "QUESTIONS"
+        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.questions)
 
         binding.btnAddQuestion.setOnClickListener { view: View ->
             Navigation.findNavController(view).navigate(QuestionsFragmentDirections.actionQuestionsFragmentToEditQuestionFragment(arguments.categoryId, -1))
@@ -123,7 +123,7 @@ class QuestionsFragment : Fragment() {
             val mBuilder =
                 AlertDialog.Builder(activity).setView(mDialogView)
             val mAlertDialog = mBuilder.show()
-            mDialogView.txtMessage.setText("Do you really want to remove this question?")
+            mDialogView.txtMessage.setText(getString(R.string.remove_question_dialog))
             mDialogView.btnRemove.setOnClickListener {
                 mAlertDialog.dismiss()
                 viewModel.removeQuestion(question)

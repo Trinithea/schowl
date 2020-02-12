@@ -41,7 +41,7 @@ class EditQuestionFragment : Fragment() {
         binding.editQuestionViewModel = viewModel
         binding.lifecycleOwner = this
         setSeekBarListener(binding.LblDifficulty,binding.SbrDifficulty)
-        (activity as AppCompatActivity).supportActionBar?.title = "EDIT QUESTION" // TODO hardcoded string
+        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.edit_question) // TODO hardcoded string
 
         binding.btnSent.setOnClickListener {
             view: View ->

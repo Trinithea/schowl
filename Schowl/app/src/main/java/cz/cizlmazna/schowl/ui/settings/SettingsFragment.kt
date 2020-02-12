@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import cz.cizlmazna.schowl.R
 import cz.cizlmazna.schowl.databinding.FragmentSettingsBinding
@@ -20,6 +21,7 @@ class SettingsFragment : Fragment() {
 //
 //            }
 //        })
+        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.SETTINGS)
         return binding.root
     }
 

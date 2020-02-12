@@ -93,7 +93,7 @@ class TestSetupFragment : Fragment() {
         setMinSeekBarListener(binding.SkbMinDif)
         setMaxSeekBarListener(binding.SkbMaxDif)
 
-        (activity as AppCompatActivity).supportActionBar?.title = "CREATE YOUR TEST" // TODO move text out of here, also it would be great to optimize the action bar a little
+        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.create_your_test) // TODO move text out of here, also it would be great to optimize the action bar a little
 
         return binding.root
     }

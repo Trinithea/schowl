@@ -39,7 +39,7 @@ class TestFragment : Fragment() {
 
         viewModel = ViewModelProvider(this, viewModelFactory).get(TestViewModel::class.java)
 
-        (activity as AppCompatActivity).supportActionBar?.title = "TEST"
+        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.test)
 
         binding.BtnShowSolution.setOnClickListener{
             binding.BtnShowSolution.visibility = View.GONE

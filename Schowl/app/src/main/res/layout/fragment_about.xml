@@ -33,19 +33,19 @@
                     android:id="@+id/LblTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="ABOUT SCHOWL"
+                    android:text="@string/about_schowl"
                     android:textAlignment="center"
                     android:textSize="36sp" />
 
                 <TextView
-                    android:id="@+id/textView5"
+                    android:id="@+id/LblInfo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginRight="16dp"
                     android:layout_marginBottom="16dp"
-                    android:text="TextView"
+                    android:text="@string/textview"
                     android:textAlignment="center"
                     android:textSize="18sp" />
             </LinearLayout>

@@ -47,29 +47,28 @@
                         app:srcCompat="@drawable/ic_icon_confirm" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/LytSetDifficulty"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="32dp"
-                            android:layout_marginBottom="72dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/LytSelectCategory">
+                        android:id="@+id/LytSetDifficulty"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="72dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/LytSelectCategory">
 
                         <SeekBar
-                                android:id="@+id/SkbMinDif"
-                                android:layout_width="271dp"
-                                android:layout_height="37dp"
-                                android:backgroundTint="@color/white"
-                                android:max="10"
-                                android:progress="@{testSetupViewModel.minDifficulty}"
-                                app:layout_constraintBottom_toTopOf="@+id/LblMaxDif"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintEnd_toStartOf="@+id/LblCurrentMinDif"
-                                app:layout_constraintHorizontal_bias="0.5"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/LblMinDif" />
+                            android:id="@+id/SkbMinDif"
+                            android:layout_width="271dp"
+                            android:layout_height="37dp"
+                            android:backgroundTint="@color/white"
+                            android:max="10"
+                            android:progress="@{testSetupViewModel.minDifficulty}"
+                            app:layout_constraintBottom_toTopOf="@+id/LblMaxDif"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/LblCurrentMinDif"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/LblMinDif" />
 
                         <TextView
                             android:id="@+id/LblMinDif"
@@ -86,19 +85,19 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
-                                android:id="@+id/LblCurrentMinDif"
-                                android:layout_width="wrap_content"
-                                android:layout_height="37dp"
-                                android:layout_marginEnd="8dp"
-                                android:fontFamily="sans-serif-smallcaps"
-                                android:text="@{testSetupViewModel.minDifficulty.toString()}"
-                                android:textColor="@color/ivoryYellow"
-                                android:textSize="30sp"
-                                app:layout_constraintBottom_toBottomOf="@+id/SkbMinDif"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintHorizontal_bias="0.5"
-                                app:layout_constraintStart_toEndOf="@+id/SkbMinDif"
-                                app:layout_constraintTop_toTopOf="@+id/SkbMinDif" />
+                            android:id="@+id/LblCurrentMinDif"
+                            android:layout_width="wrap_content"
+                            android:layout_height="37dp"
+                            android:layout_marginEnd="8dp"
+                            android:fontFamily="sans-serif-smallcaps"
+                            android:text="@{testSetupViewModel.minDifficulty.toString()}"
+                            android:textColor="@color/ivoryYellow"
+                            android:textSize="30sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/SkbMinDif"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toEndOf="@+id/SkbMinDif"
+                            app:layout_constraintTop_toTopOf="@+id/SkbMinDif" />
 
                         <TextView
                             android:id="@+id/LblCurrentMaxDif"
@@ -149,7 +148,7 @@
                         android:id="@+id/LytSelectCategory"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="64dp"
+                        android:layout_marginTop="16dp"
                         android:layout_marginBottom="64dp"
                         android:visibility="@{testSetupViewModel.categorySelectionVisibility}"
                         app:layout_constraintBottom_toTopOf="@+id/LytSetDifficulty"
@@ -161,7 +160,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:layout_marginEnd="8dp"
-                            android:text="CHOOSE CATEGORIES:"
+                            android:text="@string/choose_categories"
                             android:textColor="@color/ivoryYellow"
                             android:textSize="24sp"
                             app:fontFamily="monospace"
@@ -225,6 +224,7 @@
                             android:layout_marginStart="8dp"
                             android:layout_marginEnd="8dp"
                             android:backgroundTint="@color/peacockBlue"
+                            android:popupBackground="@color/navyBlue"
                             app:layout_constraintBottom_toTopOf="@+id/SwitchAllCategories"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -236,10 +236,10 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:layout_marginEnd="8dp"
-                            android:text="All categories  "
-                            android:textColor="@color/ivoryYellow"
-                            android:textSize="18sp"
                             android:checked="@{testSetupViewModel.allCategoriesSelected}"
+                            android:text="@string/all_categories"
+                            android:textColor="@color/peacockBlue"
+                            android:textSize="18sp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"

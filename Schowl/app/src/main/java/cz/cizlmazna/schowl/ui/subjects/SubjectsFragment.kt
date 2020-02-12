@@ -48,14 +48,14 @@ class SubjectsFragment : Fragment() {
 
         viewModel = ViewModelProvider(this, viewModelFactory).get(SubjectsViewModel::class.java)
 
-        (activity as AppCompatActivity).supportActionBar?.title = "SUBJECTS" // TODO hardcoded string
+        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.subjects) // TODO hardcoded string
 
         binding.btnAddSubject.setOnClickListener {
             val mDialogView =
                 LayoutInflater.from(activity).inflate(R.layout.add_subject_dialog, null)
             val mBuilder =
                 AlertDialog.Builder(activity).setView(mDialogView)
-            mDialogView.TxtName.hint = "Name of subject"
+            mDialogView.TxtName.hint = getString(R.string.name_of_subject)
             val mAlertDialog = mBuilder.show()
 
             mDialogView.BtnAdd.setOnClickListener {
@@ -128,7 +128,7 @@ class SubjectsFragment : Fragment() {
                 AlertDialog.Builder(activity).setView(mDialogView)
             val mAlertDialog = mBuilder.show()
             mDialogView.TxtName.setText(subject.name)
-            mDialogView.BtnAdd.text = "EDIT"
+            mDialogView.BtnAdd.text = getString(R.string.edit)
             mDialogView.BtnAdd.setOnClickListener {
                 mAlertDialog.dismiss()
                 viewModel.editSubject(subject, mDialogView.TxtName.text.toString())
@@ -145,7 +145,7 @@ class SubjectsFragment : Fragment() {
             val mBuilder =
                 AlertDialog.Builder(activity).setView(mDialogView)
             val mAlertDialog = mBuilder.show()
-            mDialogView.txtMessage.text = "Do you really want to remove " + subject.name + "?" // TODO Really? New hardcoded strings???
+            mDialogView.txtMessage.text = getString(R.string.remove_dalog) + subject.name + "?" // TODO Really? New hardcoded strings???
             mDialogView.btnRemove.setOnClickListener {
                 mAlertDialog.dismiss()
                 viewModel.removeSubject(subject)
