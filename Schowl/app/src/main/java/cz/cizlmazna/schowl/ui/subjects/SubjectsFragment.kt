@@ -25,6 +25,7 @@ import android.util.DisplayMetrics
 import android.app.Activity
 import android.util.TypedValue
 import kotlinx.android.synthetic.main.remove_dialog.view.*
+import kotlin.math.roundToInt
 
 
 class SubjectsFragment : Fragment() {
@@ -144,7 +145,7 @@ class SubjectsFragment : Fragment() {
             val mBuilder =
                 AlertDialog.Builder(activity).setView(mDialogView)
             val mAlertDialog = mBuilder.show()
-            mDialogView.txtMessage.setText("Do you really want to remove " + subject.name + "?")
+            mDialogView.txtMessage.text = "Do you really want to remove " + subject.name + "?" // TODO Really? New hardcoded strings???
             mDialogView.btnRemove.setOnClickListener {
                 mAlertDialog.dismiss()
                 viewModel.removeSubject(subject)
@@ -177,9 +178,9 @@ class SubjectsFragment : Fragment() {
             btnNewSubject.layoutParams = param
         }
 
-        mainLyt.setId(View.generateViewId())
-        btnNewSubject.setId(View.generateViewId())
-        optionsLyt.setId(View.generateViewId())
+        mainLyt.id = View.generateViewId()
+        btnNewSubject.id = View.generateViewId()
+        optionsLyt.id = View.generateViewId()
 
         mainLyt.addView(btnNewSubject)
         mainLyt.addView(optionsLyt)
@@ -195,8 +196,8 @@ class SubjectsFragment : Fragment() {
         binding.llMain.addView(mainLyt)
     }
 
-    fun dpToPx(dp: Int): Int {
+    private fun dpToPx(dp: Int): Int {
         val displayMetrics = context!!.resources.displayMetrics
-        return Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT))
+        return (dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT)).roundToInt()
     }
 }

@@ -12,4 +12,8 @@ data class Subject(
 
     @ColumnInfo(name = "name")
     var name: String
-)
+) {
+    override fun toString(): String {
+        return name
+    }
+}

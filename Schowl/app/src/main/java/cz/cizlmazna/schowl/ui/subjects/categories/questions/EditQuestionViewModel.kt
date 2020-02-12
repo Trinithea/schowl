@@ -79,4 +79,9 @@ class EditQuestionViewModel(
             database.updateQuestion(question)
         }
     }
+
+    override fun onCleared() {
+        super.onCleared()
+        viewModelJob.cancel()
+    }
 }

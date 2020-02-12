@@ -42,4 +42,9 @@ class QuestionsViewModel(
             database.deleteQuestion(question)
         }
     }
+
+    override fun onCleared() {
+        super.onCleared()
+        viewModelJob.cancel()
+    }
 }

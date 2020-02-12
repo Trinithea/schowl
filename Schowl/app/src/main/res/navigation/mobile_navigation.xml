@@ -16,10 +16,16 @@
     <fragment
         android:id="@+id/testFragment"
         android:name="cz.cizlmazna.schowl.ui.test.TestFragment"
-        android:label="TestFragment" >
+        android:label="TestFragment">
         <argument
             android:name="categoryIds"
             app:argType="long[]" />
+        <argument
+            android:name="minDifficulty"
+            app:argType="integer" />
+        <argument
+            android:name="maxDifficulty"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/nav_test"
@@ -38,7 +44,7 @@
     <fragment
         android:id="@+id/nav_subjects"
         android:name="cz.cizlmazna.schowl.ui.subjects.SubjectsFragment"
-        android:label="SubjectsFragment" >
+        android:label="SubjectsFragment">
         <action
             android:id="@+id/action_subjectsFragment_to_categoriesFragment"
             app:destination="@id/categoriesFragment" />
@@ -63,7 +69,7 @@
     <fragment
         android:id="@+id/questionsFragment"
         android:name="cz.cizlmazna.schowl.ui.subjects.categories.questions.QuestionsFragment"
-        android:label="QuestionsFragment" >
+        android:label="QuestionsFragment">
         <action
             android:id="@+id/action_questionsFragment_to_editQuestionFragment"
             app:destination="@id/editQuestionFragment" />
@@ -74,7 +80,7 @@
     <fragment
         android:id="@+id/editQuestionFragment"
         android:name="cz.cizlmazna.schowl.ui.subjects.categories.questions.EditQuestionFragment"
-        android:label="EditQuestionFragment" >
+        android:label="EditQuestionFragment">
         <action
             android:id="@+id/action_editQuestionFragment_to_questionsFragment"
             app:destination="@id/questionsFragment"

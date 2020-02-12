@@ -1,30 +1,24 @@
 package cz.cizlmazna.schowl.ui.test
 
-
 import android.content.res.ColorStateList
-import android.content.res.Configuration
 import android.graphics.Typeface
 import android.os.Bundle
+import android.util.Log
 import android.view.*
-import android.widget.CheckBox
-import android.widget.LinearLayout
-import android.widget.SeekBar
-import androidx.fragment.app.Fragment
-import android.widget.TextView
+import android.widget.*
+import android.widget.AdapterView.OnItemSelectedListener
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
-import androidx.core.graphics.toColor
-import androidx.core.graphics.toColorLong
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import cz.cizlmazna.schowl.R
 import cz.cizlmazna.schowl.database.SchowlDatabase
+import cz.cizlmazna.schowl.database.Subject
 import cz.cizlmazna.schowl.databinding.FragmentTestSetupBinding
-import kotlinx.android.synthetic.main.fragment_categories.*
 
 
 class TestSetupFragment : Fragment() {
@@ -58,17 +52,49 @@ class TestSetupFragment : Fragment() {
 
         viewModel = ViewModelProvider(this, viewModelFactory).get(TestSetupViewModel::class.java)
 
-       // setHasOptionsMenu(true)
-        binding.btnSent.setOnClickListener {
-                view: View ->
-            Navigation.findNavController(view).navigate(TestSetupFragmentDirections.actionTestSetupFragmentToTestFragment(LongArray(1)))// TODO make this work, no hardcoded array
-        }
+        binding.lifecycleOwner = this
+        binding.testSetupViewModel = viewModel
+
+        // setHasOptionsMenu(true)
         //setLayout(Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_NO)
 
-        setSeekBarListener(binding.LblCurrentMinDif, binding.SkbMinDif)
-        setSeekBarListener(binding.LblCurrentMaxDif, binding.SkbMaxDif)
+        viewModel.getSubjects().observe(viewLifecycleOwner, Observer {
+            val dataAdapter = ArrayAdapter<Subject>(context!!, android.R.layout.simple_spinner_item, it)
+            dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            binding.SpnSubject.adapter = dataAdapter
+        })
+
+        viewModel.getSelectedSubject().observe(viewLifecycleOwner, Observer {
+            val dataAdapter = ArrayAdapter<Subject>(context!!, android.R.layout.simple_spinner_item, viewModel.getSubjects().value!!)
+            binding.SpnSubject.setSelection(dataAdapter.getPosition(it))
+        })
+
+        binding.SpnSubject.onItemSelectedListener = object : OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                viewModel.onSubjectSelected(parent?.getItemAtPosition(position) as Subject)
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                viewModel.onSubjectSelected(null)
+            }
+        }
+
+        binding.SwitchAllCategories.setOnCheckedChangeListener {_, isChecked ->
+            viewModel.onAllCategoriesSelectedChange(isChecked)
+        }
+
+        // TODO list categories
+
+//        viewModel.getNavigateToTest().observe(viewLifecycleOwner, Observer {
+////            this.findNavController().navigate(TestSetupFragmentDirections.actionTestSetupFragmentToTestFragment(viewModel.getCategoryIds(), viewModel.getMinDifficulty().value!!, viewModel.getMaxDifficulty().value!!))
+//            viewModel.doneNavigatingToTest()
+//        })
+
+        setMinSeekBarListener(binding.SkbMinDif)
+        setMaxSeekBarListener(binding.SkbMaxDif)
 
         (activity as AppCompatActivity).supportActionBar?.title = "CREATE YOUR TEST" // TODO move text out of here, also it would be great to optimize the action bar a little
+
         return binding.root
     }
 
@@ -95,18 +121,23 @@ class TestSetupFragment : Fragment() {
 
     }
 
-    private fun setSeekBarListener(label: TextView, seekBar: SeekBar) {
+    private fun setMinSeekBarListener(seekBar: SeekBar) {
         seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                label.text = progress.toString()
+                viewModel.onSetMinDifficulty(seekBar!!.progress)
             }
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {}
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {}
+        })
+    }
 
-            override fun onStartTrackingTouch(seekBar: SeekBar?) {
+    private fun setMaxSeekBarListener(seekBar: SeekBar) {
+        seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                viewModel.onSetMaxDifficulty(seekBar!!.progress)
             }
-
-            override fun onStopTrackingTouch(seekBar: SeekBar?) {
-            }
-
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {}
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {}
         })
     }
 

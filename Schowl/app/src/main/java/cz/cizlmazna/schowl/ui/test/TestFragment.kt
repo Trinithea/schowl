@@ -35,7 +35,7 @@ class TestFragment : Fragment() {
 
         val databaseDao = SchowlDatabase.getInstance(application).schowlDatabaseDao
 
-        val viewModelFactory = TestViewModelFactory(databaseDao, arguments.categoryIds)
+        val viewModelFactory = TestViewModelFactory(databaseDao, arguments.categoryIds, arguments.minDifficulty, arguments.maxDifficulty)
 
         viewModel = ViewModelProvider(this, viewModelFactory).get(TestViewModel::class.java)
 

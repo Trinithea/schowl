@@ -51,4 +51,9 @@ class SubjectsViewModel(
             database.deleteSubject(subject)
         }
     }
+
+    override fun onCleared() {
+        super.onCleared()
+        viewModelJob.cancel()
+    }
 }

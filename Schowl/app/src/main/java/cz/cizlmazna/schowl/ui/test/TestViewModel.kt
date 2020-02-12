@@ -6,7 +6,9 @@ import kotlinx.coroutines.*
 
 class TestViewModel(
     private val database: SchowlDatabaseDao,
-    categoryIds: LongArray
+    categoryIds: LongArray,
+    minDifficulty: Int,
+    maxDifficulty: Int
 ) : ViewModel() {
 
     private var viewModelJob = Job()
@@ -23,5 +25,10 @@ class TestViewModel(
         withContext(Dispatchers.IO) {
 
         }
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        viewModelJob.cancel()
     }
 }

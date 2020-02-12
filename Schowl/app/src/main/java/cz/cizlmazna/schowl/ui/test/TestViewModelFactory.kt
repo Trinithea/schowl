@@ -7,13 +7,15 @@ import java.lang.IllegalArgumentException
 
 class TestViewModelFactory(
     private val database: SchowlDatabaseDao,
-    private val categoryIds: LongArray
+    private val categoryIds: LongArray,
+    private val minDifficulty: Int,
+    private val maxDifficulty: Int
 ) : ViewModelProvider.Factory {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(TestViewModel::class.java)) {
-            return TestViewModel(database, categoryIds) as T
+            return TestViewModel(database, categoryIds, minDifficulty, maxDifficulty) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }
