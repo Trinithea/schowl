@@ -64,18 +64,18 @@
                                 app:layout_constraintTop_toBottomOf="@+id/LblMinDif" />
 
                         <TextView
-                                android:id="@+id/LblMinDif"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="sans-serif-condensed-light"
-                                android:text="@string/min_difficulty"
-                                android:textColor="@color/ivoryYellow"
-                                android:textSize="28sp"
-                                app:fontFamily="monospace"
-                                app:layout_constraintBottom_toTopOf="@+id/SkbMinDif"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                            android:id="@+id/LblMinDif"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-condensed-light"
+                            android:text="@string/min_difficulty"
+                            android:textColor="@color/ivoryYellow"
+                            android:textSize="24sp"
+                            app:fontFamily="monospace"
+                            app:layout_constraintBottom_toTopOf="@+id/SkbMinDif"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
                                 android:id="@+id/LblCurrentMinDif"
@@ -123,17 +123,17 @@
                             app:layout_constraintTop_toBottomOf="@+id/LblMaxDif" />
 
                         <TextView
-                                android:id="@+id/LblMaxDif"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/max_difficulty"
-                                android:textColor="@color/ivoryYellow"
-                                android:textSize="28sp"
-                                app:fontFamily="monospace"
-                                app:layout_constraintBottom_toTopOf="@+id/SkbMaxDif"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/SkbMinDif" />
+                            android:id="@+id/LblMaxDif"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/max_difficulty"
+                            android:textColor="@color/ivoryYellow"
+                            android:textSize="24sp"
+                            app:fontFamily="monospace"
+                            app:layout_constraintBottom_toTopOf="@+id/SkbMaxDif"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/SkbMinDif" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -147,18 +147,18 @@
                             app:layout_constraintTop_toBottomOf="@+id/LytSelectSubject">
 
                         <TextView
-                                android:id="@+id/LblCategory"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="8dp"
-                                android:layout_marginEnd="8dp"
-                                android:text="CHOOSE CATEGORIES:"
-                                android:textColor="@color/ivoryYellow"
-                                android:textSize="30sp"
-                                app:fontFamily="monospace"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                            android:id="@+id/LblCategory"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="CHOOSE CATEGORIES:"
+                            android:textColor="@color/ivoryYellow"
+                            android:textSize="24sp"
+                            app:fontFamily="monospace"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
                         <ScrollView
                                 android:id="@+id/ScCategories"
@@ -201,7 +201,7 @@
                             android:layout_marginEnd="8dp"
                             android:text="@string/select_subject"
                             android:textColor="@color/ivoryYellow"
-                            android:textSize="30sp"
+                            android:textSize="24sp"
                             app:fontFamily="monospace"
                             app:layout_constraintBottom_toTopOf="@+id/SpnSubject"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -229,7 +229,7 @@
                             android:layout_marginEnd="8dp"
                             android:text="All categories  "
                             android:textColor="@color/ivoryYellow"
-                            android:textSize="24sp"
+                            android:textSize="18sp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"

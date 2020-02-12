@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SeekBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -39,7 +40,7 @@ class EditQuestionFragment : Fragment() {
 
         binding.editQuestionViewModel = viewModel
         binding.lifecycleOwner = this
-
+        setSeekBarListener(binding.LblDifficulty,binding.SbrDifficulty)
         (activity as AppCompatActivity).supportActionBar?.title = "EDIT QUESTION" // TODO hardcoded string
 
         binding.btnSent.setOnClickListener {
@@ -48,5 +49,19 @@ class EditQuestionFragment : Fragment() {
             Navigation.findNavController(view).navigate(EditQuestionFragmentDirections.actionEditQuestionFragmentToQuestionsFragment(viewModel.categoryId))
         }
         return binding.root
+    }
+    private fun setSeekBarListener(label: TextView, seekBar: SeekBar) {
+        seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                label.setText(progress.toString())
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {
+            }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {
+            }
+
+        })
     }
 }
