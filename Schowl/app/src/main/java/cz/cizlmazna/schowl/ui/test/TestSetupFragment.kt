@@ -3,7 +3,6 @@ package cz.cizlmazna.schowl.ui.test
 import android.content.res.ColorStateList
 import android.graphics.Typeface
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.*
 import android.widget.AdapterView.OnItemSelectedListener
@@ -15,6 +14,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
+import cz.cizlmazna.schowl.MainActivity
 import cz.cizlmazna.schowl.R
 import cz.cizlmazna.schowl.database.Category
 import cz.cizlmazna.schowl.database.SchowlDatabase
@@ -55,13 +55,19 @@ class TestSetupFragment : Fragment() {
 
         binding.lifecycleOwner = this
         binding.testSetupViewModel = viewModel
-
-        // setHasOptionsMenu(true)
-        //setLayout(Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_NO)
+        if(!(activity as MainActivity).getDarkMode()){
+            setLayoutToLightMode()
+        }
 
         viewModel.getSubjects().observe(viewLifecycleOwner, Observer {
-            val dataAdapter = ArrayAdapter<Subject>(context!!, android.R.layout.simple_spinner_item, it)
-            dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            var dataAdapter =ArrayAdapter<Subject>(context!!, android.R.layout.simple_spinner_item, it)
+            if((activity as MainActivity).getDarkMode()) {
+                dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            }
+            else {
+                dataAdapter = ArrayAdapter<Subject>(context!!, R.layout.spinner_item_dark, it)
+                dataAdapter.setDropDownViewResource(R.layout.spinner_item_light)
+            }
             binding.SpnSubject.adapter = dataAdapter
         })
 
@@ -114,16 +120,32 @@ class TestSetupFragment : Fragment() {
         return NavigationUI.onNavDestinationSelected(item, view!!.findNavController()) || super.onOptionsItemSelected(item)
     }
 
-    private fun setLayout(darkMode: Boolean) {
-        // TODO use darkMode
-        binding.LblSubject.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
-        binding.LblCategory.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
-        binding.LblMinDif.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
-        binding.LblMaxDif.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
-        binding.LblCurrentMinDif.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
-        binding.LblCurrentMaxDif.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
-        binding.LytMainConstraint.background = ContextCompat.getDrawable(context!!, R.color.white)
-        binding.SwitchAllCategories.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
+    private fun setLayoutToLightMode() {
+
+            binding.LblSubject.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
+            binding.LblCategory.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
+            binding.LblMinDif.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
+            binding.LblMaxDif.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
+            binding.LblCurrentMinDif.setTextColor(
+                ContextCompat.getColor(
+                    context!!,
+                    R.color.navyBlue
+                )
+            )
+            binding.LblCurrentMaxDif.setTextColor(
+                ContextCompat.getColor(
+                    context!!,
+                    R.color.navyBlue
+                )
+            )
+            binding.LytMain.background =
+                ContextCompat.getDrawable(context!!, R.color.white)
+            binding.SwitchAllCategories.setTextColor(
+                ContextCompat.getColor(
+                    context!!,
+                    R.color.navyBlue
+                )
+            )
 
     }
 

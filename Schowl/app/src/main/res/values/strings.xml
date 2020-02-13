@@ -44,11 +44,12 @@
     <string name="textview">TextView</string>
     <string name="correct_solution">CORRECT SOLUTION</string>
     <string name="difficulty">DIFFICULTY</string>
-    <string name="dark_mode">Dark mode</string>
+    <string name="dark_mode">DARK MODE</string>
     <string name="my_answer">My answer:</string>
     <string name="all_categories">All categories</string>
     <string name="choose_categories">CHOOSE CATEGORIES:</string>
     <string name="test_completed">TEST COMPLETED!</string>
     <string name="let_s_do_this_again">LET\'S DO THIS AGAIN</string>
+    <string name="light_mode">LIGHT MODE</string>
     <!--TODO: ilájs u should write here something about our great app -->
 </resources>

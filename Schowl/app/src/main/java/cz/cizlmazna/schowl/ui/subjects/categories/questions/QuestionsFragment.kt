@@ -21,6 +21,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
+import cz.cizlmazna.schowl.MainActivity
 import cz.cizlmazna.schowl.R
 import cz.cizlmazna.schowl.database.Question
 import cz.cizlmazna.schowl.database.SchowlDatabase
@@ -62,14 +63,26 @@ class QuestionsFragment : Fragment() {
             generateQuestionsList(it)
         })
 
+        if((activity as MainActivity).getDarkMode() == false){
+            setLayoutToLightMode()
+        }
         return binding.root
 
     }
-
+    private fun setDialog(darkmode: Boolean, textView: TextView, ll:LinearLayout){
+        if(!darkmode){
+            ll.background = ContextCompat.getDrawable(context!!, R.color.white)
+            textView.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
+        }
+        else{
+            ll.background = ContextCompat.getDrawable(context!!, R.color.navyBlue)
+            textView.setTextColor(ContextCompat.getColor(context!!, R.color.ivoryYellow))
+        }
+    }
     private fun generateQuestionsList(questions: List<Question>) {
         binding.llMain.removeAllViews()
         for (question in questions) {
-            addQuestion(question)
+            addQuestion((activity as MainActivity).getDarkMode(),question)
         }
     }
 
@@ -82,7 +95,7 @@ class QuestionsFragment : Fragment() {
         return NavigationUI.onNavDestinationSelected(item, view!!.findNavController()) || super.onOptionsItemSelected(item)
     }
 
-    private fun addQuestion(question: Question){
+    private fun addQuestion(darkmode : Boolean, question: Question){
         val btnQuestion = Button(activity)
         val btnRemove = ImageButton(activity)
         val params = LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.MATCH_PARENT)
@@ -90,6 +103,14 @@ class QuestionsFragment : Fragment() {
         val mainLyt = ConstraintLayout(activity)
         btnQuestion.layoutParams = params
 
+        if(darkmode == false){
+            btnQuestion.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
+            btnRemove.setImageResource(R.drawable.ic_remove_blue)
+        }
+        else{
+            btnQuestion.setTextColor(ContextCompat.getColor(context!!, R.color.ivoryYellow))
+            btnRemove.setImageResource(R.drawable.ic_remove_yellow)
+        }
         btnQuestion.background = ContextCompat.getDrawable(context!!, R.drawable.transparent)
         btnQuestion.translationZ = 3f
         btnQuestion.gravity = Gravity.START
@@ -115,7 +136,6 @@ class QuestionsFragment : Fragment() {
             btnQuestion.layoutParams = param
         }
         btnRemove.layoutParams = params
-        btnRemove.setImageResource(R.drawable.ic_remove_yellow)
         btnRemove.background= ContextCompat.getDrawable(context!!, R.drawable.transparent)
         btnRemove.setOnClickListener {
             val mDialogView =
@@ -124,6 +144,7 @@ class QuestionsFragment : Fragment() {
                 AlertDialog.Builder(activity).setView(mDialogView)
             val mAlertDialog = mBuilder.show()
             mDialogView.txtMessage.setText(getString(R.string.remove_question_dialog))
+            setDialog(darkmode,mDialogView.txtMessage,mDialogView.LlMainRemove)
             mDialogView.btnRemove.setOnClickListener {
                 mAlertDialog.dismiss()
                 viewModel.removeQuestion(question)
@@ -152,5 +173,8 @@ class QuestionsFragment : Fragment() {
     fun dpToPx(dp: Int): Int {
         val displayMetrics = context!!.resources.displayMetrics
         return Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT))
+    }
+    fun setLayoutToLightMode(){
+        binding.LytMain.background = ContextCompat.getDrawable(context!!, R.color.white)
     }
 }

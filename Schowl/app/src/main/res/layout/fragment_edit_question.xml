@@ -8,166 +8,171 @@
             type="cz.cizlmazna.schowl.ui.subjects.categories.questions.EditQuestionViewModel" />
     </data>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/LytBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/navyBlue">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btnSent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@color/appleRed"
+            android:clickable="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/ic_icon_confirm" />
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/navyBlue"
             android:orientation="vertical">
 
-        <ScrollView
+            <ScrollView
                 android:id="@+id/ScView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-            <LinearLayout
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/LytMain"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@color/navyBlue"
                         tools:context=".MainActivity">
 
-                    <com.google.android.material.floatingactionbutton.FloatingActionButton
-                            android:id="@+id/btnSent"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="16dp"
-                            android:layout_marginBottom="16dp"
-                            android:background="@color/appleRed"
-                            android:clickable="true"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:srcCompat="@drawable/ic_icon_confirm" />
-
-                    <LinearLayout
-                        android:id="@+id/linearLayout3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginTop="32dp"
-                        android:layout_marginRight="16dp"
-                        android:layout_marginBottom="64dp"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
-
-                        <TextView
-                            android:id="@+id/textView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="monospace"
-                            android:text="YOUR QUESTION"
-                            android:textColor="@color/ivoryYellow"
-                            android:textSize="24sp" />
-
-                        <EditText
-                            android:id="@+id/TxtQuestion"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:backgroundTint="@color/peacockBlue"
-                            android:ems="10"
-                            android:gravity="start|top"
-                            android:inputType="textMultiLine"
-                            android:textColor="@color/ivoryYellow"
-                            android:textSize="18sp"
-                            android:text="@{editQuestionViewModel.questionText}"/>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/linearLayout2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginRight="16dp"
-                        android:layout_marginBottom="64dp"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
-
-                        <TextView
-                            android:id="@+id/textView2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="monospace"
-                            android:text="@string/correct_solution"
-                            android:textColor="@color/ivoryYellow"
-                            android:textSize="24sp" />
-
-                        <EditText
-                            android:id="@+id/TxtAnswer"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:backgroundTint="@color/peacockBlue"
-                            android:ems="10"
-                            android:gravity="start|top"
-                            android:inputType="textMultiLine"
-                            android:text="@{editQuestionViewModel.answerText}"
-                            android:textColor="@color/ivoryYellow"
-                            android:textSize="18sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/linearLayout4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginRight="16dp"
-                        android:layout_marginBottom="128dp"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
-
-                        <TextView
-                            android:id="@+id/textView3"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="48dp"
-                            android:layout_marginRight="48dp"
-                            android:fontFamily="monospace"
-                            android:text="@string/difficulty"
-                            android:textColor="@color/ivoryYellow"
-                            android:textSize="24sp" />
-
                         <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="horizontal">
-
-                            <SeekBar
-                                android:id="@+id/SbrDifficulty"
-                                android:layout_width="193dp"
-                                android:layout_height="match_parent"
-                                android:max="10"
-                                android:progress="@{editQuestionViewModel.difficulty}" />
+                            android:id="@+id/linearLayout3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="32dp"
+                            android:layout_marginRight="16dp"
+                            android:layout_marginBottom="64dp"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
 
                             <TextView
-                                android:id="@+id/LblDifficulty"
+                                android:id="@+id/LblQueston"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginRight="8dp"
-                                android:text="0"
+                                android:fontFamily="monospace"
+                                android:text="YOUR QUESTION"
+                                android:textColor="@color/ivoryYellow"
                                 android:textSize="24sp" />
+
+                            <EditText
+                                android:id="@+id/TxtQuestion"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:backgroundTint="@color/peacockBlue"
+                                android:ems="10"
+                                android:gravity="start|top"
+                                android:inputType="textMultiLine"
+                                android:text="@{editQuestionViewModel.questionText}"
+                                android:textColor="@color/ivoryYellow"
+                                android:textSize="18sp" />
                         </LinearLayout>
 
-                    </LinearLayout>
+                        <LinearLayout
+                            android:id="@+id/linearLayout2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginRight="16dp"
+                            android:layout_marginBottom="64dp"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </LinearLayout>
-        </ScrollView>
-    </LinearLayout>
+                            <TextView
+                                android:id="@+id/LblSolution"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="monospace"
+                                android:text="@string/correct_solution"
+                                android:textColor="@color/ivoryYellow"
+                                android:textSize="24sp" />
+
+                            <EditText
+                                android:id="@+id/TxtAnswer"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:backgroundTint="@color/peacockBlue"
+                                android:ems="10"
+                                android:gravity="start|top"
+                                android:inputType="textMultiLine"
+                                android:text="@{editQuestionViewModel.answerText}"
+                                android:textColor="@color/ivoryYellow"
+                                android:textSize="18sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginRight="16dp"
+                            android:layout_marginBottom="128dp"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+                            <TextView
+                                android:id="@+id/LblDiff"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="48dp"
+                                android:layout_marginRight="48dp"
+                                android:fontFamily="monospace"
+                                android:text="@string/difficulty"
+                                android:textColor="@color/ivoryYellow"
+                                android:textSize="24sp" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal">
+
+                                <SeekBar
+                                    android:id="@+id/SbrDifficulty"
+                                    android:layout_width="193dp"
+                                    android:layout_height="match_parent"
+                                    android:max="10"
+                                    android:progress="@{editQuestionViewModel.difficulty}" />
+
+                                <TextView
+                                    android:id="@+id/LblDifficulty"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="8dp"
+                                    android:text="0"
+                                    android:textSize="24sp" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
