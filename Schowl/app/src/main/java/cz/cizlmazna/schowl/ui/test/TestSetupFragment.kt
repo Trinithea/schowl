@@ -54,13 +54,19 @@ class TestSetupFragment : Fragment() {
 
         binding.lifecycleOwner = this
         binding.testSetupViewModel = viewModel
-        if((activity as MainActivity).getDarkMode() == false){
+        if(!(activity as MainActivity).getDarkMode()){
             setLayoutToLightMode()
         }
 
         viewModel.getSubjects().observe(viewLifecycleOwner, Observer {
-            val dataAdapter = ArrayAdapter<Subject>(context!!, android.R.layout.simple_spinner_item, it)
-            dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            var dataAdapter =ArrayAdapter<Subject>(context!!, android.R.layout.simple_spinner_item, it)
+            if((activity as MainActivity).getDarkMode()) {
+                dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            }
+            else {
+                dataAdapter = ArrayAdapter<Subject>(context!!, R.layout.spinner_item_dark, it)
+                dataAdapter.setDropDownViewResource(R.layout.spinner_item_light)
+            }
             binding.SpnSubject.adapter = dataAdapter
         })
 
