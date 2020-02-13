@@ -15,6 +15,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
+import cz.cizlmazna.schowl.MainActivity
 import cz.cizlmazna.schowl.R
 import cz.cizlmazna.schowl.database.SchowlDatabase
 import cz.cizlmazna.schowl.database.Subject
@@ -56,7 +57,7 @@ class TestSetupFragment : Fragment() {
         binding.testSetupViewModel = viewModel
 
         // setHasOptionsMenu(true)
-        //setLayout(Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_NO)
+        setLayout((activity as MainActivity).getDarkMode())
 
         viewModel.getSubjects().observe(viewLifecycleOwner, Observer {
             val dataAdapter = ArrayAdapter<Subject>(context!!, android.R.layout.simple_spinner_item, it)
@@ -110,14 +111,32 @@ class TestSetupFragment : Fragment() {
     private fun setLayout(darkMode: Boolean) {
         // TODO update to use ContextCompat
         // TODO use darkMode
-        binding.LblSubject.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
-        binding.LblCategory.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
-        binding.LblMinDif.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
-        binding.LblMaxDif.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
-        binding.LblCurrentMinDif.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
-        binding.LblCurrentMaxDif.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
-        binding.LytMainConstraint.background = ContextCompat.getDrawable(context!!, R.color.white)
-        binding.SwitchAllCategories.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
+        if(darkMode ==  false) {
+            binding.LblSubject.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
+            binding.LblCategory.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
+            binding.LblMinDif.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
+            binding.LblMaxDif.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
+            binding.LblCurrentMinDif.setTextColor(
+                ContextCompat.getColor(
+                    context!!,
+                    R.color.navyBlue
+                )
+            )
+            binding.LblCurrentMaxDif.setTextColor(
+                ContextCompat.getColor(
+                    context!!,
+                    R.color.navyBlue
+                )
+            )
+            binding.LytMainConstraint.background =
+                ContextCompat.getDrawable(context!!, R.color.white)
+            binding.SwitchAllCategories.setTextColor(
+                ContextCompat.getColor(
+                    context!!,
+                    R.color.navyBlue
+                )
+            )
+        }
 
     }
 
