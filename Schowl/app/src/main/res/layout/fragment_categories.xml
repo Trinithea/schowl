@@ -36,6 +36,7 @@
                 android:clickable="true"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:srcCompat="@drawable/ic_icon_plus" />
+                app:srcCompat="@drawable/ic_icon_plus"
+            android:focusable="true" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
