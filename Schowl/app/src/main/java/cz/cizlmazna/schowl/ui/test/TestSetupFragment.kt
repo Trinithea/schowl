@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import cz.cizlmazna.schowl.MainActivity
 import cz.cizlmazna.schowl.R
@@ -92,7 +93,6 @@ class TestSetupFragment : Fragment() {
             viewModel.onAllCategoriesSelectedChange(isChecked)
         }
 
-        // TODO list categories
         viewModel.getSelectedSubjectCategories().observe(viewLifecycleOwner, Observer {
             generateCategoriesList(it)
         })
@@ -100,10 +100,12 @@ class TestSetupFragment : Fragment() {
         setMinSeekBarListener(binding.SkbMinDif)
         setMaxSeekBarListener(binding.SkbMaxDif)
 
-//        viewModel.getNavigateToTest().observe(viewLifecycleOwner, Observer {
-////            this.findNavController().navigate(TestSetupFragmentDirections.actionTestSetupFragmentToTestFragment(viewModel.getCategoryIds(), viewModel.getMinDifficulty().value!!, viewModel.getMaxDifficulty().value!!))
-//            viewModel.doneNavigatingToTest()
-//        })
+        viewModel.getNavigateToTest().observe(viewLifecycleOwner, Observer {
+            if (it == true) {
+                findNavController().navigate(TestSetupFragmentDirections.actionTestSetupFragmentToTestFragment(viewModel.getCategoryIds(), viewModel.getMinDifficulty().value!!, viewModel.getMaxDifficulty().value!!))
+                viewModel.doneNavigatingToTest()
+            }
+        })
 
         (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.create_your_test) // TODO it would be great to optimize the action bar a little
 

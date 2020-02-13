@@ -10,15 +10,16 @@ import cz.cizlmazna.schowl.database.SchowlDatabaseDao
 import cz.cizlmazna.schowl.database.Subject
 import kotlinx.coroutines.*
 
-const val DEFAULT_MIN_DIFFICULTY = 0
-const val DEFAULT_MAX_DIFFICULTY = 10
-const val DEFAULT_ALL_CATEGORIES_SELECTED = false
-
 class TestSetupViewModel(
     private val database: SchowlDatabaseDao,
     subjectId: Long,
     categoryId: Long
 ) : ViewModel() {
+    companion object {
+        const val DEFAULT_MIN_DIFFICULTY = 0
+        const val DEFAULT_MAX_DIFFICULTY = 10
+        const val DEFAULT_ALL_CATEGORIES_SELECTED = false
+    }
 
     private var viewModelJob = Job()
 
@@ -37,7 +38,7 @@ class TestSetupViewModel(
             selectedSubject.value = subject
             uiScope.launch {
                 selectedSubjectCategories.value = setSelectedSubjectCategories()
-                val categoriesCheckedTemp = HashMap<Long, Boolean>()
+                val categoriesCheckedTemp = hashMapOf<Long, Boolean>()
                 for (category in selectedSubjectCategories.value!!) {
                     categoriesCheckedTemp[category.id] = false
                 }
@@ -48,12 +49,11 @@ class TestSetupViewModel(
 
 
     private val subjects = database.getAllSubjects()
-
     fun getSubjects(): LiveData<List<Subject>> {
         return subjects
     }
-    private val allCategoriesSelected = MutableLiveData<Boolean>(DEFAULT_ALL_CATEGORIES_SELECTED)
 
+    private val allCategoriesSelected = MutableLiveData<Boolean>(DEFAULT_ALL_CATEGORIES_SELECTED)
     fun getAllCategoriesSelected(): LiveData<Boolean> {
 
         return allCategoriesSelected
@@ -81,8 +81,8 @@ class TestSetupViewModel(
         }
     }
 
-    private val categoriesChecked = MutableLiveData<HashMap<Long, Boolean>>()
-    fun getCategoriesChecked(): LiveData<HashMap<Long, Boolean>> {
+    private val categoriesChecked = MutableLiveData<MutableMap<Long, Boolean>>()
+    fun getCategoriesChecked(): LiveData<MutableMap<Long, Boolean>> {
         return categoriesChecked
     }
 
@@ -109,7 +109,6 @@ class TestSetupViewModel(
         maxDifficulty.value = difficulty
     }
     private val navigateToTest = MutableLiveData<Boolean>(false)
-
     fun getNavigateToTest(): LiveData<Boolean> {
         return navigateToTest
     }
@@ -118,8 +117,19 @@ class TestSetupViewModel(
         navigateToTest.value = false
     }
 
+    private val categoryIds: MutableList<Long> = mutableListOf()
+
     fun onConfirm() {
-        // TODO magic of selecting the appropriate data
+        for (categoryIdCheck in categoriesChecked.value!!.entries) {
+            if (categoryIdCheck.value) {
+                categoryIds.add(categoryIdCheck.key)
+            }
+        }
+        navigateToTest.value = true
+    }
+
+    fun getCategoryIds(): LongArray {
+        return categoryIds.toLongArray()
     }
 
     init {
@@ -127,7 +137,7 @@ class TestSetupViewModel(
             selectedSubject.value = getSubject(subjectId)
             if (selectedSubject.value != null) {
                 selectedSubjectCategories.value = setSelectedSubjectCategories()
-                val categoriesCheckedTemp = HashMap<Long, Boolean>()
+                val categoriesCheckedTemp = hashMapOf<Long, Boolean>()
                 for (category in selectedSubjectCategories.value!!) {
                     categoriesCheckedTemp[category.id] = false
                 }
