@@ -179,7 +179,7 @@
                             <ScrollView
                                 android:id="@+id/ScCategories"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
                                 android:layout_marginStart="40dp"
                                 android:layout_marginTop="16dp"
                                 android:layout_marginEnd="40dp"
