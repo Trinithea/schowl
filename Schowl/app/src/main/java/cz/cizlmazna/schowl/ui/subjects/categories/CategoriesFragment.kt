@@ -9,6 +9,7 @@ import android.view.*
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -20,6 +21,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
+import cz.cizlmazna.schowl.MainActivity
 import cz.cizlmazna.schowl.R
 import cz.cizlmazna.schowl.database.Category
 import cz.cizlmazna.schowl.database.SchowlDatabase
@@ -59,6 +61,7 @@ class CategoriesFragment : Fragment() {
             val mBuilder = AlertDialog.Builder(activity).setView(mDialogView)
             val mAlertDialog = mBuilder.show()
             mDialogView.TxtName.hint = getString(R.string.name_of_category)
+            setDialog((activity as MainActivity).getDarkMode(),mDialogView.TxtName,mDialogView.llMain)
             mDialogView.BtnAdd.setOnClickListener{
                 mAlertDialog.dismiss()
                 val name = mDialogView.TxtName.text.toString()
@@ -73,13 +76,16 @@ class CategoriesFragment : Fragment() {
             generateCategoriesList(it)
         })
 
+        if((activity as MainActivity).getDarkMode() == false){
+            setLayoutToLightMode()
+        }
         return binding.root
     }
 
     private fun generateCategoriesList(categories: List<Category>) {
         llMain.removeAllViews()
         for (category in categories) {
-            addCategory(category)
+            addCategory((activity as MainActivity).getDarkMode(),category)
         }
     }
 
@@ -91,8 +97,21 @@ class CategoriesFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return NavigationUI.onNavDestinationSelected(item, view!!.findNavController()) || super.onOptionsItemSelected(item)
     }
+    private fun setLayoutToLightMode(){
+        binding.LytMain.background = ContextCompat.getDrawable(context!!, R.color.white)
+    }
 
-    private fun addCategory(category: Category){
+    private fun setDialog(darkmode: Boolean, textView: TextView, ll:LinearLayout){
+        if(!darkmode){
+            ll.background = ContextCompat.getDrawable(context!!, R.color.white)
+            textView.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
+        }
+        else{
+            ll.background = ContextCompat.getDrawable(context!!, R.color.navyBlue)
+            textView.setTextColor(ContextCompat.getColor(context!!, R.color.ivoryYellow))
+        }
+    }
+    private fun addCategory(darkmode : Boolean, category: Category){
         val optionsLyt = LinearLayout(activity)
         val btnNewCategory = Button(activity)
         val btnEdit=ImageButton(activity)
@@ -116,9 +135,21 @@ class CategoriesFragment : Fragment() {
                 view: View ->
             Navigation.findNavController(view).navigate(CategoriesFragmentDirections.actionCategoriesFragmentToQuestionsFragment(category.id))
         }
+        if(darkmode == false){
+            btnNewCategory.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
+            btnEdit.setImageResource(R.drawable.ic_edit_blue)
+            btnRemove.setImageResource(R.drawable.ic_remove_blue)
+            btnTest.setImageResource(R.drawable.ic_test_blue)
+        }
+        else{
+            btnNewCategory.setTextColor(ContextCompat.getColor(context!!, R.color.ivoryYellow))
+            btnEdit.setImageResource(R.drawable.ic_edit_yellow)
+            btnRemove.setImageResource(R.drawable.ic_remove_yellow)
+            btnTest.setImageResource(R.drawable.ic_test_yellow)
+
+        }
 
         btnEdit.layoutParams = params
-        btnEdit.setImageResource(R.drawable.ic_edit_yellow)
         btnEdit.background= ContextCompat.getDrawable(context!!, R.drawable.transparent)
         btnEdit.setOnClickListener{
             val mDialogView = LayoutInflater.from(activity).inflate(R.layout.add_subject_dialog,null)
@@ -127,6 +158,7 @@ class CategoriesFragment : Fragment() {
             mDialogView.TxtName.setText(category.name)
             mDialogView.BtnAdd.text = getString(R.string.edit)
 
+            setDialog((activity as MainActivity).getDarkMode(),mDialogView.TxtName,mDialogView.llMain)
             mDialogView.BtnAdd.setOnClickListener{
                 mAlertDialog.dismiss()
                 viewModel.editCategory(category, mDialogView.TxtName.text.toString())
@@ -135,7 +167,6 @@ class CategoriesFragment : Fragment() {
         }
 
         btnRemove.layoutParams = params
-        btnRemove.setImageResource(R.drawable.ic_remove_yellow)
         btnRemove.background= ContextCompat.getDrawable(context!!, R.drawable.transparent)
         btnRemove.setOnClickListener {
             val mDialogView =
@@ -144,6 +175,8 @@ class CategoriesFragment : Fragment() {
                 AlertDialog.Builder(activity).setView(mDialogView)
             val mAlertDialog = mBuilder.show()
             mDialogView.txtMessage.setText(getString(R.string.remove_dalog) + category.name + "?")
+
+            setDialog((activity as MainActivity).getDarkMode(),mDialogView.txtMessage,mDialogView.LlMainRemove)
             mDialogView.btnRemove.setOnClickListener {
                 mAlertDialog.dismiss()
                 viewModel.removeCategory(category)
@@ -154,7 +187,6 @@ class CategoriesFragment : Fragment() {
         }
 
         btnTest.layoutParams = params
-        btnTest.setImageResource(R.drawable.ic_test_yellow)
         btnTest.background= ContextCompat.getDrawable(context!!, R.drawable.transparent)
         btnTest.setOnClickListener{
                 view: View ->

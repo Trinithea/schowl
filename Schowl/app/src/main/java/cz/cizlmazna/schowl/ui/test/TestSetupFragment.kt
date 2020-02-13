@@ -3,7 +3,6 @@ package cz.cizlmazna.schowl.ui.test
 import android.content.res.ColorStateList
 import android.graphics.Typeface
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.*
 import android.widget.AdapterView.OnItemSelectedListener
@@ -55,9 +54,9 @@ class TestSetupFragment : Fragment() {
 
         binding.lifecycleOwner = this
         binding.testSetupViewModel = viewModel
-
-        // setHasOptionsMenu(true)
-        setLayout((activity as MainActivity).getDarkMode())
+        if((activity as MainActivity).getDarkMode() == false){
+            setLayoutToLightMode()
+        }
 
         viewModel.getSubjects().observe(viewLifecycleOwner, Observer {
             val dataAdapter = ArrayAdapter<Subject>(context!!, android.R.layout.simple_spinner_item, it)
@@ -108,10 +107,8 @@ class TestSetupFragment : Fragment() {
         return NavigationUI.onNavDestinationSelected(item, view!!.findNavController()) || super.onOptionsItemSelected(item)
     }
 
-    private fun setLayout(darkMode: Boolean) {
-        // TODO update to use ContextCompat
-        // TODO use darkMode
-        if(darkMode ==  false) {
+    private fun setLayoutToLightMode() {
+
             binding.LblSubject.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
             binding.LblCategory.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
             binding.LblMinDif.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
@@ -128,7 +125,7 @@ class TestSetupFragment : Fragment() {
                     R.color.navyBlue
                 )
             )
-            binding.LytMainConstraint.background =
+            binding.LytMain.background =
                 ContextCompat.getDrawable(context!!, R.color.white)
             binding.SwitchAllCategories.setTextColor(
                 ContextCompat.getColor(
@@ -136,7 +133,6 @@ class TestSetupFragment : Fragment() {
                     R.color.navyBlue
                 )
             )
-        }
 
     }
 

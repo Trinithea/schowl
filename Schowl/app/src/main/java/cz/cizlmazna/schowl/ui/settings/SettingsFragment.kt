@@ -35,7 +35,7 @@ class SettingsFragment : Fragment() {
 
 
     private fun setLayoutToLightMode(binding:FragmentSettingsBinding){
-        binding.llMain.background= ContextCompat.getDrawable(context!!, R.color.ivoryYellow)
+        binding.llMain.background= ContextCompat.getDrawable(context!!, R.color.white)
         binding.SwitchDarkMode.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
     }
 }

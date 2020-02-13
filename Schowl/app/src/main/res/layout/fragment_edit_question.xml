@@ -63,7 +63,7 @@
                             app:layout_constraintTop_toTopOf="parent">
 
                             <TextView
-                                android:id="@+id/textView"
+                                android:id="@+id/LblQueston"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="monospace"
@@ -100,7 +100,7 @@
                             app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
 
                             <TextView
-                                android:id="@+id/textView2"
+                                android:id="@+id/LblSolution"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="monospace"
@@ -137,7 +137,7 @@
                             app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
                             <TextView
-                                android:id="@+id/textView3"
+                                android:id="@+id/LblDiff"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="48dp"

@@ -12,6 +12,7 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import cz.cizlmazna.schowl.MainActivity
 import cz.cizlmazna.schowl.R
 import cz.cizlmazna.schowl.database.SchowlDatabase
 import cz.cizlmazna.schowl.databinding.FragmentTestBinding
@@ -46,7 +47,9 @@ class TestFragment : Fragment() {
             binding.LblSolution.visibility = View.VISIBLE
             binding.LytEditNext.visibility = View.VISIBLE
         }
-        //setLayout(true)
+        if(!(activity as MainActivity).getDarkMode()){
+            setLayoutToLightMode()
+        }
         binding.BtnNext.setOnClickListener {
                 view: View ->
 //            Navigation.findNavController(view).navigate(TestFragmentDirections.actionTestFragmentSelf())
@@ -55,8 +58,7 @@ class TestFragment : Fragment() {
         return binding.root
     }
 
-    private fun setLayout(darkMode: Boolean){
-//        TODO("Add darkMode functionality")
+    private fun setLayoutToLightMode(){
         binding.LblMyAnswer.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
         binding.LblQuestion.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
         binding.LblNumberOfQuestion.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))

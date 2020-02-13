@@ -9,9 +9,11 @@ import android.view.ViewGroup
 import android.widget.SeekBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import cz.cizlmazna.schowl.MainActivity
 import cz.cizlmazna.schowl.R
 import cz.cizlmazna.schowl.database.SchowlDatabase
 import cz.cizlmazna.schowl.databinding.FragmentEditQuestionBinding
@@ -48,6 +50,10 @@ class EditQuestionFragment : Fragment() {
             viewModel.confirm(binding.TxtQuestion.text.toString(), binding.TxtAnswer.text.toString(), binding.SbrDifficulty.progress.toByte())
             Navigation.findNavController(view).navigate(EditQuestionFragmentDirections.actionEditQuestionFragmentToQuestionsFragment(viewModel.categoryId))
         }
+
+        if((activity as MainActivity).getDarkMode()==false){
+            setLayoutToLightMode()
+        }
         return binding.root
     }
     private fun setSeekBarListener(label: TextView, seekBar: SeekBar) {
@@ -63,5 +69,14 @@ class EditQuestionFragment : Fragment() {
             }
 
         })
+    }
+    private fun setLayoutToLightMode(){
+        binding.LytBackground.background = ContextCompat.getDrawable(context!!, R.color.white)
+        binding.LblDifficulty.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
+        binding.LblDiff.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
+        binding.LblQueston.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
+        binding.LblSolution.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
+        binding.TxtAnswer.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
+        binding.TxtQuestion.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
     }
 }
