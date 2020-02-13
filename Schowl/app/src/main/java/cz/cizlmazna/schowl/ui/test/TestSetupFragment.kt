@@ -84,7 +84,6 @@ class TestSetupFragment : Fragment() {
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
-                Log.i("TestSetupFragment", "Nothing selected")
                 viewModel.onSubjectSelected(null)
             }
         }

@@ -1,6 +1,5 @@
 package cz.cizlmazna.schowl.ui.test
 
-import android.util.Log
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -35,7 +34,6 @@ class TestSetupViewModel(
 
     fun onSubjectSelected(subject: Subject?) {
         if (subject != null && subject != selectedSubject.value) {
-            Log.i("TestSetupVM", "We don't want this if we came from outside")
             selectedSubject.value = subject
             uiScope.launch {
                 selectedSubjectCategories.value = setSelectedSubjectCategories()
