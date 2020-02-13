@@ -48,7 +48,7 @@ class SubjectsFragment : Fragment() {
 
         viewModel = ViewModelProvider(this, viewModelFactory).get(SubjectsViewModel::class.java)
 
-        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.subjects) // TODO hardcoded string
+        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.subjects)
 
         binding.btnAddSubject.setOnClickListener {
             val mDialogView =
@@ -145,7 +145,7 @@ class SubjectsFragment : Fragment() {
             val mBuilder =
                 AlertDialog.Builder(activity).setView(mDialogView)
             val mAlertDialog = mBuilder.show()
-            mDialogView.txtMessage.text = getString(R.string.remove_dalog) + subject.name + "?" // TODO Really? New hardcoded strings???
+            mDialogView.txtMessage.text = getString(R.string.remove_dalog) + subject.name + "?"
             mDialogView.btnRemove.setOnClickListener {
                 mAlertDialog.dismiss()
                 viewModel.removeSubject(subject)

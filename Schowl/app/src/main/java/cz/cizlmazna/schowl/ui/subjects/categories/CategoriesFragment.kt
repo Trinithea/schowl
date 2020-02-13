@@ -50,7 +50,7 @@ class CategoriesFragment : Fragment() {
 
         viewModel = ViewModelProvider(this, viewModelFactory).get(CategoriesViewModel::class.java)
 
-        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.categories) // TODO hardcoded string, also also should include Subject name
+        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.categories) // TODO should include Subject name
 
 
 

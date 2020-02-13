@@ -16,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import cz.cizlmazna.schowl.R
+import cz.cizlmazna.schowl.database.Category
 import cz.cizlmazna.schowl.database.SchowlDatabase
 import cz.cizlmazna.schowl.database.Subject
 import cz.cizlmazna.schowl.databinding.FragmentTestSetupBinding
@@ -65,8 +66,10 @@ class TestSetupFragment : Fragment() {
         })
 
         viewModel.getSelectedSubject().observe(viewLifecycleOwner, Observer {
-            val dataAdapter = ArrayAdapter<Subject>(context!!, android.R.layout.simple_spinner_item, viewModel.getSubjects().value!!)
-            binding.SpnSubject.setSelection(dataAdapter.getPosition(it))
+            if(viewModel.getSubjects().value != null) {
+                val dataAdapter = ArrayAdapter<Subject>(context!!, android.R.layout.simple_spinner_item, viewModel.getSubjects().value!!)
+                binding.SpnSubject.setSelection(dataAdapter.getPosition(it))
+            }
         })
 
         binding.SpnSubject.onItemSelectedListener = object : OnItemSelectedListener {
@@ -75,6 +78,7 @@ class TestSetupFragment : Fragment() {
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
+                Log.i("TestSetupFragment", "Nothing selected")
                 viewModel.onSubjectSelected(null)
             }
         }
@@ -84,16 +88,19 @@ class TestSetupFragment : Fragment() {
         }
 
         // TODO list categories
+        viewModel.getSelectedSubjectCategories().observe(viewLifecycleOwner, Observer {
+            generateCategoriesList(it)
+        })
+
+        setMinSeekBarListener(binding.SkbMinDif)
+        setMaxSeekBarListener(binding.SkbMaxDif)
 
 //        viewModel.getNavigateToTest().observe(viewLifecycleOwner, Observer {
 ////            this.findNavController().navigate(TestSetupFragmentDirections.actionTestSetupFragmentToTestFragment(viewModel.getCategoryIds(), viewModel.getMinDifficulty().value!!, viewModel.getMaxDifficulty().value!!))
 //            viewModel.doneNavigatingToTest()
 //        })
 
-        setMinSeekBarListener(binding.SkbMinDif)
-        setMaxSeekBarListener(binding.SkbMaxDif)
-
-        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.create_your_test) // TODO move text out of here, also it would be great to optimize the action bar a little
+        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.create_your_test) // TODO it would be great to optimize the action bar a little
 
         return binding.root
     }
@@ -108,7 +115,6 @@ class TestSetupFragment : Fragment() {
     }
 
     private fun setLayout(darkMode: Boolean) {
-        // TODO update to use ContextCompat
         // TODO use darkMode
         binding.LblSubject.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
         binding.LblCategory.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
@@ -141,21 +147,42 @@ class TestSetupFragment : Fragment() {
         })
     }
 
-    fun addCategory(name: String) {
-        val category = CheckBox(activity)
+    private fun generateCategoriesList(categories: List<Category>) {
+        binding.LytCategories.removeAllViews()
+        viewModel.getCategoriesChecked().removeObservers(viewLifecycleOwner)
+        for(category in categories) {
+            addCategory(category)
+        }
+    }
+
+    private fun addCategory(category: Category) {
+        val categoryCheckBox = CheckBox(activity)
         val params = LinearLayout.LayoutParams(
             ViewGroup.LayoutParams.MATCH_PARENT,
             ViewGroup.LayoutParams.WRAP_CONTENT
         )
 
-        category.layoutParams = params
-        category.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(context!!, R.color.peacockBlue))
-        category.buttonTintList = ColorStateList.valueOf(ContextCompat.getColor(context!!, R.color.peacockBlue))
-        category.text = name
-        category.setTextColor(ContextCompat.getColor(context!!, R.color.ivoryYellow))
-        category.textSize = 18f
-        category.typeface = Typeface.MONOSPACE
-        binding.LytCategories.addView(category)
+        categoryCheckBox.layoutParams = params
+        categoryCheckBox.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(context!!, R.color.peacockBlue))
+        categoryCheckBox.buttonTintList = ColorStateList.valueOf(ContextCompat.getColor(context!!, R.color.peacockBlue))
+        categoryCheckBox.text = category.name
+        categoryCheckBox.setTextColor(ContextCompat.getColor(context!!, R.color.ivoryYellow))
+        categoryCheckBox.textSize = 18f
+        categoryCheckBox.typeface = Typeface.MONOSPACE
+
+        categoryCheckBox.setOnCheckedChangeListener { _, isChecked ->
+            viewModel.onCategoryCheckedChange(category, isChecked)
+        }
+
+        viewModel.getCategoriesChecked().observe(viewLifecycleOwner, Observer {
+//            Log.i("TestSetupFragment", "category ${category.name} observing one check ${it[category.id]}")
+            // TODO every checkbox reacts on one check change
+            // observes only once
+            if (it[category.id] != null)
+                categoryCheckBox.isChecked = it[category.id]!!
+        })
+
+        binding.LytCategories.addView(categoryCheckBox)
 
     }
 

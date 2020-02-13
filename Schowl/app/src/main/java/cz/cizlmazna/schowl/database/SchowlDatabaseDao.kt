@@ -50,4 +50,7 @@ interface SchowlDatabaseDao {
 
     @Query("SELECT * FROM questions_table WHERE category_id = :categoryId")
     fun getQuestions(categoryId: Long): LiveData<List<Question>>
+
+    @Query("SELECT * FROM categories_table WHERE subject_id = :subjectId")
+    fun getCategoriesRaw(subjectId: Long): List<Category>
 }
