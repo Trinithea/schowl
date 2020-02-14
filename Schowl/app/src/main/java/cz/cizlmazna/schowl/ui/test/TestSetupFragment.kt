@@ -28,6 +28,7 @@ class TestSetupFragment : Fragment() {
     private lateinit var binding: FragmentTestSetupBinding
 
     private lateinit var viewModel: TestSetupViewModel
+    private var darkMode = true
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,7 +37,7 @@ class TestSetupFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_test_setup, container, false)
 
         val application = requireNotNull(this.activity).application
-
+        darkMode = (activity as MainActivity).getDarkMode()
         val subjectId: Long
         val categoryId: Long
         if (this.arguments!!.isEmpty) {
@@ -56,7 +57,7 @@ class TestSetupFragment : Fragment() {
 
         binding.lifecycleOwner = this
         binding.testSetupViewModel = viewModel
-        if(!(activity as MainActivity).getDarkMode()){
+        if(!darkMode){
             setLayoutToLightMode()
         }
 
@@ -189,7 +190,11 @@ class TestSetupFragment : Fragment() {
         categoryCheckBox.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(context!!, R.color.peacockBlue))
         categoryCheckBox.buttonTintList = ColorStateList.valueOf(ContextCompat.getColor(context!!, R.color.peacockBlue))
         categoryCheckBox.text = category.name
-        categoryCheckBox.setTextColor(ContextCompat.getColor(context!!, R.color.ivoryYellow))
+        if (darkMode)
+            categoryCheckBox.setTextColor(ContextCompat.getColor(context!!, R.color.ivoryYellow))
+        else
+            categoryCheckBox.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
+
         categoryCheckBox.textSize = 18f
         categoryCheckBox.typeface = Typeface.MONOSPACE
 

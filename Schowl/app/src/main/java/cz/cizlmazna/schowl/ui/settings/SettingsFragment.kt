@@ -20,14 +20,14 @@ class SettingsFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding: FragmentSettingsBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_settings, container, false)
-        val darkmode = (activity as MainActivity).getDarkMode()
-        binding.SwitchDarkMode.isChecked = darkmode
-        if(!darkmode)
+        val darkMode = (activity as MainActivity).getDarkMode()
+        binding.SwitchDarkMode.isChecked = darkMode
+        if(!darkMode)
             setLayoutToLightMode(binding)
         else
             setLayoutToDarkMode(binding)
         binding.SwitchDarkMode.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
-            if(isChecked == false){
+            if(!isChecked){
                 (activity as MainActivity).setDarkMode(false)
                 setLayoutToLightMode(binding)
             }
@@ -42,14 +42,12 @@ class SettingsFragment : Fragment() {
 
 
     private fun setLayoutToLightMode(binding:FragmentSettingsBinding){
-       // binding.llMain.background= ContextCompat.getDrawable(context!!, R.drawable.ic_settings_background_light)
         binding.SwitchDarkMode.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
         binding.SwitchDarkMode.setText(getString(R.string.light_mode))
       binding.image.setImageResource(R.drawable.ic_settings_background_light)
 
     }
     private fun setLayoutToDarkMode(binding:FragmentSettingsBinding){
-        //binding.llMain.background= ContextCompat.getDrawable(context!!, R.drawable.ic_settings_background_dark_3)
         binding.image.setImageResource(R.drawable.ic_settings_background_dark_3)
         binding.SwitchDarkMode.setTextColor(ContextCompat.getColor(context!!, R.color.ivoryYellow))
         binding.SwitchDarkMode.setText(getString(R.string.dark_mode))

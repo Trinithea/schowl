@@ -23,10 +23,8 @@ import cz.cizlmazna.schowl.databinding.FragmentSubjectsBinding
 import android.util.DisplayMetrics
 
 import android.app.Activity
-import android.util.TypedValue
 import cz.cizlmazna.schowl.MainActivity
 import kotlinx.android.synthetic.main.remove_dialog.view.*
-import kotlin.math.roundToInt
 
 
 class SubjectsFragment : Fragment() {
@@ -34,6 +32,7 @@ class SubjectsFragment : Fragment() {
     private lateinit var binding: FragmentSubjectsBinding
 
     private lateinit var viewModel: SubjectsViewModel
+    private var darkMode = true
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,6 +40,7 @@ class SubjectsFragment : Fragment() {
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_subjects, container, false)
 
+        darkMode = (activity as MainActivity).getDarkMode()
         val application = requireNotNull(this.activity).application
 
         val databaseDao = SchowlDatabase.getInstance(application).schowlDatabaseDao
@@ -57,7 +57,7 @@ class SubjectsFragment : Fragment() {
             val mBuilder =
                 AlertDialog.Builder(activity).setView(mDialogView)
             mDialogView.TxtName.hint = getString(R.string.name_of_subject)
-            setDialog((activity as MainActivity).getDarkMode(),mDialogView.TxtName,mDialogView.llMain)
+            setDialog(mDialogView.TxtName,mDialogView.llMain)
             val mAlertDialog = mBuilder.show()
 
             mDialogView.BtnAdd.setOnClickListener {
@@ -73,7 +73,7 @@ class SubjectsFragment : Fragment() {
             generateSubjectsList(it)
         })
 
-        if(!(activity as MainActivity).getDarkMode()){
+        if(!darkMode){
             setLayoutToLightMode()
         }
 
@@ -87,11 +87,11 @@ class SubjectsFragment : Fragment() {
     private fun generateSubjectsList(subjects: List<Subject>) {
         binding.llMain.removeAllViews()
         for (subject in subjects) {
-            addSubject((activity as MainActivity).getDarkMode(),subject)
+            addSubject(subject)
         }
     }
-    private fun setDialog(darkmode: Boolean,textView: TextView,ll:LinearLayout){
-        if(!darkmode){
+    private fun setDialog(textView: TextView,ll:LinearLayout){
+        if(!darkMode){
             ll.background = ContextCompat.getDrawable(context!!, R.color.white)
             textView.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
         }
@@ -100,7 +100,7 @@ class SubjectsFragment : Fragment() {
             textView.setTextColor(ContextCompat.getColor(context!!, R.color.ivoryYellow))
         }
     }
-    private fun addSubject(darkmode: Boolean, subject: Subject) {
+    private fun addSubject( subject: Subject) {
 
         val optionsLyt = LinearLayout(activity)
         val btnNewSubject = Button(activity)
@@ -131,7 +131,7 @@ class SubjectsFragment : Fragment() {
         btnNewSubject.setOnClickListener { view: View ->
             Navigation.findNavController(view).navigate(SubjectsFragmentDirections.actionSubjectsFragmentToCategoriesFragment(subject.id))
         }
-        if(!darkmode){
+        if(!darkMode){
             btnNewSubject.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
             btnEdit.setImageResource(R.drawable.ic_edit_blue)
             btnRemove.setImageResource(R.drawable.ic_remove_blue)
@@ -157,11 +157,10 @@ class SubjectsFragment : Fragment() {
             mDialogView.TxtName.setText(subject.name)
             mDialogView.BtnAdd.text = getString(R.string.edit)
 
-            setDialog((activity as MainActivity).getDarkMode(),mDialogView.TxtName,mDialogView.llMain)
+            setDialog(mDialogView.TxtName,mDialogView.llMain)
             mDialogView.BtnAdd.setOnClickListener {
                 mAlertDialog.dismiss()
                 viewModel.editSubject(subject, mDialogView.TxtName.text.toString())
-//                btnNewSubject.text = mDialogView.TxtName.text.toString()
             }
         }
 
@@ -175,7 +174,7 @@ class SubjectsFragment : Fragment() {
             val mAlertDialog = mBuilder.show()
             mDialogView.txtMessage.text = getString(R.string.remove_dalog) + subject.name + "?" // TODO Really? New hardcoded strings???
 
-            setDialog((activity as MainActivity).getDarkMode(),mDialogView.txtMessage,mDialogView.LlMainRemove)
+            setDialog(mDialogView.txtMessage,mDialogView.LlMainRemove)
             mDialogView.btnRemove.setOnClickListener {
                 mAlertDialog.dismiss()
                 viewModel.removeSubject(subject)
@@ -200,8 +199,7 @@ class SubjectsFragment : Fragment() {
             (context as Activity).windowManager
                 .defaultDisplay
                 .getMetrics(displayMetrics)
-            val width = displayMetrics.widthPixels
-            val param = LinearLayout.LayoutParams(dpToPx(260),
+            val param = LinearLayout.LayoutParams((activity as MainActivity).dpToPx(260),
                 ViewGroup.LayoutParams.MATCH_PARENT
             )
             btnNewSubject.layoutParams = param
@@ -225,10 +223,7 @@ class SubjectsFragment : Fragment() {
         binding.llMain.addView(mainLyt)
     }
 
-    private fun dpToPx(dp: Int): Int {
-        val displayMetrics = context!!.resources.displayMetrics
-        return (dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT)).roundToInt()
-    }
+
     private fun setLayoutToLightMode(){
         binding.LytMain.background = ContextCompat.getDrawable(context!!, R.color.white)
     }
