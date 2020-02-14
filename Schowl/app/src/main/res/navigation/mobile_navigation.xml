@@ -26,6 +26,9 @@
         <argument
             android:name="maxDifficulty"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_testFragment_to_editQuestionFragment"
+            app:destination="@id/editQuestionFragment" />
     </fragment>
     <fragment
         android:id="@+id/nav_test"
@@ -85,11 +88,6 @@
         android:id="@+id/editQuestionFragment"
         android:name="cz.cizlmazna.schowl.ui.subjects.categories.questions.EditQuestionFragment"
         android:label="EditQuestionFragment">
-        <action
-            android:id="@+id/action_editQuestionFragment_to_questionsFragment"
-            app:destination="@id/questionsFragment"
-            app:popUpTo="@+id/questionsFragment"
-            app:popUpToInclusive="true" />
         <argument
             android:name="categoryId"
             app:argType="long" />

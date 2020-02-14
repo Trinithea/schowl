@@ -48,7 +48,7 @@ class EditQuestionFragment : Fragment() {
         binding.btnSent.setOnClickListener {
             view: View ->
             viewModel.confirm(binding.TxtQuestion.text.toString(), binding.TxtAnswer.text.toString(), binding.SbrDifficulty.progress.toByte())
-            Navigation.findNavController(view).navigate(EditQuestionFragmentDirections.actionEditQuestionFragmentToQuestionsFragment(viewModel.categoryId))
+            Navigation.findNavController(view).popBackStack()
         }
 
         if((activity as MainActivity).getDarkMode()==false){

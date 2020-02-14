@@ -54,4 +54,6 @@ class SettingsFragment : Fragment() {
         binding.SwitchDarkMode.setTextColor(ContextCompat.getColor(context!!, R.color.ivoryYellow))
         binding.SwitchDarkMode.setText(getString(R.string.dark_mode))
     }
+
+
 }

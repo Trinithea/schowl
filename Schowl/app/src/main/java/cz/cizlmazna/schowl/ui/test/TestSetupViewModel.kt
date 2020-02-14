@@ -33,6 +33,7 @@ class TestSetupViewModel(
         return selectedSubject
     }
 
+    // Careful, sometimes this is run with null even though a subject appears to be selected
     fun onSubjectSelected(subject: Subject?) {
         if (subject != null && subject != selectedSubject.value) {
             selectedSubject.value = subject
@@ -120,9 +121,16 @@ class TestSetupViewModel(
     private val categoryIds: MutableList<Long> = mutableListOf()
 
     fun onConfirm() {
-        for (categoryIdCheck in categoriesChecked.value!!.entries) {
-            if (categoryIdCheck.value) {
-                categoryIds.add(categoryIdCheck.key)
+        categoryIds.clear()
+        if (allCategoriesSelected.value!!) {
+            for (category in selectedSubjectCategories.value!!) {
+                categoryIds.add(category.id)
+            }
+        } else {
+            for (categoryIdCheck in categoriesChecked.value!!.entries) {
+                if (categoryIdCheck.value) {
+                    categoryIds.add(categoryIdCheck.key)
+                }
             }
         }
         navigateToTest.value = true
@@ -147,7 +155,22 @@ class TestSetupViewModel(
                     categoriesCheckedTemp[categoryId] = true
                 }
                 categoriesChecked.value = categoriesCheckedTemp
+            } else {
+                // TODO This has to be cleaned up
+                selectedSubject.value = getFirstSubject()
+                selectedSubjectCategories.value = setSelectedSubjectCategories()
+                val categoriesCheckedTemp = hashMapOf<Long, Boolean>()
+                for (category in selectedSubjectCategories.value!!) {
+                    categoriesCheckedTemp[category.id] = false
+                }
+                categoriesChecked.value = categoriesCheckedTemp
             }
+        }
+    }
+
+    private suspend fun getFirstSubject(): Subject {
+        return withContext(Dispatchers.IO) {
+            database.getFirstSubject()
         }
     }
 

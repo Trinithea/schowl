@@ -1,6 +1,7 @@
 package cz.cizlmazna.schowl
 
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -19,6 +20,9 @@ public class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private var Darkmode:Boolean = true
+    private val topLevelDestinations = setOf(
+        R.id.nav_test, R.id.nav_subjects, R.id.nav_settings, R.id.nav_about
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,9 +38,7 @@ public class MainActivity : AppCompatActivity() {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.nav_test, R.id.nav_subjects, R.id.nav_settings, R.id.nav_about
-            ), drawerLayout
+            topLevelDestinations, drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
@@ -48,6 +50,16 @@ public class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
+
+    override fun onBackPressed() {
+        val navController = findNavController(R.id.nav_host_fragment)
+        if (topLevelDestinations.contains(navController.currentDestination?.id)) {
+            finish()
+        } else {
+            super.onBackPressed()
+        }
+    }
+
     public fun setDarkMode(darkmode:Boolean){
         Darkmode = darkmode
     }

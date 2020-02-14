@@ -3,6 +3,12 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="testViewModel"
+            type="cz.cizlmazna.schowl.ui.test.TestViewModel" />
+    </data>
+
     <LinearLayout
             android:id="@+id/LytMain"
             android:layout_width="match_parent"
@@ -30,7 +36,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="16dp"
                             android:layout_marginRight="16dp"
-                            android:text="1/10"
+                            android:text="@{testViewModel.numberOfQuestion}"
                             android:textColor="@color/ivoryYellow"
                             android:textSize="18sp"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -42,7 +48,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="48dp"
                         android:fontFamily="monospace"
-                        android:text="Question?"
+                        android:text="@{testViewModel.currentQuestionText}"
                         android:textColor="@color/ivoryYellow"
                         android:textSize="24sp"
                         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
@@ -95,6 +101,8 @@
                         android:textColor="@color/peacockBlue"
                         android:textSize="18sp"
                         android:translationZ="3dp"
+                        android:visibility="@{testViewModel.showSolutionButtonVisible}"
+                        android:onClick="@{() -> testViewModel.onShowSolution()}"
                         app:layout_constraintBottom_toTopOf="@+id/LblSolution"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -106,10 +114,10 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="32dp"
                             android:fontFamily="monospace"
-                            android:text="This is the solution."
+                            android:text="@{testViewModel.currentSolutionText}"
                             android:textColor="@color/ivoryYellow"
                             android:textSize="14sp"
-                            android:visibility="invisible"
+                            android:visibility="@{testViewModel.solutionPartsVisible}"
                             app:layout_constraintBottom_toTopOf="@+id/LytEditNext"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -122,7 +130,7 @@
                             android:layout_marginTop="32dp"
                             android:gravity="center|center_horizontal|center_vertical"
                             android:orientation="horizontal"
-                            android:visibility="invisible"
+                            android:visibility="@{testViewModel.solutionPartsVisible}"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/LblSolution"
                             tools:layout_editor_absoluteX="0dp">
@@ -139,7 +147,8 @@
                             android:text="@string/edit_question"
                             android:textColor="@color/peacockBlue"
                             android:textSize="18sp"
-                            android:translationZ="3dp" />
+                            android:translationZ="3dp"
+                            android:onClick="@{() -> testViewModel.editQuestion()}"/>
 
                         <Button
                             android:id="@+id/BtnNext"
@@ -151,7 +160,8 @@
                             android:text="@string/next"
                             android:textColor="@color/appleRed"
                             android:textSize="18sp"
-                            android:translationZ="3dp" />
+                            android:translationZ="3dp"
+                            android:onClick="@{() -> testViewModel.nextQuestion()}"/>
                     </LinearLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
