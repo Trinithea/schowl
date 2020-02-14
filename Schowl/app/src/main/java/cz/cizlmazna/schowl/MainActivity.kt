@@ -1,6 +1,7 @@
 package cz.cizlmazna.schowl
 
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -14,6 +15,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
 import cz.cizlmazna.schowl.databinding.ActivityMainBinding
+import kotlin.math.roundToInt
 
 public class MainActivity : AppCompatActivity() {
 
@@ -48,10 +50,14 @@ public class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
-    public fun setDarkMode(darkmode:Boolean){
-        Darkmode = darkmode
+    fun setDarkMode(darkmode:Boolean){
+        (application as MainApplicationClass).setDarkMode(darkmode)
     }
-    public fun getDarkMode():Boolean{
-        return Darkmode
+    fun getDarkMode():Boolean{
+        return (application as MainApplicationClass).getDarkMode()
+    }
+    fun dpToPx(dp: Int): Int {
+        val displayMetrics = this.resources.displayMetrics
+        return (dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT)).roundToInt()
     }
 }

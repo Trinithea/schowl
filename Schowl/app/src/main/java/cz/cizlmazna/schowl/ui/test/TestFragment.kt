@@ -23,12 +23,14 @@ class TestFragment : Fragment() {
     private lateinit var binding: FragmentTestBinding
 
     private lateinit var viewModel: TestViewModel
+    private var darkMode = true
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_test, container, false)
+        darkMode = (activity as MainActivity).getDarkMode()
 
         val application = requireNotNull(this.activity).application
 
@@ -47,7 +49,8 @@ class TestFragment : Fragment() {
             binding.LblSolution.visibility = View.VISIBLE
             binding.LytEditNext.visibility = View.VISIBLE
         }
-        if(!(activity as MainActivity).getDarkMode()){
+
+        if(!darkMode){
             setLayoutToLightMode()
         }
         binding.BtnNext.setOnClickListener {

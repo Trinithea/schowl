@@ -23,12 +23,14 @@ class EditQuestionFragment : Fragment() {
     private lateinit var binding: FragmentEditQuestionBinding
 
     private lateinit var viewModel: EditQuestionViewModel
+    private var darkMode = true
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_edit_question, container, false)
+        darkMode =(activity as MainActivity).getDarkMode()
 
         val application = requireNotNull(this.activity).application
 
@@ -51,7 +53,7 @@ class EditQuestionFragment : Fragment() {
             Navigation.findNavController(view).navigate(EditQuestionFragmentDirections.actionEditQuestionFragmentToQuestionsFragment(viewModel.categoryId))
         }
 
-        if((activity as MainActivity).getDarkMode()==false){
+        if(!darkMode){
             setLayoutToLightMode()
         }
         return binding.root
@@ -59,7 +61,7 @@ class EditQuestionFragment : Fragment() {
     private fun setSeekBarListener(label: TextView, seekBar: SeekBar) {
         seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                label.setText(progress.toString())
+                label.text = progress.toString()
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar?) {
