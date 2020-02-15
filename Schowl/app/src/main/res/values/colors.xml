@@ -12,4 +12,7 @@
     <color name="white">#FFFFFF</color>
     <color name="brighterNavyBlue">#008ECF</color>
     <color name="navyBlueDark">#000508</color>
+    <color name="peacockBlueDark">#CF0C4147</color>
+    <color name="appleReddARK">#B4731400</color>
+    <color name="brighterNavyBlueOp">#B6008ECF</color>
 </resources>

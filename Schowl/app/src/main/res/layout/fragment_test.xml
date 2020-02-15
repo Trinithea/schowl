@@ -44,10 +44,14 @@
 
                     <TextView
                         android:id="@+id/LblQuestion"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
                         android:layout_marginTop="48dp"
+                        android:layout_marginEnd="16dp"
                         android:fontFamily="monospace"
+                        android:foregroundGravity="center"
+                        android:gravity="center"
                         android:text="@{testViewModel.currentQuestionText}"
                         android:textColor="@color/ivoryYellow"
                         android:textSize="24sp"
@@ -97,31 +101,35 @@
                         android:layout_marginTop="32dp"
                         android:background="@drawable/transparent"
                         android:fontFamily="monospace"
+                        android:onClick="@{() -> testViewModel.onShowSolution()}"
                         android:text="@string/show_solution"
-                        android:textColor="@color/peacockBlue"
+                        android:textColor="@color/brighterNavyBlue"
                         android:textSize="18sp"
                         android:translationZ="3dp"
                         android:visibility="@{testViewModel.showSolutionButtonVisible}"
-                        android:onClick="@{() -> testViewModel.onShowSolution()}"
                         app:layout_constraintBottom_toTopOf="@+id/LblSolution"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
                     <TextView
-                            android:id="@+id/LblSolution"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="32dp"
-                            android:fontFamily="monospace"
-                            android:text="@{testViewModel.currentSolutionText}"
-                            android:textColor="@color/ivoryYellow"
-                            android:textSize="14sp"
-                            android:visibility="@{testViewModel.solutionPartsVisible}"
-                            app:layout_constraintBottom_toTopOf="@+id/LytEditNext"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/BtnShowSolution" />
+                        android:id="@+id/LblSolution"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="32dp"
+                        android:layout_marginEnd="16dp"
+                        android:fontFamily="monospace"
+                        android:foregroundGravity="center"
+                        android:gravity="center"
+                        android:text="@{testViewModel.currentSolutionText}"
+                        android:textColor="@color/ivoryYellow"
+                        android:textSize="14sp"
+                        android:visibility="@{testViewModel.solutionPartsVisible}"
+                        app:layout_constraintBottom_toTopOf="@+id/LytEditNext"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/BtnShowSolution" />
 
                     <LinearLayout
                             android:id="@+id/LytEditNext"
@@ -144,11 +152,11 @@
                             android:background="@drawable/transparent"
                             android:fontFamily="monospace"
                             android:foregroundGravity="center_vertical|center|center_horizontal"
+                            android:onClick="@{() -> testViewModel.editQuestion()}"
                             android:text="@string/edit_question"
-                            android:textColor="@color/peacockBlue"
+                            android:textColor="@color/brighterNavyBlue"
                             android:textSize="18sp"
-                            android:translationZ="3dp"
-                            android:onClick="@{() -> testViewModel.editQuestion()}"/>
+                            android:translationZ="3dp" />
 
                         <Button
                             android:id="@+id/BtnNext"

@@ -49,7 +49,7 @@
 
                         <LinearLayout
                             android:id="@+id/linearLayout3"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="16dp"
                             android:layout_marginTop="32dp"
@@ -73,7 +73,7 @@
 
                             <EditText
                                 android:id="@+id/TxtQuestion"
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:backgroundTint="@color/peacockBlue"
                                 android:ems="10"
@@ -81,12 +81,12 @@
                                 android:inputType="textMultiLine"
                                 android:text="@{editQuestionViewModel.questionText}"
                                 android:textColor="@color/ivoryYellow"
-                                android:textSize="18sp" />
+                                android:textSize="14sp" />
                         </LinearLayout>
 
                         <LinearLayout
                             android:id="@+id/linearLayout2"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="16dp"
                             android:layout_marginTop="16dp"
@@ -110,7 +110,7 @@
 
                             <EditText
                                 android:id="@+id/TxtAnswer"
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:backgroundTint="@color/peacockBlue"
                                 android:ems="10"
@@ -118,7 +118,7 @@
                                 android:inputType="textMultiLine"
                                 android:text="@{editQuestionViewModel.answerText}"
                                 android:textColor="@color/ivoryYellow"
-                                android:textSize="18sp" />
+                                android:textSize="14sp" />
                         </LinearLayout>
 
                         <LinearLayout
