@@ -184,6 +184,9 @@ class TestSetupViewModel(
     init {
         uiScope.launch {
             selectedSubject.value = getSubject(subjectId)
+            if (selectedSubject.value == null) {
+                selectedSubject.value = getFirstSubject()
+            }
             if (selectedSubject.value != null) {
                 selectedSubjectCategories.value = setSelectedSubjectCategories()
                 val categoriesCheckedTemp = hashMapOf<Long, Boolean>()
@@ -194,15 +197,6 @@ class TestSetupViewModel(
                     allCategoriesSelected.value = true
                 } else {
                     categoriesCheckedTemp[categoryId] = true
-                }
-                categoriesChecked.value = categoriesCheckedTemp
-            } else {
-                // TODO This has to be cleaned up
-                selectedSubject.value = getFirstSubject()
-                selectedSubjectCategories.value = setSelectedSubjectCategories()
-                val categoriesCheckedTemp = hashMapOf<Long, Boolean>()
-                for (category in selectedSubjectCategories.value!!) {
-                    categoriesCheckedTemp[category.id] = false
                 }
                 categoriesChecked.value = categoriesCheckedTemp
             }
