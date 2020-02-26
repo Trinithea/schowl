@@ -41,7 +41,9 @@
     <string name="create_your_test">CREATE YOUR TEST</string>
     <string name="add">ADD</string>
     <string name="about_schowl">ABOUT SCHOWL</string>
-    <string name="textview">TextView</string>
+    <string name="text_view">Schowl is an app that aims to improve studying preparation. The user puts in questions and then practices getting their answers right in a dynamic test-like environment. The app keeps the questions neatly organized in its friendly interface. The user may keep learning for as long as they want.\n\n
+
+        Schowl was initially made by Michaela Mazna and Elias Cizl as a school project assignment but also so they could study better.</string>
     <string name="correct_solution">CORRECT SOLUTION</string>
     <string name="difficulty">DIFFICULTY</string>
     <string name="dark_mode">DARK MODE</string>
@@ -54,5 +56,4 @@
     <string name="no_subject_selected">No subject selected.</string>
     <string name="no_categories_selected">No categories selected.</string>
     <string name="no_questions_in_categories">No questions in selected categories.</string>
-    <!--TODO: ilájs u should write here something about our great app -->
 </resources>
