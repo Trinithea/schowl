@@ -69,7 +69,17 @@ class TestViewModel(
         return testOver
     }
 
+    private val questionChange = MutableLiveData<Boolean>(false)
+    fun getQuestionChange(): LiveData<Boolean> {
+        return questionChange
+    }
+
+    fun doneChangingQuestion() {
+        questionChange.value = false
+    }
+
     fun nextQuestion() {
+        questionChange.value = true
         if (currentQuestionIndex.value!! >= testedQuestions.size - 1) {
             testOver.value = true
         } else {

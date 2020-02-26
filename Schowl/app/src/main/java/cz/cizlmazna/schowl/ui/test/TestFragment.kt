@@ -58,6 +58,13 @@ class TestFragment : Fragment() {
             setLayoutToLightMode()
         }
 
+        viewModel.getQuestionChange().observe(viewLifecycleOwner, Observer {
+            if (it) {
+                binding.TxtAnswer.setText("")
+                viewModel.doneChangingQuestion()
+            }
+        })
+
         viewModel.getNavigateToEditQuestion().observe(viewLifecycleOwner, Observer {
             if (it == true) {
                 findNavController().navigate(
