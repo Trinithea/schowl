@@ -40,7 +40,7 @@ class QuestionsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_questions,container,false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_questions, container, false)
         darkMode = (activity as MainActivity).getDarkMode()
 
         val application = requireNotNull(this.activity).application
@@ -56,7 +56,12 @@ class QuestionsFragment : Fragment() {
         (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.questions)
 
         binding.btnAddQuestion.setOnClickListener { view: View ->
-            Navigation.findNavController(view).navigate(QuestionsFragmentDirections.actionQuestionsFragmentToEditQuestionFragment(arguments.categoryId, -1))
+            Navigation.findNavController(view).navigate(
+                QuestionsFragmentDirections.actionQuestionsFragmentToEditQuestionFragment(
+                    arguments.categoryId,
+                    -1
+                )
+            )
         }
 
         binding.lifecycleOwner = this
@@ -65,22 +70,23 @@ class QuestionsFragment : Fragment() {
             generateQuestionsList(it)
         })
 
-        if(!darkMode){
+        if (!darkMode) {
             setLayoutToLightMode()
         }
         return binding.root
 
     }
-    private fun setDialog( textView: TextView, ll:LinearLayout){
-        if(!darkMode){
+
+    private fun setDialog(textView: TextView, ll: LinearLayout) {
+        if (!darkMode) {
             ll.background = ContextCompat.getDrawable(context!!, R.color.white)
             textView.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
-        }
-        else{
+        } else {
             ll.background = ContextCompat.getDrawable(context!!, R.color.navyBlue)
             textView.setTextColor(ContextCompat.getColor(context!!, R.color.ivoryYellow))
         }
     }
+
     private fun generateQuestionsList(questions: List<Question>) {
         binding.llMain.removeAllViews()
         for (question in questions) {
@@ -90,58 +96,68 @@ class QuestionsFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.question_menu,menu)
+        inflater.inflate(R.menu.question_menu, menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return NavigationUI.onNavDestinationSelected(item, view!!.findNavController()) || super.onOptionsItemSelected(item)
+        return NavigationUI.onNavDestinationSelected(
+            item,
+            view!!.findNavController()
+        ) || super.onOptionsItemSelected(item)
     }
 
-    private fun addQuestion( question: Question){
+    private fun addQuestion(question: Question) {
         val btnQuestion = Button(activity)
         val btnRemove = ImageButton(activity)
-        val params = LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.MATCH_PARENT)
+        val params = LinearLayout.LayoutParams(
+            ViewGroup.LayoutParams.WRAP_CONTENT,
+            ViewGroup.LayoutParams.MATCH_PARENT
+        )
         params.weight = 1f
         val mainLyt = ConstraintLayout(activity)
         btnQuestion.layoutParams = params
 
-        if(!darkMode){
+        if (!darkMode) {
             btnQuestion.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
             btnRemove.setImageResource(R.drawable.ic_remove_blue)
-        }
-        else{
+        } else {
             btnQuestion.setTextColor(ContextCompat.getColor(context!!, R.color.ivoryYellow))
             btnRemove.setImageResource(R.drawable.ic_remove_yellow)
         }
         btnQuestion.background = ContextCompat.getDrawable(context!!, R.drawable.transparent)
         btnQuestion.translationZ = 3f
         btnQuestion.gravity = Gravity.START
-        btnQuestion.setOnClickListener{
-                view: View ->
-            Navigation.findNavController(view).navigate(QuestionsFragmentDirections.actionQuestionsFragmentToEditQuestionFragment(question.categoryId, question.id))
+        btnQuestion.setOnClickListener { view: View ->
+            Navigation.findNavController(view).navigate(
+                QuestionsFragmentDirections.actionQuestionsFragmentToEditQuestionFragment(
+                    question.categoryId,
+                    question.id
+                )
+            )
         }
 
         btnQuestion.text = question.questionText
-        if(btnQuestion.text.length >27){
+        if (btnQuestion.text.length > 27) {
             val displayMetrics = DisplayMetrics()
             (context as Activity).windowManager
                 .defaultDisplay
                 .getMetrics(displayMetrics)
-            val param = LinearLayout.LayoutParams((activity as MainActivity).dpToPx(260),
+            val param = LinearLayout.LayoutParams(
+                (activity as MainActivity).dpToPx(260),
                 ViewGroup.LayoutParams.MATCH_PARENT
             )
             btnQuestion.layoutParams = param
         }
         btnRemove.layoutParams = params
-        btnRemove.background= ContextCompat.getDrawable(context!!, R.drawable.transparent)
+        btnRemove.background = ContextCompat.getDrawable(context!!, R.drawable.transparent)
         btnRemove.setOnClickListener {
             val mDialogView =
-                LayoutInflater.from(activity).inflate(R.layout.remove_dialog, null)
+                View.inflate(activity, R.layout.remove_dialog, null)
             val mBuilder =
                 AlertDialog.Builder(activity).setView(mDialogView)
             val mAlertDialog = mBuilder.show()
-            mDialogView.txtMessage.text=getString(R.string.remove_question_dialog)
-            setDialog(mDialogView.txtMessage,mDialogView.LlMainRemove)
+            mDialogView.txtMessage.text = getString(R.string.remove_question_dialog)
+            setDialog(mDialogView.txtMessage, mDialogView.LlMainRemove)
             mDialogView.btnRemove.setOnClickListener {
                 mAlertDialog.dismiss()
                 viewModel.removeQuestion(question)
@@ -151,9 +167,9 @@ class QuestionsFragment : Fragment() {
             }
         }
 
-        mainLyt.setId(View.generateViewId())
-        btnQuestion.setId(View.generateViewId())
-        btnRemove.setId(View.generateViewId())
+        mainLyt.id = View.generateViewId()
+        btnQuestion.id = View.generateViewId()
+        btnRemove.id = View.generateViewId()
 
         mainLyt.addView(btnQuestion)
         mainLyt.addView(btnRemove)
@@ -163,11 +179,17 @@ class QuestionsFragment : Fragment() {
         set.connect(btnQuestion.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP)
         set.connect(btnRemove.id, ConstraintSet.RIGHT, ConstraintSet.PARENT_ID, ConstraintSet.RIGHT)
         set.connect(btnRemove.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP)
-        set.connect(btnRemove.id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM)
+        set.connect(
+            btnRemove.id,
+            ConstraintSet.BOTTOM,
+            ConstraintSet.PARENT_ID,
+            ConstraintSet.BOTTOM
+        )
         set.applyTo(mainLyt)
         binding.llMain.addView(mainLyt)
     }
-    private fun setLayoutToLightMode(){
+
+    private fun setLayoutToLightMode() {
         binding.LytMain.background = ContextCompat.getDrawable(context!!, R.color.white)
     }
 }

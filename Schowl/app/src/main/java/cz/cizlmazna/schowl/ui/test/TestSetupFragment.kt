@@ -57,31 +57,40 @@ class TestSetupFragment : Fragment() {
 
         binding.lifecycleOwner = this
         binding.testSetupViewModel = viewModel
-        if(!darkMode){
+        if (!darkMode) {
             setLayoutToLightMode()
         }
 
         viewModel.getSubjects().observe(viewLifecycleOwner, Observer {
-            var dataAdapter =ArrayAdapter<Subject>(context!!, android.R.layout.simple_spinner_item, it)
-            if((activity as MainActivity).getDarkMode()) {
+            var dataAdapter =
+                ArrayAdapter<Subject>(context!!, android.R.layout.simple_spinner_item, it)
+            if ((activity as MainActivity).getDarkMode()) {
                 dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            }
-            else {
-                dataAdapter = ArrayAdapter<Subject>(context!!, R.layout.spinner_item_dark, it)
+            } else {
+                dataAdapter = ArrayAdapter(context!!, R.layout.spinner_item_dark, it)
                 dataAdapter.setDropDownViewResource(R.layout.spinner_item_light)
             }
             binding.SpnSubject.adapter = dataAdapter
         })
 
         viewModel.getSelectedSubject().observe(viewLifecycleOwner, Observer {
-            if(viewModel.getSubjects().value != null) {
-                val dataAdapter = ArrayAdapter<Subject>(context!!, android.R.layout.simple_spinner_item, viewModel.getSubjects().value!!)
+            if (viewModel.getSubjects().value != null) {
+                val dataAdapter = ArrayAdapter<Subject>(
+                    context!!,
+                    android.R.layout.simple_spinner_item,
+                    viewModel.getSubjects().value!!
+                )
                 binding.SpnSubject.setSelection(dataAdapter.getPosition(it))
             }
         })
 
         binding.SpnSubject.onItemSelectedListener = object : OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
                 viewModel.onSubjectSelected(parent?.getItemAtPosition(position) as Subject)
             }
 
@@ -90,7 +99,7 @@ class TestSetupFragment : Fragment() {
             }
         }
 
-        binding.SwitchAllCategories.setOnCheckedChangeListener {_, isChecked ->
+        binding.SwitchAllCategories.setOnCheckedChangeListener { _, isChecked ->
             viewModel.onAllCategoriesSelectedChange(isChecked)
         }
 
@@ -102,8 +111,8 @@ class TestSetupFragment : Fragment() {
         setMaxSeekBarListener(binding.SkbMaxDif)
 
         viewModel.getErrorMessage().observe(viewLifecycleOwner, Observer {
-            if(it != null) {
-                val text = when(it) {
+            if (it != null) {
+                val text = when (it) {
                     TestSetupViewModel.ErrorMessage.NO_SUBJECT_SELECTED -> getString(R.string.no_subject_selected)
                     TestSetupViewModel.ErrorMessage.NO_CATEGORIES_SELECTED -> getString(R.string.no_categories_selected)
                     TestSetupViewModel.ErrorMessage.NO_QUESTIONS_IN_CATEGORIES -> getString(R.string.no_questions_in_categories)
@@ -115,12 +124,19 @@ class TestSetupFragment : Fragment() {
 
         viewModel.getNavigateToTest().observe(viewLifecycleOwner, Observer {
             if (it == true) {
-                findNavController().navigate(TestSetupFragmentDirections.actionTestSetupFragmentToTestFragment(viewModel.getCategoryIds(), viewModel.getMinDifficulty().value!!, viewModel.getMaxDifficulty().value!!))
+                findNavController().navigate(
+                    TestSetupFragmentDirections.actionTestSetupFragmentToTestFragment(
+                        viewModel.getCategoryIds(),
+                        viewModel.getMinDifficulty().value!!,
+                        viewModel.getMaxDifficulty().value!!
+                    )
+                )
                 viewModel.doneNavigatingToTest()
             }
         })
 
-        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.create_your_test) // TODO it would be great to optimize the action bar a little
+        (activity as AppCompatActivity).supportActionBar?.title =
+            getString(R.string.create_your_test) // TODO it would be great to optimize the action bar a little
 
         return binding.root
     }
@@ -131,35 +147,38 @@ class TestSetupFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return NavigationUI.onNavDestinationSelected(item, view!!.findNavController()) || super.onOptionsItemSelected(item)
+        return NavigationUI.onNavDestinationSelected(
+            item,
+            view!!.findNavController()
+        ) || super.onOptionsItemSelected(item)
     }
 
     private fun setLayoutToLightMode() {
 
-            binding.LblSubject.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
-            binding.LblCategory.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
-            binding.LblMinDif.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
-            binding.LblMaxDif.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
-            binding.LblCurrentMinDif.setTextColor(
-                ContextCompat.getColor(
-                    context!!,
-                    R.color.navyBlue
-                )
+        binding.LblSubject.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
+        binding.LblCategory.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
+        binding.LblMinDif.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
+        binding.LblMaxDif.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
+        binding.LblCurrentMinDif.setTextColor(
+            ContextCompat.getColor(
+                context!!,
+                R.color.navyBlue
             )
-            binding.LblCurrentMaxDif.setTextColor(
-                ContextCompat.getColor(
-                    context!!,
-                    R.color.navyBlue
-                )
+        )
+        binding.LblCurrentMaxDif.setTextColor(
+            ContextCompat.getColor(
+                context!!,
+                R.color.navyBlue
             )
-            binding.LytMain.background =
-                ContextCompat.getDrawable(context!!, R.color.white)
-            binding.SwitchAllCategories.setTextColor(
-                ContextCompat.getColor(
-                    context!!,
-                    R.color.navyBlue
-                )
+        )
+        binding.LytMain.background =
+            ContextCompat.getDrawable(context!!, R.color.white)
+        binding.SwitchAllCategories.setTextColor(
+            ContextCompat.getColor(
+                context!!,
+                R.color.navyBlue
             )
+        )
 
     }
 
@@ -168,6 +187,7 @@ class TestSetupFragment : Fragment() {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 viewModel.onSetMinDifficulty(seekBar!!.progress)
             }
+
             override fun onStartTrackingTouch(seekBar: SeekBar?) {}
             override fun onStopTrackingTouch(seekBar: SeekBar?) {}
         })
@@ -178,6 +198,7 @@ class TestSetupFragment : Fragment() {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 viewModel.onSetMaxDifficulty(seekBar!!.progress)
             }
+
             override fun onStartTrackingTouch(seekBar: SeekBar?) {}
             override fun onStopTrackingTouch(seekBar: SeekBar?) {}
         })
@@ -186,7 +207,7 @@ class TestSetupFragment : Fragment() {
     private fun generateCategoriesList(categories: List<Category>) {
         binding.LytCategories.removeAllViews()
         viewModel.getCategoriesChecked().removeObservers(viewLifecycleOwner)
-        for(category in categories) {
+        for (category in categories) {
             addCategory(category)
         }
     }
@@ -199,8 +220,10 @@ class TestSetupFragment : Fragment() {
         )
 
         categoryCheckBox.layoutParams = params
-        categoryCheckBox.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(context!!, R.color.peacockBlue))
-        categoryCheckBox.buttonTintList = ColorStateList.valueOf(ContextCompat.getColor(context!!, R.color.peacockBlue))
+        categoryCheckBox.backgroundTintList =
+            ColorStateList.valueOf(ContextCompat.getColor(context!!, R.color.peacockBlue))
+        categoryCheckBox.buttonTintList =
+            ColorStateList.valueOf(ContextCompat.getColor(context!!, R.color.peacockBlue))
         categoryCheckBox.text = category.name
         if (darkMode)
             categoryCheckBox.setTextColor(ContextCompat.getColor(context!!, R.color.ivoryYellow))

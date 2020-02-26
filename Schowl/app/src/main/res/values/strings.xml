@@ -34,7 +34,7 @@
     <string name="remove_question_dialog">Do you really want to remove this question?</string>
     <string name="categories">CATEGORIES</string>
     <string name="name_of_category">Name of category</string>
-    <string name="remove_dalog">"Do you really want to remove "</string>
+    <string name="remove_dialog">"Do you really want to remove %1$s?"</string>
     <string name="name_of_subject">Name of subject</string>
     <string name="subjects">SUBJECTS</string>
     <string name="test">TEST</string>

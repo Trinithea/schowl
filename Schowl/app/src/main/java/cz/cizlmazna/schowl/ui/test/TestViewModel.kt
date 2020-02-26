@@ -47,14 +47,14 @@ class TestViewModel(
     private val showSolution = MutableLiveData<Boolean>(false)
 
     val showSolutionButtonVisible = Transformations.map(showSolution) {
-        when(it) {
+        when (it) {
             true -> View.GONE
             false -> View.VISIBLE
         }
     }
 
     val solutionPartsVisible = Transformations.map(showSolution) {
-        when(it) {
+        when (it) {
             true -> View.VISIBLE
             false -> View.GONE
         }
@@ -89,7 +89,7 @@ class TestViewModel(
     }
 
     fun doneNavigatingToEditQuestion() {
-        if(navigateToEditQuestion.value == true) {
+        if (navigateToEditQuestion.value == true) {
             navigateToEditQuestion.value = false
             nextQuestion()
         }
@@ -105,7 +105,11 @@ class TestViewModel(
         }
     }
 
-    private suspend fun getQuestions(categoryId: Long, minDifficulty: Int, maxDifficulty: Int): List<Question>{
+    private suspend fun getQuestions(
+        categoryId: Long,
+        minDifficulty: Int,
+        maxDifficulty: Int
+    ): List<Question> {
         return withContext(Dispatchers.IO) {
             database.getQuestionsLimited(categoryId, minDifficulty.toByte(), maxDifficulty.toByte())
         }

@@ -16,7 +16,8 @@ class AboutFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding: FragmentAboutBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_about, container, false)
+        val binding: FragmentAboutBinding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_about, container, false)
         (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.about)
         return binding.root
     }

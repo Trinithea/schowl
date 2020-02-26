@@ -29,8 +29,9 @@ class EditQuestionFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_edit_question, container, false)
-        darkMode =(activity as MainActivity).getDarkMode()
+        binding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_edit_question, container, false)
+        darkMode = (activity as MainActivity).getDarkMode()
 
         val application = requireNotNull(this.activity).application
 
@@ -38,26 +39,31 @@ class EditQuestionFragment : Fragment() {
 
         val databaseDao = SchowlDatabase.getInstance(application).schowlDatabaseDao
 
-        val viewModelFactory = EditQuestionViewModelFactory(databaseDao, arguments.categoryId, arguments.questionId)
+        val viewModelFactory =
+            EditQuestionViewModelFactory(databaseDao, arguments.categoryId, arguments.questionId)
 
         viewModel = ViewModelProvider(this, viewModelFactory).get(EditQuestionViewModel::class.java)
 
         binding.editQuestionViewModel = viewModel
         binding.lifecycleOwner = this
-        setSeekBarListener(binding.LblDifficulty,binding.SbrDifficulty)
+        setSeekBarListener(binding.LblDifficulty, binding.SbrDifficulty)
         (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.edit_question)
 
-        binding.btnSent.setOnClickListener {
-            view: View ->
-            viewModel.confirm(binding.TxtQuestion.text.toString(), binding.TxtAnswer.text.toString(), binding.SbrDifficulty.progress.toByte())
+        binding.btnSent.setOnClickListener { view: View ->
+            viewModel.confirm(
+                binding.TxtQuestion.text.toString(),
+                binding.TxtAnswer.text.toString(),
+                binding.SbrDifficulty.progress.toByte()
+            )
             Navigation.findNavController(view).popBackStack()
         }
 
-        if(!darkMode){
+        if (!darkMode) {
             setLayoutToLightMode()
         }
         return binding.root
     }
+
     private fun setSeekBarListener(label: TextView, seekBar: SeekBar) {
         seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
@@ -72,7 +78,8 @@ class EditQuestionFragment : Fragment() {
 
         })
     }
-    private fun setLayoutToLightMode(){
+
+    private fun setLayoutToLightMode() {
         binding.LytBackground.background = ContextCompat.getDrawable(context!!, R.color.white)
         binding.LblDifficulty.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
         binding.LblDiff.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))

@@ -25,7 +25,7 @@ class QuestionsViewModel(
         }
     }
 
-    private suspend fun getCategory(categoryId: Long){
+    private suspend fun getCategory(categoryId: Long) {
         withContext(Dispatchers.IO) {
             category = database.getCategory(categoryId)
         }

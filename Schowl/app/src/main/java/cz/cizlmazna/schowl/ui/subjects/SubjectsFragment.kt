@@ -8,7 +8,7 @@ import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import kotlinx.android.synthetic.main.add_subject_dialog.view.*
+import kotlinx.android.synthetic.main.add_dialog.view.*
 import android.widget.LinearLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
@@ -53,11 +53,11 @@ class SubjectsFragment : Fragment() {
 
         binding.btnAddSubject.setOnClickListener {
             val mDialogView =
-                LayoutInflater.from(activity).inflate(R.layout.add_subject_dialog, null)
+                View.inflate(activity, R.layout.add_dialog, null)
             val mBuilder =
                 AlertDialog.Builder(activity).setView(mDialogView)
             mDialogView.TxtName.hint = getString(R.string.name_of_subject)
-            setDialog(mDialogView.TxtName,mDialogView.llMain)
+            setDialog(mDialogView.TxtName, mDialogView.llMain)
             val mAlertDialog = mBuilder.show()
 
             mDialogView.BtnAdd.setOnClickListener {
@@ -73,7 +73,7 @@ class SubjectsFragment : Fragment() {
             generateSubjectsList(it)
         })
 
-        if(!darkMode){
+        if (!darkMode) {
             setLayoutToLightMode()
         }
 
@@ -90,17 +90,18 @@ class SubjectsFragment : Fragment() {
             addSubject(subject)
         }
     }
-    private fun setDialog(textView: TextView,ll:LinearLayout){
-        if(!darkMode){
+
+    private fun setDialog(textView: TextView, ll: LinearLayout) {
+        if (!darkMode) {
             ll.background = ContextCompat.getDrawable(context!!, R.color.white)
             textView.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
-        }
-        else{
+        } else {
             ll.background = ContextCompat.getDrawable(context!!, R.color.navyBlue)
             textView.setTextColor(ContextCompat.getColor(context!!, R.color.ivoryYellow))
         }
     }
-    private fun addSubject( subject: Subject) {
+
+    private fun addSubject(subject: Subject) {
 
         val optionsLyt = LinearLayout(activity)
         val btnNewSubject = Button(activity)
@@ -129,15 +130,16 @@ class SubjectsFragment : Fragment() {
 
         btnNewSubject.gravity = Gravity.START
         btnNewSubject.setOnClickListener { view: View ->
-            Navigation.findNavController(view).navigate(SubjectsFragmentDirections.actionSubjectsFragmentToCategoriesFragment(subject.id))
+            Navigation.findNavController(view).navigate(
+                SubjectsFragmentDirections.actionSubjectsFragmentToCategoriesFragment(subject.id)
+            )
         }
-        if(!darkMode){
+        if (!darkMode) {
             btnNewSubject.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
             btnEdit.setImageResource(R.drawable.ic_edit_blue)
             btnRemove.setImageResource(R.drawable.ic_remove_blue)
             btnTest.setImageResource(R.drawable.ic_test_blue)
-        }
-        else{
+        } else {
             btnNewSubject.setTextColor(ContextCompat.getColor(context!!, R.color.ivoryYellow))
             btnEdit.setImageResource(R.drawable.ic_edit_yellow)
             btnRemove.setImageResource(R.drawable.ic_remove_yellow)
@@ -150,14 +152,14 @@ class SubjectsFragment : Fragment() {
         btnEdit.background = ContextCompat.getDrawable(context!!, R.drawable.transparent)
         btnEdit.setOnClickListener {
             val mDialogView =
-                LayoutInflater.from(activity).inflate(R.layout.add_subject_dialog, null)
+                View.inflate(activity, R.layout.add_dialog, null)
             val mBuilder =
                 AlertDialog.Builder(activity).setView(mDialogView)
             val mAlertDialog = mBuilder.show()
             mDialogView.TxtName.setText(subject.name)
             mDialogView.BtnAdd.text = getString(R.string.edit)
 
-            setDialog(mDialogView.TxtName,mDialogView.llMain)
+            setDialog(mDialogView.TxtName, mDialogView.llMain)
             mDialogView.BtnAdd.setOnClickListener {
                 mAlertDialog.dismiss()
                 viewModel.editSubject(subject, mDialogView.TxtName.text.toString())
@@ -168,13 +170,13 @@ class SubjectsFragment : Fragment() {
         btnRemove.background = ContextCompat.getDrawable(context!!, R.drawable.transparent)
         btnRemove.setOnClickListener {
             val mDialogView =
-                LayoutInflater.from(activity).inflate(R.layout.remove_dialog, null)
+                View.inflate(activity, R.layout.remove_dialog, null)
             val mBuilder =
                 AlertDialog.Builder(activity).setView(mDialogView)
             val mAlertDialog = mBuilder.show()
-            mDialogView.txtMessage.text = getString(R.string.remove_dalog) + subject.name + "?" // TODO Really? New hardcoded strings???
+            mDialogView.txtMessage.text = getString(R.string.remove_dialog, subject.name)
 
-            setDialog(mDialogView.txtMessage,mDialogView.LlMainRemove)
+            setDialog(mDialogView.txtMessage, mDialogView.LlMainRemove)
             mDialogView.btnRemove.setOnClickListener {
                 mAlertDialog.dismiss()
                 viewModel.removeSubject(subject)
@@ -186,20 +188,21 @@ class SubjectsFragment : Fragment() {
 
         btnTest.layoutParams = params
         btnTest.background = ContextCompat.getDrawable(context!!, R.drawable.transparent)
-        btnTest.setOnClickListener{
-                view: View ->
-            Navigation.findNavController(view).navigate(SubjectsFragmentDirections.actionNavSubjectsToNavTest(subject.id, -1))
+        btnTest.setOnClickListener { view: View ->
+            Navigation.findNavController(view)
+                .navigate(SubjectsFragmentDirections.actionNavSubjectsToNavTest(subject.id, -1))
         }
 
         optionsLyt.addView(btnEdit)
         optionsLyt.addView(btnRemove)
         optionsLyt.addView(btnTest)
-        if(subject.name.length >27){
+        if (subject.name.length > 27) {
             val displayMetrics = DisplayMetrics()
             (context as Activity).windowManager
                 .defaultDisplay
                 .getMetrics(displayMetrics)
-            val param = LinearLayout.LayoutParams((activity as MainActivity).dpToPx(260),
+            val param = LinearLayout.LayoutParams(
+                (activity as MainActivity).dpToPx(260),
                 ViewGroup.LayoutParams.MATCH_PARENT
             )
             btnNewSubject.layoutParams = param
@@ -211,20 +214,35 @@ class SubjectsFragment : Fragment() {
 
         mainLyt.addView(btnNewSubject)
         mainLyt.addView(optionsLyt)
-        val set =ConstraintSet()
+        val set = ConstraintSet()
         set.clone(mainLyt)
-        set.connect(btnNewSubject.id,ConstraintSet.LEFT,ConstraintSet.PARENT_ID,ConstraintSet.LEFT)
-        set.connect(btnNewSubject.id,ConstraintSet.TOP,ConstraintSet.PARENT_ID,ConstraintSet.TOP)
-        set.connect(optionsLyt.id,ConstraintSet.RIGHT,ConstraintSet.PARENT_ID,ConstraintSet.RIGHT)
-        set.connect(optionsLyt.id,ConstraintSet.TOP,ConstraintSet.PARENT_ID,ConstraintSet.TOP)
-        set.connect(optionsLyt.id,ConstraintSet.BOTTOM,ConstraintSet.PARENT_ID,ConstraintSet.BOTTOM)
+        set.connect(
+            btnNewSubject.id,
+            ConstraintSet.LEFT,
+            ConstraintSet.PARENT_ID,
+            ConstraintSet.LEFT
+        )
+        set.connect(btnNewSubject.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP)
+        set.connect(
+            optionsLyt.id,
+            ConstraintSet.RIGHT,
+            ConstraintSet.PARENT_ID,
+            ConstraintSet.RIGHT
+        )
+        set.connect(optionsLyt.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP)
+        set.connect(
+            optionsLyt.id,
+            ConstraintSet.BOTTOM,
+            ConstraintSet.PARENT_ID,
+            ConstraintSet.BOTTOM
+        )
         set.applyTo(mainLyt)
 
         binding.llMain.addView(mainLyt)
     }
 
 
-    private fun setLayoutToLightMode(){
+    private fun setLayoutToLightMode() {
         binding.LytMain.background = ContextCompat.getDrawable(context!!, R.color.white)
     }
 }

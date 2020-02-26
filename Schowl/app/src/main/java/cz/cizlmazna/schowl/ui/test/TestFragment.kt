@@ -39,7 +39,12 @@ class TestFragment : Fragment() {
 
         val databaseDao = SchowlDatabase.getInstance(application).schowlDatabaseDao
 
-        val viewModelFactory = TestViewModelFactory(databaseDao, arguments.categoryIds, arguments.minDifficulty, arguments.maxDifficulty)
+        val viewModelFactory = TestViewModelFactory(
+            databaseDao,
+            arguments.categoryIds,
+            arguments.minDifficulty,
+            arguments.maxDifficulty
+        )
 
         viewModel = ViewModelProvider(this, viewModelFactory).get(TestViewModel::class.java)
 
@@ -49,29 +54,28 @@ class TestFragment : Fragment() {
 
         (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.test)
 
-        binding.BtnShowSolution.setOnClickListener{
-            binding.BtnShowSolution.visibility = View.GONE
-            binding.LblSolution.visibility = View.VISIBLE
-            binding.LytEditNext.visibility = View.VISIBLE
-        }
-
-        if(!darkMode){
+        if (!darkMode) {
             setLayoutToLightMode()
         }
 
         viewModel.getNavigateToEditQuestion().observe(viewLifecycleOwner, Observer {
-            if(it == true) {
-                findNavController().navigate(TestFragmentDirections.actionTestFragmentToEditQuestionFragment(viewModel.getCurrentQuestionCategoryId(), viewModel.getCurrentQuestionId()))
+            if (it == true) {
+                findNavController().navigate(
+                    TestFragmentDirections.actionTestFragmentToEditQuestionFragment(
+                        viewModel.getCurrentQuestionCategoryId(),
+                        viewModel.getCurrentQuestionId()
+                    )
+                )
             }
         })
 
         viewModel.getTestOver().observe(viewLifecycleOwner, Observer {
             if (it == true) {
-                val mDialogView = LayoutInflater.from(activity).inflate(R.layout.test_completed_dialog, null)
+                val mDialogView = View.inflate(activity, R.layout.test_completed_dialog, null)
                 val mBuilder = AlertDialog.Builder(activity).setView(mDialogView)
                 val mAlertDialog = mBuilder.show()
                 mDialogView.btnSetup.setOnClickListener {
-                    // TODO make this as an event using the viewmodel
+                    // TODO make this as an event using the viewModel
                     findNavController().popBackStack()
                     mAlertDialog.dismiss()
                 }
@@ -86,12 +90,17 @@ class TestFragment : Fragment() {
         viewModel.doneNavigatingToEditQuestion()
     }
 
-    private fun setLayoutToLightMode(){
+    private fun setLayoutToLightMode() {
         binding.LblMyAnswer.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
         binding.LblQuestion.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
-        binding.LblNumberOfQuestion.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
+        binding.LblNumberOfQuestion.setTextColor(
+            ContextCompat.getColor(
+                context!!,
+                R.color.navyBlue
+            )
+        )
         binding.LblSolution.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
-        binding.LytMain.background=ContextCompat.getDrawable(context!!, R.color.white)
+        binding.LytMain.background = ContextCompat.getDrawable(context!!, R.color.white)
         binding.TxtAnswer.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
     }
 }

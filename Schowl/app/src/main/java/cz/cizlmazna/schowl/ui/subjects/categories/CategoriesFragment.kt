@@ -26,7 +26,7 @@ import cz.cizlmazna.schowl.R
 import cz.cizlmazna.schowl.database.Category
 import cz.cizlmazna.schowl.database.SchowlDatabase
 import cz.cizlmazna.schowl.databinding.FragmentCategoriesBinding
-import kotlinx.android.synthetic.main.add_subject_dialog.view.*
+import kotlinx.android.synthetic.main.add_dialog.view.*
 import kotlinx.android.synthetic.main.fragment_subjects.*
 import kotlinx.android.synthetic.main.remove_dialog.view.*
 
@@ -41,7 +41,7 @@ class CategoriesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_categories,container,false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_categories, container, false)
 
         darkMode = (activity as MainActivity).getDarkMode()
 
@@ -55,17 +55,17 @@ class CategoriesFragment : Fragment() {
 
         viewModel = ViewModelProvider(this, viewModelFactory).get(CategoriesViewModel::class.java)
 
-        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.categories) // TODO should include Subject name
-
+        (activity as AppCompatActivity).supportActionBar?.title =
+            getString(R.string.categories) // TODO should include Subject name
 
 
         binding.btnAddCategory.setOnClickListener {
-            val mDialogView = LayoutInflater.from(activity).inflate(R.layout.add_subject_dialog,null)
+            val mDialogView = View.inflate(activity, R.layout.add_dialog, null)
             val mBuilder = AlertDialog.Builder(activity).setView(mDialogView)
             val mAlertDialog = mBuilder.show()
             mDialogView.TxtName.hint = getString(R.string.name_of_category)
-            setDialog(mDialogView.TxtName,mDialogView.llMain)
-            mDialogView.BtnAdd.setOnClickListener{
+            setDialog(mDialogView.TxtName, mDialogView.llMain)
+            mDialogView.BtnAdd.setOnClickListener {
                 mAlertDialog.dismiss()
                 val name = mDialogView.TxtName.text.toString()
                 viewModel.addCategory(name)
@@ -79,7 +79,7 @@ class CategoriesFragment : Fragment() {
             generateCategoriesList(it)
         })
 
-        if(!darkMode){
+        if (!darkMode) {
             setLayoutToLightMode()
         }
         return binding.root
@@ -94,38 +94,48 @@ class CategoriesFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.category_menu,menu)
+        inflater.inflate(R.menu.category_menu, menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return NavigationUI.onNavDestinationSelected(item, view!!.findNavController()) || super.onOptionsItemSelected(item)
+        return NavigationUI.onNavDestinationSelected(
+            item,
+            view!!.findNavController()
+        ) || super.onOptionsItemSelected(item)
     }
-    private fun setLayoutToLightMode(){
+
+    private fun setLayoutToLightMode() {
         binding.LytMain.background = ContextCompat.getDrawable(context!!, R.color.white)
     }
 
-    private fun setDialog(textView: TextView, ll:LinearLayout){
-        if(!darkMode){
+    private fun setDialog(textView: TextView, ll: LinearLayout) {
+        if (!darkMode) {
             ll.background = ContextCompat.getDrawable(context!!, R.color.white)
             textView.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
-        }
-        else{
+        } else {
             ll.background = ContextCompat.getDrawable(context!!, R.color.navyBlue)
             textView.setTextColor(ContextCompat.getColor(context!!, R.color.ivoryYellow))
         }
     }
-    private fun addCategory(category: Category){
+
+    private fun addCategory(category: Category) {
         val optionsLyt = LinearLayout(activity)
         val btnNewCategory = Button(activity)
-        val btnEdit=ImageButton(activity)
-        val btnRemove=ImageButton(activity)
-        val btnTest=ImageButton(activity)
-        val ll: LinearLayout.LayoutParams=LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.MATCH_PARENT)
+        val btnEdit = ImageButton(activity)
+        val btnRemove = ImageButton(activity)
+        val btnTest = ImageButton(activity)
+        val ll: LinearLayout.LayoutParams = LinearLayout.LayoutParams(
+            ViewGroup.LayoutParams.WRAP_CONTENT,
+            ViewGroup.LayoutParams.MATCH_PARENT
+        )
         optionsLyt.layoutParams = ll
         optionsLyt.orientation = LinearLayout.HORIZONTAL
         val mainLyt = ConstraintLayout(activity)
 
-        val params = LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.MATCH_PARENT)
+        val params = LinearLayout.LayoutParams(
+            ViewGroup.LayoutParams.WRAP_CONTENT,
+            ViewGroup.LayoutParams.MATCH_PARENT
+        )
         params.weight = 1f
 
         btnNewCategory.layoutParams = params
@@ -134,17 +144,17 @@ class CategoriesFragment : Fragment() {
         btnNewCategory.text = category.name
 
         btnNewCategory.gravity = Gravity.START
-        btnNewCategory.setOnClickListener{
-                view: View ->
-            Navigation.findNavController(view).navigate(CategoriesFragmentDirections.actionCategoriesFragmentToQuestionsFragment(category.id))
+        btnNewCategory.setOnClickListener { view: View ->
+            Navigation.findNavController(view).navigate(
+                CategoriesFragmentDirections.actionCategoriesFragmentToQuestionsFragment(category.id)
+            )
         }
-        if(!darkMode){
+        if (!darkMode) {
             btnNewCategory.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
             btnEdit.setImageResource(R.drawable.ic_edit_blue)
             btnRemove.setImageResource(R.drawable.ic_remove_blue)
             btnTest.setImageResource(R.drawable.ic_test_blue)
-        }
-        else{
+        } else {
             btnNewCategory.setTextColor(ContextCompat.getColor(context!!, R.color.ivoryYellow))
             btnEdit.setImageResource(R.drawable.ic_edit_yellow)
             btnRemove.setImageResource(R.drawable.ic_remove_yellow)
@@ -153,32 +163,32 @@ class CategoriesFragment : Fragment() {
         }
 
         btnEdit.layoutParams = params
-        btnEdit.background= ContextCompat.getDrawable(context!!, R.drawable.transparent)
-        btnEdit.setOnClickListener{
-            val mDialogView = LayoutInflater.from(activity).inflate(R.layout.add_subject_dialog,null)
+        btnEdit.background = ContextCompat.getDrawable(context!!, R.drawable.transparent)
+        btnEdit.setOnClickListener {
+            val mDialogView = View.inflate(activity, R.layout.add_dialog, null)
             val mBuilder = AlertDialog.Builder(activity).setView(mDialogView)
             val mAlertDialog = mBuilder.show()
             mDialogView.TxtName.setText(category.name)
             mDialogView.BtnAdd.text = getString(R.string.edit)
 
-            setDialog(mDialogView.TxtName,mDialogView.llMain)
-            mDialogView.BtnAdd.setOnClickListener{
+            setDialog(mDialogView.TxtName, mDialogView.llMain)
+            mDialogView.BtnAdd.setOnClickListener {
                 mAlertDialog.dismiss()
                 viewModel.editCategory(category, mDialogView.TxtName.text.toString())
             }
         }
 
         btnRemove.layoutParams = params
-        btnRemove.background= ContextCompat.getDrawable(context!!, R.drawable.transparent)
+        btnRemove.background = ContextCompat.getDrawable(context!!, R.drawable.transparent)
         btnRemove.setOnClickListener {
             val mDialogView =
-                LayoutInflater.from(activity).inflate(R.layout.remove_dialog, null)
+                View.inflate(activity, R.layout.remove_dialog, null)
             val mBuilder =
                 AlertDialog.Builder(activity).setView(mDialogView)
             val mAlertDialog = mBuilder.show()
-            mDialogView.txtMessage.text = getString(R.string.remove_dalog) + category.name + "?"
+            mDialogView.txtMessage.text = getString(R.string.remove_dialog, category.name)
 
-            setDialog(mDialogView.txtMessage,mDialogView.LlMainRemove)
+            setDialog(mDialogView.txtMessage, mDialogView.LlMainRemove)
             mDialogView.btnRemove.setOnClickListener {
                 mAlertDialog.dismiss()
                 viewModel.removeCategory(category)
@@ -189,39 +199,64 @@ class CategoriesFragment : Fragment() {
         }
 
         btnTest.layoutParams = params
-        btnTest.background= ContextCompat.getDrawable(context!!, R.drawable.transparent)
-        btnTest.setOnClickListener{
-                view: View ->
-            Navigation.findNavController(view).navigate(CategoriesFragmentDirections.actionCategoriesFragmentToNavTest(category.subjectId, category.id))
+        btnTest.background = ContextCompat.getDrawable(context!!, R.drawable.transparent)
+        btnTest.setOnClickListener { view: View ->
+            Navigation.findNavController(view).navigate(
+                CategoriesFragmentDirections.actionCategoriesFragmentToNavTest(
+                    category.subjectId,
+                    category.id
+                )
+            )
         }
 
         optionsLyt.addView(btnEdit)
         optionsLyt.addView(btnRemove)
         optionsLyt.addView(btnTest)
-        if(category.name.length >27){
+        if (category.name.length > 27) {
             val displayMetrics = DisplayMetrics()
             (context as Activity).windowManager
                 .defaultDisplay
                 .getMetrics(displayMetrics)
-            val param = LinearLayout.LayoutParams((activity as MainActivity).dpToPx(260),
+            val param = LinearLayout.LayoutParams(
+                (activity as MainActivity).dpToPx(260),
                 ViewGroup.LayoutParams.MATCH_PARENT
             )
             btnNewCategory.layoutParams = param
         }
 
-        mainLyt.setId(View.generateViewId())
-        btnNewCategory.setId(View.generateViewId())
-        optionsLyt.setId(View.generateViewId())
+        mainLyt.id = View.generateViewId()
+        btnNewCategory.id = View.generateViewId()
+        optionsLyt.id = View.generateViewId()
 
         mainLyt.addView(btnNewCategory)
         mainLyt.addView(optionsLyt)
         val set = ConstraintSet()
         set.clone(mainLyt)
-        set.connect(btnNewCategory.id, ConstraintSet.LEFT, ConstraintSet.PARENT_ID, ConstraintSet.LEFT)
-        set.connect(btnNewCategory.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP)
-        set.connect(optionsLyt.id, ConstraintSet.RIGHT, ConstraintSet.PARENT_ID, ConstraintSet.RIGHT)
+        set.connect(
+            btnNewCategory.id,
+            ConstraintSet.LEFT,
+            ConstraintSet.PARENT_ID,
+            ConstraintSet.LEFT
+        )
+        set.connect(
+            btnNewCategory.id,
+            ConstraintSet.TOP,
+            ConstraintSet.PARENT_ID,
+            ConstraintSet.TOP
+        )
+        set.connect(
+            optionsLyt.id,
+            ConstraintSet.RIGHT,
+            ConstraintSet.PARENT_ID,
+            ConstraintSet.RIGHT
+        )
         set.connect(optionsLyt.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP)
-        set.connect(optionsLyt.id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM)
+        set.connect(
+            optionsLyt.id,
+            ConstraintSet.BOTTOM,
+            ConstraintSet.PARENT_ID,
+            ConstraintSet.BOTTOM
+        )
         set.applyTo(mainLyt)
         binding.llMain.addView(mainLyt)
 

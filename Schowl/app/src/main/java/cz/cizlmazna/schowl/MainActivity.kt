@@ -2,7 +2,6 @@ package cz.cizlmazna.schowl
 
 import android.os.Bundle
 import android.util.DisplayMetrics
-import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.Toolbar
@@ -17,17 +16,17 @@ import com.google.android.material.navigation.NavigationView
 import cz.cizlmazna.schowl.databinding.ActivityMainBinding
 import kotlin.math.roundToInt
 
-public class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
-    private var Darkmode:Boolean = true
     private val topLevelDestinations = setOf(
         R.id.nav_test, R.id.nav_subjects, R.id.nav_settings, R.id.nav_about
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this,R.layout.activity_main)
+        val binding =
+            DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
 
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
@@ -51,6 +50,7 @@ public class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
+
     override fun onBackPressed() {
 
         val navController = findNavController(R.id.nav_host_fragment)
@@ -61,12 +61,14 @@ public class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun setDarkMode(darkmode:Boolean){
-        (application as MainApplicationClass).setDarkMode(darkmode)
+    fun setDarkMode(darkMode: Boolean) {
+        (application as MainApplicationClass).setDarkMode(darkMode)
     }
-    fun getDarkMode():Boolean{
+
+    fun getDarkMode(): Boolean {
         return (application as MainApplicationClass).getDarkMode()
     }
+
     fun dpToPx(dp: Int): Int {
         val displayMetrics = this.resources.displayMetrics
         return (dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT)).roundToInt()

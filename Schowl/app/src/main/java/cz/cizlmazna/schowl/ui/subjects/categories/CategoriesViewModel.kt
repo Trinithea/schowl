@@ -25,7 +25,7 @@ class CategoriesViewModel(
         }
     }
 
-    private suspend fun getSubject(subjectId: Long){
+    private suspend fun getSubject(subjectId: Long) {
         withContext(Dispatchers.IO) {
             subject = database.getSubject(subjectId)
         }

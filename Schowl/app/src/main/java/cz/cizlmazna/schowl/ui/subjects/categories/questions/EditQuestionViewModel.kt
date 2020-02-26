@@ -43,11 +43,11 @@ class EditQuestionViewModel(
         }
     }
 
-    private suspend fun getData(categoryId: Long): Question?{
+    private suspend fun getData(categoryId: Long): Question? {
         return withContext(Dispatchers.IO) {
             category = database.getCategory(categoryId)
             if (questionId != -1L) {
-                 return@withContext database.getQuestion(questionId)
+                return@withContext database.getQuestion(questionId)
             }
             null
         }
@@ -56,7 +56,14 @@ class EditQuestionViewModel(
     fun confirm(questionText: String, answerText: String, difficulty: Byte) {
         if (question.value == null) {
             uiScope.launch {
-                insert(Question(questionText = questionText, answerText = answerText, difficulty = difficulty, categoryId = category.id))
+                insert(
+                    Question(
+                        questionText = questionText,
+                        answerText = answerText,
+                        difficulty = difficulty,
+                        categoryId = category.id
+                    )
+                )
             }
         } else {
             question.value!!.questionText = questionText

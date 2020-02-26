@@ -5,7 +5,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
-import cz.cizlmazna.schowl.R
 import cz.cizlmazna.schowl.database.Category
 import cz.cizlmazna.schowl.database.SchowlDatabaseDao
 import cz.cizlmazna.schowl.database.Subject
@@ -30,6 +29,7 @@ class TestSetupViewModel(
      * value == null => no subject selected
      */
     private var selectedSubject = MutableLiveData<Subject>()
+
     fun getSelectedSubject(): LiveData<Subject> {
         return selectedSubject
     }
@@ -60,7 +60,7 @@ class TestSetupViewModel(
     }
 
     val categorySelectionVisibility: LiveData<Int> = Transformations.map(allCategoriesSelected) {
-        when(it) {
+        when (it) {
             false -> View.VISIBLE
             true -> View.GONE
         }
@@ -100,6 +100,7 @@ class TestSetupViewModel(
     fun onSetMinDifficulty(difficulty: Int) {
         minDifficulty.value = difficulty
     }
+
     private val maxDifficulty = MutableLiveData<Int>(DEFAULT_MAX_DIFFICULTY)
 
     fun getMaxDifficulty(): LiveData<Int> {
@@ -109,6 +110,7 @@ class TestSetupViewModel(
     fun onSetMaxDifficulty(difficulty: Int) {
         maxDifficulty.value = difficulty
     }
+
     private val navigateToTest = MutableLiveData<Boolean>(false)
     fun getNavigateToTest(): LiveData<Boolean> {
         return navigateToTest
