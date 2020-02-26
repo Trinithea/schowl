@@ -101,6 +101,18 @@ class TestSetupFragment : Fragment() {
         setMinSeekBarListener(binding.SkbMinDif)
         setMaxSeekBarListener(binding.SkbMaxDif)
 
+        viewModel.getErrorMessage().observe(viewLifecycleOwner, Observer {
+            if(it != null) {
+                val text = when(it) {
+                    TestSetupViewModel.ErrorMessage.NO_SUBJECT_SELECTED -> getString(R.string.no_subject_selected)
+                    TestSetupViewModel.ErrorMessage.NO_CATEGORIES_SELECTED -> getString(R.string.no_categories_selected)
+                    TestSetupViewModel.ErrorMessage.NO_QUESTIONS_IN_CATEGORIES -> getString(R.string.no_questions_in_categories)
+                }
+                Toast.makeText(activity, text, Toast.LENGTH_SHORT).show()
+                viewModel.doneShowingErrorMessage()
+            }
+        })
+
         viewModel.getNavigateToTest().observe(viewLifecycleOwner, Observer {
             if (it == true) {
                 findNavController().navigate(TestSetupFragmentDirections.actionTestSetupFragmentToTestFragment(viewModel.getCategoryIds(), viewModel.getMinDifficulty().value!!, viewModel.getMaxDifficulty().value!!))
@@ -203,7 +215,6 @@ class TestSetupFragment : Fragment() {
         }
 
         viewModel.getCategoriesChecked().observe(viewLifecycleOwner, Observer {
-//            Log.i("TestSetupFragment", "category ${category.name} observing one check ${it[category.id]}")
             // TODO every checkbox reacts on one check change
             // observes only once
             if (it[category.id] != null)

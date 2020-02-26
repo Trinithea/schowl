@@ -51,5 +51,8 @@
     <string name="test_completed">TEST COMPLETED!</string>
     <string name="let_s_do_this_again">LET\'S DO THIS AGAIN</string>
     <string name="light_mode">LIGHT MODE</string>
+    <string name="no_subject_selected">No subject selected.</string>
+    <string name="no_categories_selected">No categories selected.</string>
+    <string name="no_questions_in_categories">No questions in selected categories.</string>
     <!--TODO: ilájs u should write here something about our great app -->
 </resources>

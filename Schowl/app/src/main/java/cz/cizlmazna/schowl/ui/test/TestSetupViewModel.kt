@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import cz.cizlmazna.schowl.R
 import cz.cizlmazna.schowl.database.Category
 import cz.cizlmazna.schowl.database.SchowlDatabaseDao
 import cz.cizlmazna.schowl.database.Subject
@@ -26,7 +27,7 @@ class TestSetupViewModel(
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
     /**
-     * null = no subject selected
+     * value == null => no subject selected
      */
     private var selectedSubject = MutableLiveData<Subject>()
     fun getSelectedSubject(): LiveData<Subject> {
@@ -48,7 +49,6 @@ class TestSetupViewModel(
         }
     }
 
-
     private val subjects = database.getAllSubjects()
     fun getSubjects(): LiveData<List<Subject>> {
         return subjects
@@ -56,9 +56,9 @@ class TestSetupViewModel(
 
     private val allCategoriesSelected = MutableLiveData<Boolean>(DEFAULT_ALL_CATEGORIES_SELECTED)
     fun getAllCategoriesSelected(): LiveData<Boolean> {
-
         return allCategoriesSelected
     }
+
     val categorySelectionVisibility: LiveData<Int> = Transformations.map(allCategoriesSelected) {
         when(it) {
             false -> View.VISIBLE
@@ -118,9 +118,26 @@ class TestSetupViewModel(
         navigateToTest.value = false
     }
 
+    enum class ErrorMessage {
+        NO_SUBJECT_SELECTED, NO_CATEGORIES_SELECTED, NO_QUESTIONS_IN_CATEGORIES
+    }
+
+    private val errorMessage = MutableLiveData<ErrorMessage>()
+    fun getErrorMessage(): LiveData<ErrorMessage> {
+        return errorMessage
+    }
+
+    fun doneShowingErrorMessage() {
+        errorMessage.value = null
+    }
+
     private val categoryIds: MutableList<Long> = mutableListOf()
 
     fun onConfirm() {
+        if (selectedSubject.value == null) {
+            errorMessage.value = ErrorMessage.NO_SUBJECT_SELECTED
+            return
+        }
         categoryIds.clear()
         if (allCategoriesSelected.value!!) {
             for (category in selectedSubjectCategories.value!!) {
@@ -133,7 +150,29 @@ class TestSetupViewModel(
                 }
             }
         }
-        navigateToTest.value = true
+        if (categoryIds.size == 0) {
+            errorMessage.value = ErrorMessage.NO_CATEGORIES_SELECTED
+            return
+        }
+
+        var questionsCount = 0
+        uiScope.launch {
+            for (categoryId in categoryIds) {
+                questionsCount += getQuestionsCount(categoryId)
+            }
+            if (questionsCount == 0) {
+                errorMessage.value = ErrorMessage.NO_QUESTIONS_IN_CATEGORIES
+                return@launch
+            }
+
+            navigateToTest.value = true
+        }
+    }
+
+    private suspend fun getQuestionsCount(categoryId: Long): Int {
+        return withContext(Dispatchers.IO) {
+            database.getQuestionsRaw(categoryId).size
+        }
     }
 
     fun getCategoryIds(): LongArray {

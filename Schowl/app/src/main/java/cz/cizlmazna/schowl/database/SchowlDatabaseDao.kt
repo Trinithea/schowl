@@ -59,4 +59,7 @@ interface SchowlDatabaseDao {
 
     @Query("SELECT * FROM subjects_table LIMIT 1")
     fun getFirstSubject(): Subject
+
+    @Query("SELECT * FROM questions_table WHERE category_id = :categoryId")
+    fun getQuestionsRaw(categoryId: Long): List<Question>
 }
