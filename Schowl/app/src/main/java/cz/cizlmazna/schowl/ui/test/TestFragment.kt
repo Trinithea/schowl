@@ -118,4 +118,9 @@ class TestFragment : Fragment() {
         binding.LytMain.background = ContextCompat.getDrawable(context!!, R.color.white)
         binding.TxtAnswer.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
     }
+
+    override fun onStop() {
+        super.onStop()
+        (activity as MainActivity).hideKeyboard(binding.TxtAnswer)
+    }
 }

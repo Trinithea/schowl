@@ -17,10 +17,6 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
 import cz.cizlmazna.schowl.databinding.ActivityMainBinding
 import kotlin.math.roundToInt
-import android.content.Context.INPUT_METHOD_SERVICE
-import androidx.core.app.ComponentActivity.ExtraData
-import androidx.core.content.ContextCompat.getSystemService
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import android.view.inputmethod.InputMethodManager
 
 
@@ -82,8 +78,8 @@ class MainActivity : AppCompatActivity() {
         return (dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT)).roundToInt()
     }
 
-    fun hideKeyboard(editText:EditText){
-        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm!!.hideSoftInputFromWindow(editText.windowToken, 0)
+    fun hideKeyboard(editText: EditText){
+        val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(editText.windowToken, 0)
     }
 }

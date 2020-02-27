@@ -55,8 +55,6 @@ class EditQuestionFragment : Fragment() {
                 binding.TxtAnswer.text.toString(),
                 binding.SbrDifficulty.progress.toByte()
             )
-            (activity as MainActivity).hideKeyboard(binding.TxtAnswer)
-            (activity as MainActivity).hideKeyboard(binding.TxtQuestion)
             Navigation.findNavController(view).popBackStack()
         }
 
@@ -91,5 +89,11 @@ class EditQuestionFragment : Fragment() {
         binding.LblSolution.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
         binding.TxtAnswer.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
         binding.TxtQuestion.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
+    }
+
+    override fun onStop() {
+        super.onStop()
+        (activity as MainActivity).hideKeyboard(binding.TxtQuestion)
+        (activity as MainActivity).hideKeyboard(binding.TxtAnswer)
     }
 }
