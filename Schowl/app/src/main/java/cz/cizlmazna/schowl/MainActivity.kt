@@ -1,7 +1,9 @@
 package cz.cizlmazna.schowl
 
+import android.content.Context
 import android.os.Bundle
 import android.util.DisplayMetrics
+import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.Toolbar
@@ -15,6 +17,12 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
 import cz.cizlmazna.schowl.databinding.ActivityMainBinding
 import kotlin.math.roundToInt
+import android.content.Context.INPUT_METHOD_SERVICE
+import androidx.core.app.ComponentActivity.ExtraData
+import androidx.core.content.ContextCompat.getSystemService
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import android.view.inputmethod.InputMethodManager
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -72,5 +80,10 @@ class MainActivity : AppCompatActivity() {
     fun dpToPx(dp: Int): Int {
         val displayMetrics = this.resources.displayMetrics
         return (dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT)).roundToInt()
+    }
+
+    fun hideKeyboard(editText:EditText){
+        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm!!.hideSoftInputFromWindow(editText.windowToken, 0)
     }
 }

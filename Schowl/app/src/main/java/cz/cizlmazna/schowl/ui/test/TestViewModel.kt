@@ -45,6 +45,9 @@ class TestViewModel(
     }
 
     private val showSolution = MutableLiveData<Boolean>(false)
+    fun getShowSolution(): LiveData<Boolean> {
+        return showSolution
+    }
 
     val showSolutionButtonVisible = Transformations.map(showSolution) {
         when (it) {

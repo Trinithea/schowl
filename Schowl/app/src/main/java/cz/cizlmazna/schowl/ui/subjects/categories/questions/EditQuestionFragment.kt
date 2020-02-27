@@ -55,6 +55,8 @@ class EditQuestionFragment : Fragment() {
                 binding.TxtAnswer.text.toString(),
                 binding.SbrDifficulty.progress.toByte()
             )
+            (activity as MainActivity).hideKeyboard(binding.TxtAnswer)
+            (activity as MainActivity).hideKeyboard(binding.TxtQuestion)
             Navigation.findNavController(view).popBackStack()
         }
 
@@ -67,6 +69,8 @@ class EditQuestionFragment : Fragment() {
     private fun setSeekBarListener(label: TextView, seekBar: SeekBar) {
         seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                (activity as MainActivity).hideKeyboard(binding.TxtAnswer)
+                (activity as MainActivity).hideKeyboard(binding.TxtQuestion)
                 label.text = progress.toString()
             }
 

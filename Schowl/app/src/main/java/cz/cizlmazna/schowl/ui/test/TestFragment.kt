@@ -58,8 +58,15 @@ class TestFragment : Fragment() {
             setLayoutToLightMode()
         }
 
+        viewModel.getShowSolution().observe(viewLifecycleOwner, Observer {
+            if (it) {
+                (activity as MainActivity).hideKeyboard(binding.TxtAnswer)
+            }
+        })
+
         viewModel.getQuestionChange().observe(viewLifecycleOwner, Observer {
             if (it) {
+                (activity as MainActivity).hideKeyboard(binding.TxtAnswer)
                 binding.TxtAnswer.setText("")
                 viewModel.doneChangingQuestion()
             }
@@ -67,6 +74,7 @@ class TestFragment : Fragment() {
 
         viewModel.getNavigateToEditQuestion().observe(viewLifecycleOwner, Observer {
             if (it == true) {
+                (activity as MainActivity).hideKeyboard(binding.TxtAnswer)
                 findNavController().navigate(
                     TestFragmentDirections.actionTestFragmentToEditQuestionFragment(
                         viewModel.getCurrentQuestionCategoryId(),
