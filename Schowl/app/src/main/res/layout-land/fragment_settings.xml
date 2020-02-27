@@ -27,7 +27,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_settings_background_dark_3" />
+                app:srcCompat="@drawable/ic_settings_background_dark_3_land" />
 
             <Switch
                 android:id="@+id/SwitchDarkMode"
