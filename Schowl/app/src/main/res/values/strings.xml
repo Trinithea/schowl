@@ -51,7 +51,7 @@
     <string name="all_categories">All categories</string>
     <string name="choose_categories">CHOOSE CATEGORIES:</string>
     <string name="test_completed">TEST COMPLETED!</string>
-    <string name="let_s_do_this_again">LET\'S DO THIS AGAIN</string>
+    <string name="let_s_do_this_again">GO TO TEST SETUP</string>
     <string name="light_mode">LIGHT MODE</string>
     <string name="no_subject_selected">No subject selected.</string>
     <string name="no_categories_selected">No categories selected.</string>
