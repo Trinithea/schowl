@@ -80,7 +80,7 @@
                                 android:foregroundGravity="center"
                                 android:gravity="start|top"
                                 android:inputType="textMultiLine"
-                                android:text="@{editQuestionViewModel.questionText}"
+                                android:text="@{editQuestionViewModel.question.questionText}"
                                 android:textColor="@color/ivoryYellow"
                                 android:textSize="14sp" />
                         </LinearLayout>
@@ -118,7 +118,7 @@
                                 android:foregroundGravity="center"
                                 android:gravity="start|top"
                                 android:inputType="textMultiLine"
-                                android:text="@{editQuestionViewModel.answerText}"
+                                android:text="@{editQuestionViewModel.question.answerText}"
                                 android:textColor="@color/ivoryYellow"
                                 android:textSize="14sp" />
                         </LinearLayout>
@@ -159,7 +159,7 @@
                                     android:layout_width="193dp"
                                     android:layout_height="match_parent"
                                     android:max="10"
-                                    android:progress="@{editQuestionViewModel.difficulty}" />
+                                    android:progress="@{editQuestionViewModel.question.difficulty}" />
 
                                 <TextView
                                     android:id="@+id/LblDifficulty"

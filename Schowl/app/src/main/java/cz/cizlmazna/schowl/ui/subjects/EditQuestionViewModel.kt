@@ -21,20 +21,11 @@ class EditQuestionViewModel(
 
     private lateinit var category: Category
 
-    private var question = MutableLiveData<Question?>()
+    private var question = MutableLiveData<Question>()
+    fun getQuestion(): LiveData<Question> {
+        return question
+    }
     private var questionSet = false
-
-    val questionText: LiveData<String> = Transformations.map(question) {
-        it?.questionText
-    }
-
-    val answerText: LiveData<String> = Transformations.map(question) {
-        it?.answerText
-    }
-
-    val difficulty: LiveData<Int> = Transformations.map(question) {
-        it?.difficulty?.toInt()
-    }
 
     init {
         uiScope.launch {
