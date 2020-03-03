@@ -1,4 +1,4 @@
-package cz.cizlmazna.schowl.ui.subjects.categories
+package cz.cizlmazna.schowl.ui.subjects
 
 
 import android.app.Activity
@@ -26,6 +26,8 @@ import cz.cizlmazna.schowl.R
 import cz.cizlmazna.schowl.database.Category
 import cz.cizlmazna.schowl.database.SchowlDatabase
 import cz.cizlmazna.schowl.databinding.FragmentCategoriesBinding
+import cz.cizlmazna.schowl.ui.subjects.CategoriesFragmentArgs
+import cz.cizlmazna.schowl.ui.subjects.CategoriesFragmentDirections
 import kotlinx.android.synthetic.main.add_dialog.view.*
 import kotlinx.android.synthetic.main.fragment_subjects.*
 import kotlinx.android.synthetic.main.remove_dialog.view.*
@@ -47,11 +49,18 @@ class CategoriesFragment : Fragment() {
 
         val application = requireNotNull(this.activity).application
 
-        val arguments = CategoriesFragmentArgs.fromBundle(arguments!!)
+        val arguments =
+            CategoriesFragmentArgs.fromBundle(
+                arguments!!
+            )
 
         val databaseDao = SchowlDatabase.getInstance(application).schowlDatabaseDao
 
-        val viewModelFactory = CategoriesViewModelFactory(databaseDao, arguments.subjectId)
+        val viewModelFactory =
+            CategoriesViewModelFactory(
+                databaseDao,
+                arguments.subjectId
+            )
 
         viewModel = ViewModelProvider(this, viewModelFactory).get(CategoriesViewModel::class.java)
 
@@ -146,7 +155,9 @@ class CategoriesFragment : Fragment() {
         btnNewCategory.gravity = Gravity.START
         btnNewCategory.setOnClickListener { view: View ->
             Navigation.findNavController(view).navigate(
-                CategoriesFragmentDirections.actionCategoriesFragmentToQuestionsFragment(category.id)
+                CategoriesFragmentDirections.actionCategoriesFragmentToQuestionsFragment(
+                    category.id
+                )
             )
         }
         if (!darkMode) {

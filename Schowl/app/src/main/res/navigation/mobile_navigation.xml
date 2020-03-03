@@ -59,7 +59,7 @@
     </fragment>
     <fragment
         android:id="@+id/categoriesFragment"
-        android:name="cz.cizlmazna.schowl.ui.subjects.categories.CategoriesFragment"
+        android:name="cz.cizlmazna.schowl.ui.subjects.CategoriesFragment"
         android:label="CategoriesFragment">
         <argument
             android:name="subjectId"
@@ -75,7 +75,7 @@
     </fragment>
     <fragment
         android:id="@+id/questionsFragment"
-        android:name="cz.cizlmazna.schowl.ui.subjects.categories.questions.QuestionsFragment"
+        android:name="cz.cizlmazna.schowl.ui.subjects.QuestionsFragment"
         android:label="QuestionsFragment">
         <action
             android:id="@+id/action_questionsFragment_to_editQuestionFragment"
@@ -86,7 +86,7 @@
     </fragment>
     <fragment
         android:id="@+id/editQuestionFragment"
-        android:name="cz.cizlmazna.schowl.ui.subjects.categories.questions.EditQuestionFragment"
+        android:name="cz.cizlmazna.schowl.ui.subjects.EditQuestionFragment"
         android:label="EditQuestionFragment">
         <argument
             android:name="categoryId"

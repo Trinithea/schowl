@@ -1,4 +1,4 @@
-package cz.cizlmazna.schowl.ui.subjects.categories.questions
+package cz.cizlmazna.schowl.ui.subjects
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -12,7 +12,10 @@ class QuestionsViewModelFactory(
     @Suppress("unchecked_cast")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(QuestionsViewModel::class.java)) {
-            return QuestionsViewModel(databaseDao, categoryId) as T
+            return QuestionsViewModel(
+                databaseDao,
+                categoryId
+            ) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

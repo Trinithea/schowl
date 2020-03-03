@@ -1,4 +1,4 @@
-package cz.cizlmazna.schowl.ui.subjects.categories
+package cz.cizlmazna.schowl.ui.subjects
 
 import androidx.lifecycle.ViewModel
 import cz.cizlmazna.schowl.database.Category

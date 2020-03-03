@@ -1,18 +1,23 @@
-package cz.cizlmazna.schowl.ui.subjects.categories
+package cz.cizlmazna.schowl.ui.subjects
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import cz.cizlmazna.schowl.database.SchowlDatabaseDao
 
-class CategoriesViewModelFactory(
+class EditQuestionViewModelFactory(
     private val databaseDao: SchowlDatabaseDao,
-    private val subjectId: Long
+    private val categoryId: Long,
+    private val questionId: Long
 ) : ViewModelProvider.Factory {
 
     @Suppress("unchecked_cast")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(CategoriesViewModel::class.java)) {
-            return CategoriesViewModel(databaseDao, subjectId) as T
+        if (modelClass.isAssignableFrom(EditQuestionViewModel::class.java)) {
+            return EditQuestionViewModel(
+                databaseDao,
+                categoryId,
+                questionId
+            ) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

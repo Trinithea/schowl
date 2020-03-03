@@ -1,4 +1,4 @@
-package cz.cizlmazna.schowl.ui.subjects.categories.questions
+package cz.cizlmazna.schowl.ui.subjects
 
 
 import android.app.Activity
@@ -26,6 +26,8 @@ import cz.cizlmazna.schowl.R
 import cz.cizlmazna.schowl.database.Question
 import cz.cizlmazna.schowl.database.SchowlDatabase
 import cz.cizlmazna.schowl.databinding.FragmentQuestionsBinding
+import cz.cizlmazna.schowl.ui.subjects.QuestionsFragmentArgs
+import cz.cizlmazna.schowl.ui.subjects.QuestionsFragmentDirections
 import kotlinx.android.synthetic.main.remove_dialog.view.*
 
 
@@ -45,11 +47,18 @@ class QuestionsFragment : Fragment() {
 
         val application = requireNotNull(this.activity).application
 
-        val arguments = QuestionsFragmentArgs.fromBundle(arguments!!)
+        val arguments =
+            QuestionsFragmentArgs.fromBundle(
+                arguments!!
+            )
 
         val databaseDao = SchowlDatabase.getInstance(application).schowlDatabaseDao
 
-        val viewModelFactory = QuestionsViewModelFactory(databaseDao, arguments.categoryId)
+        val viewModelFactory =
+            QuestionsViewModelFactory(
+                databaseDao,
+                arguments.categoryId
+            )
 
         viewModel = ViewModelProvider(this, viewModelFactory).get(QuestionsViewModel::class.java)
 

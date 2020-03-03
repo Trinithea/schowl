@@ -1,4 +1,4 @@
-package cz.cizlmazna.schowl.ui.subjects.categories.questions
+package cz.cizlmazna.schowl.ui.subjects
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -22,6 +22,7 @@ class EditQuestionViewModel(
     private lateinit var category: Category
 
     private var question = MutableLiveData<Question?>()
+    private var questionSet = false
 
     val questionText: LiveData<String> = Transformations.map(question) {
         it?.questionText
@@ -35,11 +36,10 @@ class EditQuestionViewModel(
         it?.difficulty?.toInt()
     }
 
-    val questions = database.getQuestions(categoryId)
-
     init {
         uiScope.launch {
             question.value = getData(categoryId)
+            questionSet = question.value != null
         }
     }
 
@@ -53,8 +53,22 @@ class EditQuestionViewModel(
         }
     }
 
+    fun saveQuestion(questionText: String, answerText: String, difficulty: Byte) {
+        val id: Long
+        val categoryId: Long
+        if (questionSet) {
+            id = question.value!!.id
+            categoryId = question.value!!.categoryId
+        } else {
+            id = -1
+            categoryId = -1
+        }
+
+        question.value = Question(id, questionText, answerText, difficulty, categoryId)
+    }
+
     fun confirm(questionText: String, answerText: String, difficulty: Byte) {
-        if (question.value == null) {
+        if (!questionSet) {
             uiScope.launch {
                 insert(
                     Question(

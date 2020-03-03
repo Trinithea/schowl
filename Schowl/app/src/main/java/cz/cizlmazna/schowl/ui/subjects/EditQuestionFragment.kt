@@ -1,4 +1,4 @@
-package cz.cizlmazna.schowl.ui.subjects.categories.questions
+package cz.cizlmazna.schowl.ui.subjects
 
 
 import android.os.Bundle
@@ -17,6 +17,7 @@ import cz.cizlmazna.schowl.MainActivity
 import cz.cizlmazna.schowl.R
 import cz.cizlmazna.schowl.database.SchowlDatabase
 import cz.cizlmazna.schowl.databinding.FragmentEditQuestionBinding
+import cz.cizlmazna.schowl.ui.subjects.EditQuestionFragmentArgs
 
 class EditQuestionFragment : Fragment() {
 
@@ -35,12 +36,19 @@ class EditQuestionFragment : Fragment() {
 
         val application = requireNotNull(this.activity).application
 
-        val arguments = EditQuestionFragmentArgs.fromBundle(arguments!!)
+        val arguments =
+            EditQuestionFragmentArgs.fromBundle(
+                arguments!!
+            )
 
         val databaseDao = SchowlDatabase.getInstance(application).schowlDatabaseDao
 
         val viewModelFactory =
-            EditQuestionViewModelFactory(databaseDao, arguments.categoryId, arguments.questionId)
+            EditQuestionViewModelFactory(
+                databaseDao,
+                arguments.categoryId,
+                arguments.questionId
+            )
 
         viewModel = ViewModelProvider(this, viewModelFactory).get(EditQuestionViewModel::class.java)
 
@@ -48,6 +56,8 @@ class EditQuestionFragment : Fragment() {
         binding.lifecycleOwner = this
         setSeekBarListener(binding.LblDifficulty, binding.SbrDifficulty)
         (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.edit_question)
+
+//        binding.TxtQuestion.setOn
 
         binding.btnSent.setOnClickListener { view: View ->
             viewModel.confirm(
@@ -93,6 +103,11 @@ class EditQuestionFragment : Fragment() {
 
     override fun onStop() {
         super.onStop()
+        viewModel.saveQuestion(
+            binding.TxtQuestion.text.toString(),
+            binding.TxtAnswer.text.toString(),
+            binding.SbrDifficulty.progress.toByte()
+        )
         (activity as MainActivity).hideKeyboard(binding.TxtQuestion)
         (activity as MainActivity).hideKeyboard(binding.TxtAnswer)
     }
