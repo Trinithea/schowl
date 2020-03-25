@@ -1,6 +1,5 @@
 package cz.cizlmazna.schowl.ui.subjects
 
-
 import android.app.Activity
 import android.app.AlertDialog
 import android.os.Bundle
@@ -9,13 +8,13 @@ import android.view.*
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.LinearLayout
-import androidx.fragment.app.Fragment
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
@@ -25,10 +24,7 @@ import cz.cizlmazna.schowl.MainActivity
 import cz.cizlmazna.schowl.R
 import cz.cizlmazna.schowl.database.Question
 import cz.cizlmazna.schowl.databinding.FragmentQuestionsBinding
-import cz.cizlmazna.schowl.ui.subjects.QuestionsFragmentArgs
-import cz.cizlmazna.schowl.ui.subjects.QuestionsFragmentDirections
 import kotlinx.android.synthetic.main.remove_dialog.view.*
-
 
 class QuestionsFragment : Fragment() {
 
@@ -51,13 +47,8 @@ class QuestionsFragment : Fragment() {
                 arguments!!
             )
 
-        val viewModelFactory =
-            QuestionsViewModelFactory(
-                application,
-                arguments.categoryId
-            )
-
-        viewModel = ViewModelProvider(this, viewModelFactory).get(QuestionsViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(QuestionsViewModel::class.java)
+        viewModel.loadData(arguments.categoryId)
 
         (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.questions)
 

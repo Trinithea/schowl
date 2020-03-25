@@ -1,12 +1,16 @@
 package cz.cizlmazna.schowl.ui.subjects
 
 import android.app.Application
-import androidx.lifecycle.*
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import cz.cizlmazna.schowl.database.Category
 import cz.cizlmazna.schowl.database.Question
 import cz.cizlmazna.schowl.database.SchowlDatabase
-import cz.cizlmazna.schowl.database.SchowlDatabaseDao
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 class EditQuestionViewModel(
     application: Application,
@@ -30,18 +34,13 @@ class EditQuestionViewModel(
 
     init {
         uiScope.launch {
-            question.value = getData(categoryId)
-            questionSet = question.value != null
-        }
-    }
-
-    private suspend fun getData(categoryId: Long): Question? {
-        return withContext(Dispatchers.IO) {
             category = database.getCategory(categoryId)
-            if (questionId != -1L) {
-                return@withContext database.getQuestion(questionId)
+            question.value = if (questionId != -1L) {
+                database.getQuestion(questionId)
+            } else {
+                null
             }
-            null
+            questionSet = question.value != null
         }
     }
 
@@ -62,7 +61,7 @@ class EditQuestionViewModel(
     fun confirm(questionText: String, answerText: String, difficulty: Byte) {
         if (!questionSet) {
             uiScope.launch {
-                insert(
+                database.insertQuestion(
                     Question(
                         questionText = questionText,
                         answerText = answerText,
@@ -76,20 +75,8 @@ class EditQuestionViewModel(
             question.value!!.answerText = answerText
             question.value!!.difficulty = difficulty
             uiScope.launch {
-                update(question.value!!)
+                database.updateQuestion(question.value!!)
             }
-        }
-    }
-
-    private suspend fun insert(question: Question) {
-        withContext(Dispatchers.IO) {
-            database.insertQuestion(question)
-        }
-    }
-
-    private suspend fun update(question: Question) {
-        withContext(Dispatchers.IO) {
-            database.updateQuestion(question)
         }
     }
 

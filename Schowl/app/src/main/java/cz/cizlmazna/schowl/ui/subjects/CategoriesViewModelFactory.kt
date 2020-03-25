@@ -3,7 +3,6 @@ package cz.cizlmazna.schowl.ui.subjects
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import cz.cizlmazna.schowl.database.SchowlDatabaseDao
 
 class CategoriesViewModelFactory(
     private val application: Application,

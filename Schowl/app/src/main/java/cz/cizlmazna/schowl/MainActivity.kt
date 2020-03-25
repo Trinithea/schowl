@@ -19,7 +19,6 @@ import cz.cizlmazna.schowl.databinding.ActivityMainBinding
 import kotlin.math.roundToInt
 import android.view.inputmethod.InputMethodManager
 
-
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration

@@ -1,6 +1,5 @@
 package cz.cizlmazna.schowl.ui.settings
 
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +11,6 @@ import androidx.fragment.app.Fragment
 import cz.cizlmazna.schowl.MainActivity
 import cz.cizlmazna.schowl.R
 import cz.cizlmazna.schowl.databinding.FragmentSettingsBinding
-
 
 class SettingsFragment : Fragment() {
 

@@ -21,7 +21,6 @@ import cz.cizlmazna.schowl.database.Category
 import cz.cizlmazna.schowl.database.Subject
 import cz.cizlmazna.schowl.databinding.FragmentTestSetupBinding
 
-
 class TestSetupFragment : Fragment() {
 
     private lateinit var binding: FragmentTestSetupBinding
@@ -60,7 +59,7 @@ class TestSetupFragment : Fragment() {
 
         viewModel.getSubjects().observe(viewLifecycleOwner, Observer {
             var dataAdapter =
-                ArrayAdapter<Subject>(context!!, android.R.layout.simple_spinner_item, it)
+                ArrayAdapter(context!!, android.R.layout.simple_spinner_item, it)
             if ((activity as MainActivity).getDarkMode()) {
                 dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             } else {
@@ -72,7 +71,7 @@ class TestSetupFragment : Fragment() {
 
         viewModel.getSelectedSubject().observe(viewLifecycleOwner, Observer {
             if (viewModel.getSubjects().value != null) {
-                val dataAdapter = ArrayAdapter<Subject>(
+                val dataAdapter = ArrayAdapter(
                     context!!,
                     android.R.layout.simple_spinner_item,
                     viewModel.getSubjects().value!!

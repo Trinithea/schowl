@@ -2,15 +2,18 @@ package cz.cizlmazna.schowl.ui.subjects
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import cz.cizlmazna.schowl.database.Category
+import androidx.lifecycle.LiveData
 import cz.cizlmazna.schowl.database.Question
 import cz.cizlmazna.schowl.database.SchowlDatabase
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 class QuestionsViewModel(
-    application: Application,
-    categoryId: Long
+    application: Application
 ) : AndroidViewModel(application) {
+    private var categoryId: Long = -1L
 
     private val database = SchowlDatabase.getInstance(application).schowlDatabaseDao
 
@@ -18,30 +21,18 @@ class QuestionsViewModel(
 
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-    private lateinit var category: Category
-
-    val questions = database.getQuestions(categoryId)
-
-    init {
-        uiScope.launch {
-            getCategory(categoryId)
-        }
+    val questions: LiveData<List<Question>> by lazy {
+        return@lazy database.getQuestions(categoryId)
     }
 
-    private suspend fun getCategory(categoryId: Long) {
-        withContext(Dispatchers.IO) {
-            category = database.getCategory(categoryId)
+    fun loadData(categoryId: Long) {
+        if (this.categoryId == -1L) {
+            this.categoryId = categoryId
         }
     }
 
     fun removeQuestion(question: Question) {
         uiScope.launch {
-            delete(question)
-        }
-    }
-
-    private suspend fun delete(question: Question) {
-        withContext(Dispatchers.IO) {
             database.deleteQuestion(question)
         }
     }

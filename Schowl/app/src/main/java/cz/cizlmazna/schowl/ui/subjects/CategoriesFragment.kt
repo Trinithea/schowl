@@ -1,6 +1,5 @@
 package cz.cizlmazna.schowl.ui.subjects
 
-
 import android.app.Activity
 import android.app.AlertDialog
 import android.os.Bundle
@@ -24,10 +23,7 @@ import androidx.navigation.ui.NavigationUI
 import cz.cizlmazna.schowl.MainActivity
 import cz.cizlmazna.schowl.R
 import cz.cizlmazna.schowl.database.Category
-import cz.cizlmazna.schowl.database.SchowlDatabase
 import cz.cizlmazna.schowl.databinding.FragmentCategoriesBinding
-import cz.cizlmazna.schowl.ui.subjects.CategoriesFragmentArgs
-import cz.cizlmazna.schowl.ui.subjects.CategoriesFragmentDirections
 import kotlinx.android.synthetic.main.add_dialog.view.*
 import kotlinx.android.synthetic.main.fragment_subjects.*
 import kotlinx.android.synthetic.main.remove_dialog.view.*

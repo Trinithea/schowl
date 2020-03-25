@@ -47,7 +47,7 @@ class TestViewModel(
         it.answerText
     }
 
-    private val showSolution = MutableLiveData<Boolean>(false)
+    private val showSolution = MutableLiveData(false)
     fun getShowSolution(): LiveData<Boolean> {
         return showSolution
     }
@@ -70,12 +70,12 @@ class TestViewModel(
         showSolution.value = true
     }
 
-    private val testOver = MutableLiveData<Boolean>(false)
+    private val testOver = MutableLiveData(false)
     fun getTestOver(): LiveData<Boolean> {
         return testOver
     }
 
-    private val questionChange = MutableLiveData<Boolean>(false)
+    private val questionChange = MutableLiveData(false)
     fun getQuestionChange(): LiveData<Boolean> {
         return questionChange
     }
@@ -95,7 +95,7 @@ class TestViewModel(
         }
     }
 
-    private val navigateToEditQuestion = MutableLiveData<Boolean>(false)
+    private val navigateToEditQuestion = MutableLiveData(false)
     fun getNavigateToEditQuestion(): LiveData<Boolean> {
         return navigateToEditQuestion
     }
@@ -114,20 +114,10 @@ class TestViewModel(
     init {
         uiScope.launch {
             for (categoryId in categoryIds) {
-                testedQuestions.addAll(getQuestions(categoryId, minDifficulty, maxDifficulty))
+                testedQuestions.addAll(database.getQuestionsLimited(categoryId, minDifficulty.toByte(), maxDifficulty.toByte()))
             }
             testedQuestions.shuffle()
             nextQuestion()
-        }
-    }
-
-    private suspend fun getQuestions(
-        categoryId: Long,
-        minDifficulty: Int,
-        maxDifficulty: Int
-    ): List<Question> {
-        return withContext(Dispatchers.IO) {
-            database.getQuestionsLimited(categoryId, minDifficulty.toByte(), maxDifficulty.toByte())
         }
     }
 

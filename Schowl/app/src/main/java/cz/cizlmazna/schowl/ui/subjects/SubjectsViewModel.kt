@@ -20,37 +20,19 @@ class SubjectsViewModel(
 
     fun addSubject(name: String) {
         uiScope.launch {
-            insert(Subject(name = name))
-        }
-    }
-
-    private suspend fun insert(subject: Subject) {
-        withContext(Dispatchers.IO) {
-            database.insertSubject(subject)
+            database.insertSubject(Subject(name = name))
         }
     }
 
     fun editSubject(subject: Subject, name: String) {
         subject.name = name
         uiScope.launch {
-            update(subject)
-        }
-    }
-
-    private suspend fun update(subject: Subject) {
-        withContext(Dispatchers.IO) {
             database.updateSubject(subject)
         }
     }
 
     fun removeSubject(subject: Subject) {
         uiScope.launch {
-            delete(subject)
-        }
-    }
-
-    private suspend fun delete(subject: Subject) {
-        withContext(Dispatchers.IO) {
             database.deleteSubject(subject)
         }
     }

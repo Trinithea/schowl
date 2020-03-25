@@ -49,7 +49,7 @@ class TestSetupViewModel(
         if (subject != null && subject != selectedSubject.value) {
             selectedSubject.value = subject
             uiScope.launch {
-                selectedSubjectCategories.value = setSelectedSubjectCategories()
+                selectedSubjectCategories.value = database.getCategoriesRaw(selectedSubject.value!!.id)
                 val categoriesCheckedTemp = hashMapOf<Long, Boolean>()
                 for (category in selectedSubjectCategories.value!!) {
                     categoriesCheckedTemp[category.id] = false
@@ -64,7 +64,7 @@ class TestSetupViewModel(
         return subjects
     }
 
-    private val allCategoriesSelected = MutableLiveData<Boolean>(DEFAULT_ALL_CATEGORIES_SELECTED)
+    private val allCategoriesSelected = MutableLiveData(DEFAULT_ALL_CATEGORIES_SELECTED)
     fun getAllCategoriesSelected(): LiveData<Boolean> {
         return allCategoriesSelected
     }
@@ -86,12 +86,6 @@ class TestSetupViewModel(
         return selectedSubjectCategories
     }
 
-    private suspend fun setSelectedSubjectCategories(): List<Category> {
-        return withContext(Dispatchers.IO) {
-            database.getCategoriesRaw(selectedSubject.value!!.id)
-        }
-    }
-
     private val categoriesChecked = MutableLiveData<MutableMap<Long, Boolean>>()
     fun getCategoriesChecked(): LiveData<MutableMap<Long, Boolean>> {
         return categoriesChecked
@@ -101,7 +95,7 @@ class TestSetupViewModel(
         categoriesChecked.value!![category.id] = checked
     }
 
-    private val minDifficulty = MutableLiveData<Int>(DEFAULT_MIN_DIFFICULTY)
+    private val minDifficulty = MutableLiveData(DEFAULT_MIN_DIFFICULTY)
 
     fun getMinDifficulty(): LiveData<Int> {
         return minDifficulty
@@ -111,7 +105,7 @@ class TestSetupViewModel(
         minDifficulty.value = difficulty
     }
 
-    private val maxDifficulty = MutableLiveData<Int>(DEFAULT_MAX_DIFFICULTY)
+    private val maxDifficulty = MutableLiveData(DEFAULT_MAX_DIFFICULTY)
 
     fun getMaxDifficulty(): LiveData<Int> {
         return maxDifficulty
@@ -121,7 +115,7 @@ class TestSetupViewModel(
         maxDifficulty.value = difficulty
     }
 
-    private val navigateToTest = MutableLiveData<Boolean>(false)
+    private val navigateToTest = MutableLiveData(false)
     fun getNavigateToTest(): LiveData<Boolean> {
         return navigateToTest
     }
@@ -170,7 +164,7 @@ class TestSetupViewModel(
         var questionsCount = 0
         uiScope.launch {
             for (categoryId in categoryIds) {
-                questionsCount += getQuestionsCount(categoryId)
+                questionsCount += database.getQuestionsRaw(categoryId).size
             }
             if (questionsCount == 0) {
                 errorMessage.value = ErrorMessage.NO_QUESTIONS_IN_CATEGORIES
@@ -181,24 +175,22 @@ class TestSetupViewModel(
         }
     }
 
-    private suspend fun getQuestionsCount(categoryId: Long): Int {
-        return withContext(Dispatchers.IO) {
-            database.getQuestionsRaw(categoryId).size
-        }
-    }
-
     fun getCategoryIds(): LongArray {
         return categoryIds.toLongArray()
     }
 
     init {
         uiScope.launch {
-            selectedSubject.value = getSubject(subjectId)
+            selectedSubject.value = if (subjectId != -1L) {
+                database.getSubject(subjectId)
+            } else {
+                null
+            }
             if (selectedSubject.value == null) {
-                selectedSubject.value = getFirstSubject()
+                selectedSubject.value = database.getFirstSubject()
             }
             if (selectedSubject.value != null) {
-                selectedSubjectCategories.value = setSelectedSubjectCategories()
+                selectedSubjectCategories.value = database.getCategoriesRaw(selectedSubject.value!!.id)
                 val categoriesCheckedTemp = hashMapOf<Long, Boolean>()
                 for (category in selectedSubjectCategories.value!!) {
                     categoriesCheckedTemp[category.id] = false
@@ -210,21 +202,6 @@ class TestSetupViewModel(
                 }
                 categoriesChecked.value = categoriesCheckedTemp
             }
-        }
-    }
-
-    private suspend fun getFirstSubject(): Subject {
-        return withContext(Dispatchers.IO) {
-            database.getFirstSubject()
-        }
-    }
-
-    private suspend fun getSubject(subjectId: Long): Subject? {
-        return withContext(Dispatchers.IO) {
-            if (subjectId != -1L) {
-                return@withContext database.getSubject(subjectId)
-            }
-            null
         }
     }
 

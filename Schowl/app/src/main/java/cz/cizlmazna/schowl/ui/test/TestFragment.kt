@@ -1,6 +1,5 @@
 package cz.cizlmazna.schowl.ui.test
 
-
 import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
