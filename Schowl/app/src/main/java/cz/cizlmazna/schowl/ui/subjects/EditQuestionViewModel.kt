@@ -1,19 +1,20 @@
 package cz.cizlmazna.schowl.ui.subjects
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.*
 import cz.cizlmazna.schowl.database.Category
 import cz.cizlmazna.schowl.database.Question
+import cz.cizlmazna.schowl.database.SchowlDatabase
 import cz.cizlmazna.schowl.database.SchowlDatabaseDao
 import kotlinx.coroutines.*
 
 class EditQuestionViewModel(
-    private val database: SchowlDatabaseDao,
+    application: Application,
     val categoryId: Long,
     private val questionId: Long
-) : ViewModel() {
+) : AndroidViewModel(application) {
+
+    private val database = SchowlDatabase.getInstance(application).schowlDatabaseDao
 
     private var viewModelJob = Job()
 

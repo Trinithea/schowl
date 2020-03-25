@@ -1,25 +1,35 @@
 package cz.cizlmazna.schowl.ui.test
 
+import android.app.Application
 import android.view.View
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
-import androidx.lifecycle.ViewModel
 import cz.cizlmazna.schowl.database.Category
-import cz.cizlmazna.schowl.database.SchowlDatabaseDao
+import cz.cizlmazna.schowl.database.SchowlDatabase
 import cz.cizlmazna.schowl.database.Subject
 import kotlinx.coroutines.*
+import kotlin.collections.List
+import kotlin.collections.MutableList
+import kotlin.collections.MutableMap
+import kotlin.collections.hashMapOf
+import kotlin.collections.mutableListOf
+import kotlin.collections.set
+import kotlin.collections.toLongArray
 
 class TestSetupViewModel(
-    private val database: SchowlDatabaseDao,
+    application: Application,
     subjectId: Long,
     categoryId: Long
-) : ViewModel() {
+) : AndroidViewModel(application) {
     companion object {
         const val DEFAULT_MIN_DIFFICULTY = 0
         const val DEFAULT_MAX_DIFFICULTY = 10
         const val DEFAULT_ALL_CATEGORIES_SELECTED = false
     }
+
+    private val database = SchowlDatabase.getInstance(application).schowlDatabaseDao
 
     private var viewModelJob = Job()
 

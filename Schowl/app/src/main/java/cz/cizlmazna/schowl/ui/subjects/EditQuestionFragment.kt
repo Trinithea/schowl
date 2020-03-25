@@ -41,11 +41,9 @@ class EditQuestionFragment : Fragment() {
                 arguments!!
             )
 
-        val databaseDao = SchowlDatabase.getInstance(application).schowlDatabaseDao
-
         val viewModelFactory =
             EditQuestionViewModelFactory(
-                databaseDao,
+                application,
                 arguments.categoryId,
                 arguments.questionId
             )

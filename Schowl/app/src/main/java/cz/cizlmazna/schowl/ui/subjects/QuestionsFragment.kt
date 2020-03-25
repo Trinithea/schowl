@@ -24,7 +24,6 @@ import androidx.navigation.ui.NavigationUI
 import cz.cizlmazna.schowl.MainActivity
 import cz.cizlmazna.schowl.R
 import cz.cizlmazna.schowl.database.Question
-import cz.cizlmazna.schowl.database.SchowlDatabase
 import cz.cizlmazna.schowl.databinding.FragmentQuestionsBinding
 import cz.cizlmazna.schowl.ui.subjects.QuestionsFragmentArgs
 import cz.cizlmazna.schowl.ui.subjects.QuestionsFragmentDirections
@@ -52,11 +51,9 @@ class QuestionsFragment : Fragment() {
                 arguments!!
             )
 
-        val databaseDao = SchowlDatabase.getInstance(application).schowlDatabaseDao
-
         val viewModelFactory =
             QuestionsViewModelFactory(
-                databaseDao,
+                application,
                 arguments.categoryId
             )
 

@@ -18,7 +18,6 @@ import androidx.navigation.ui.NavigationUI
 import cz.cizlmazna.schowl.MainActivity
 import cz.cizlmazna.schowl.R
 import cz.cizlmazna.schowl.database.Category
-import cz.cizlmazna.schowl.database.SchowlDatabase
 import cz.cizlmazna.schowl.database.Subject
 import cz.cizlmazna.schowl.databinding.FragmentTestSetupBinding
 
@@ -49,9 +48,7 @@ class TestSetupFragment : Fragment() {
             categoryId = arguments.categoryId
         }
 
-        val databaseDao = SchowlDatabase.getInstance(application).schowlDatabaseDao
-
-        val viewModelFactory = TestSetupViewModelFactory(databaseDao, subjectId, categoryId)
+        val viewModelFactory = TestSetupViewModelFactory(application, subjectId, categoryId)
 
         viewModel = ViewModelProvider(this, viewModelFactory).get(TestSetupViewModel::class.java)
 

@@ -15,7 +15,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import cz.cizlmazna.schowl.MainActivity
 import cz.cizlmazna.schowl.R
-import cz.cizlmazna.schowl.database.SchowlDatabase
 import cz.cizlmazna.schowl.databinding.FragmentTestBinding
 import kotlinx.android.synthetic.main.test_completed_dialog.view.*
 
@@ -37,10 +36,8 @@ class TestFragment : Fragment() {
 
         val arguments = TestFragmentArgs.fromBundle(arguments!!)
 
-        val databaseDao = SchowlDatabase.getInstance(application).schowlDatabaseDao
-
         val viewModelFactory = TestViewModelFactory(
-            databaseDao,
+            application,
             arguments.categoryIds,
             arguments.minDifficulty,
             arguments.maxDifficulty

@@ -1,20 +1,23 @@
 package cz.cizlmazna.schowl.ui.test
 
+import android.app.Application
 import android.view.View
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
-import androidx.lifecycle.ViewModel
 import cz.cizlmazna.schowl.database.Question
-import cz.cizlmazna.schowl.database.SchowlDatabaseDao
+import cz.cizlmazna.schowl.database.SchowlDatabase
 import kotlinx.coroutines.*
 
 class TestViewModel(
-    private val database: SchowlDatabaseDao,
+    application: Application,
     categoryIds: LongArray,
     minDifficulty: Int,
     maxDifficulty: Int
-) : ViewModel() {
+) : AndroidViewModel(application) {
+
+    private val database = SchowlDatabase.getInstance(application).schowlDatabaseDao
 
     private var viewModelJob = Job()
 

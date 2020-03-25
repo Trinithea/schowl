@@ -54,11 +54,9 @@ class CategoriesFragment : Fragment() {
                 arguments!!
             )
 
-        val databaseDao = SchowlDatabase.getInstance(application).schowlDatabaseDao
-
         val viewModelFactory =
             CategoriesViewModelFactory(
-                databaseDao,
+                application,
                 arguments.subjectId
             )
 

@@ -1,12 +1,11 @@
 package cz.cizlmazna.schowl.ui.test
 
+import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import cz.cizlmazna.schowl.database.SchowlDatabaseDao
-import java.lang.IllegalArgumentException
 
 class TestSetupViewModelFactory(
-    private val database: SchowlDatabaseDao,
+    private val application: Application,
     private val subjectId: Long,
     private val categoryId: Long
 ) : ViewModelProvider.Factory {
@@ -14,7 +13,7 @@ class TestSetupViewModelFactory(
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(TestSetupViewModel::class.java)) {
-            return TestSetupViewModel(database, subjectId, categoryId) as T
+            return TestSetupViewModel(application, subjectId, categoryId) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

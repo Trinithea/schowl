@@ -1,15 +1,18 @@
 package cz.cizlmazna.schowl.ui.subjects
 
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import cz.cizlmazna.schowl.database.Category
 import cz.cizlmazna.schowl.database.Question
-import cz.cizlmazna.schowl.database.SchowlDatabaseDao
+import cz.cizlmazna.schowl.database.SchowlDatabase
 import kotlinx.coroutines.*
 
 class QuestionsViewModel(
-    private val database: SchowlDatabaseDao,
+    application: Application,
     categoryId: Long
-) : ViewModel() {
+) : AndroidViewModel(application) {
+
+    private val database = SchowlDatabase.getInstance(application).schowlDatabaseDao
 
     private var viewModelJob = Job()
 

@@ -1,11 +1,12 @@
 package cz.cizlmazna.schowl.ui.subjects
 
+import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import cz.cizlmazna.schowl.database.SchowlDatabaseDao
 
 class EditQuestionViewModelFactory(
-    private val databaseDao: SchowlDatabaseDao,
+    private val application: Application,
     private val categoryId: Long,
     private val questionId: Long
 ) : ViewModelProvider.Factory {
@@ -14,7 +15,7 @@ class EditQuestionViewModelFactory(
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(EditQuestionViewModel::class.java)) {
             return EditQuestionViewModel(
-                databaseDao,
+                application,
                 categoryId,
                 questionId
             ) as T

@@ -1,31 +1,32 @@
 package cz.cizlmazna.schowl.ui.subjects
 
-
+import android.app.Activity
 import android.app.AlertDialog
 import android.os.Bundle
-import android.view.*
-import android.widget.*
-import androidx.fragment.app.Fragment
-import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
-import kotlinx.android.synthetic.main.add_dialog.view.*
+import android.util.DisplayMetrics
+import android.view.Gravity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageButton
 import android.widget.LinearLayout
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.content.ContextCompat
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import cz.cizlmazna.schowl.MainActivity
 import cz.cizlmazna.schowl.R
-import cz.cizlmazna.schowl.database.SchowlDatabase
 import cz.cizlmazna.schowl.database.Subject
 import cz.cizlmazna.schowl.databinding.FragmentSubjectsBinding
-import android.util.DisplayMetrics
-
-import android.app.Activity
-import cz.cizlmazna.schowl.MainActivity
+import kotlinx.android.synthetic.main.add_dialog.view.*
 import kotlinx.android.synthetic.main.remove_dialog.view.*
-
 
 class SubjectsFragment : Fragment() {
 
@@ -41,13 +42,8 @@ class SubjectsFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_subjects, container, false)
 
         darkMode = (activity as MainActivity).getDarkMode()
-        val application = requireNotNull(this.activity).application
 
-        val databaseDao = SchowlDatabase.getInstance(application).schowlDatabaseDao
-
-        val viewModelFactory = SubjectsViewModelFactory(databaseDao)
-
-        viewModel = ViewModelProvider(this, viewModelFactory).get(SubjectsViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(SubjectsViewModel::class.java)
 
         (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.subjects)
 
