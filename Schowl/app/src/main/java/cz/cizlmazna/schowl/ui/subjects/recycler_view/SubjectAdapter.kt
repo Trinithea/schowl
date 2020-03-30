@@ -1,18 +1,15 @@
 package cz.cizlmazna.schowl.ui.subjects.recycler_view
 
-import android.text.Layout
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import androidx.navigation.Navigation
+import android.widget.ImageButton
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import cz.cizlmazna.schowl.R
 import cz.cizlmazna.schowl.database.Subject
-import cz.cizlmazna.schowl.ui.subjects.SubjectsFragmentDirections
-import kotlinx.android.synthetic.main.fragment_subjects.view.*
+import cz.cizlmazna.schowl.databinding.SubjectItemBinding
+
 //TODO darkMode -> fontColor, different drawable resource
 //TODO setOnClickListeners
 // TODO databinding
@@ -23,12 +20,12 @@ class SubjectAdapter : ListAdapter<Subject, SubjectAdapter.SubjectViewHolder>(Su
         val item = getItem(position)
         val res = holder.itemView.context.resources
         //TODO do this in ViewHolder
-        holder.btnSubject.text = item.name
-        holder.btnSubject.setOnClickListener { view: View ->
-            Navigation.findNavController(view).navigate(
-                SubjectsFragmentDirections.actionSubjectsFragmentToCategoriesFragment(item.id)
-            )
-        }
+       holder.btnSubject.text = item.name
+       // holder.btnSubject.setOnClickListener { view: View ->
+         //   Navigation.findNavController(view).navigate(
+        //      SubjectsFragmentDirections.actionSubjectsFragmentToCategoriesFragment(item.id)
+          //  )
+        //}
 
 
     }
@@ -37,17 +34,17 @@ class SubjectAdapter : ListAdapter<Subject, SubjectAdapter.SubjectViewHolder>(Su
         return SubjectViewHolder.from(parent)
     }
 
-    class SubjectViewHolder private constructor(itemView: View) : RecyclerView.ViewHolder(itemView){
-        val btnSubject : Button
-        val btnEdit : Button
-        val btnRemove : Button
-        val btnTest : Button
+    class SubjectViewHolder private constructor(val binding: SubjectItemBinding) : RecyclerView.ViewHolder(binding.root){
+        val btnSubject : Button = binding.btnNewSubject
+        val btnEdit : ImageButton = binding.btnEdit
+        val btnRemove : ImageButton = binding.btnRemove
+        val btnTest : ImageButton = binding.btnTest
 
         companion object {
             fun from(parent: ViewGroup): SubjectViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
-                val view = layoutInflater.inflate(R.layout.fragment_subjects, parent, false)
-                return SubjectViewHolder(view)
+                val binding = SubjectItemBinding.inflate(layoutInflater,parent,false)
+                return SubjectViewHolder(binding)
             }
         }
     }

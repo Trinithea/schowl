@@ -1,56 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/lytMain"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <Button
-        android:id="@+id/btnNewSubject"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/transparent"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
+        <variable
+            name="subject"
+            type="cz.cizlmazna.schowl.database.Subject" />
+    </data>
 
-    <LinearLayout
-        android:id="@+id/llOptions"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="8dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/lytMain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-        <ImageButton
-            android:id="@+id/btnEdit"
+        <Button
+            android:id="@+id/btnNewSubject"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:background="@drawable/transparent"
-            app:srcCompat="@drawable/ic_edit_yellow" />
+            android:text="Button"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageButton
-            android:id="@+id/btnRemove"
+        <LinearLayout
+            android:id="@+id/llOptions"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="@drawable/transparent"
-            app:srcCompat="@drawable/ic_remove_yellow" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <ImageButton
-            android:id="@+id/btnTest"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="@drawable/transparent"
-            app:srcCompat="@drawable/ic_test_yellow" />
-    </LinearLayout>
+            <ImageButton
+                android:id="@+id/btnEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/transparent"
+                app:srcCompat="@drawable/ic_edit_yellow" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageButton
+                android:id="@+id/btnRemove"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/transparent"
+                app:srcCompat="@drawable/ic_remove_yellow" />
+
+            <ImageButton
+                android:id="@+id/btnTest"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/transparent"
+                app:srcCompat="@drawable/ic_test_yellow" />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

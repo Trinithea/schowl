@@ -89,10 +89,10 @@ class CategoriesFragment : Fragment() {
     }
 
     private fun generateCategoriesList(categories: List<Category>) {
-        llMain.removeAllViews()
-        for (category in categories) {
-            addCategory(category)
-        }
+        //llMain.removeAllViews()
+        //for (category in categories) {
+          //  addCategory(category)
+        //}
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

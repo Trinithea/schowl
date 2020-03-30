@@ -87,7 +87,7 @@ class SubjectsFragment : Fragment() {
 //    }
 
     private fun generateSubjectsList(subjects: List<Subject>) {
-        binding.llMain.removeAllViews()
+       // binding.llMain.removeAllViews()
         for (subject in subjects) {
             addSubject(subject)
         }
@@ -240,7 +240,7 @@ class SubjectsFragment : Fragment() {
         )
         set.applyTo(mainLyt)
 
-        binding.llMain.addView(mainLyt)
+      //  binding.llMain.addView(mainLyt)
     }
 
 
