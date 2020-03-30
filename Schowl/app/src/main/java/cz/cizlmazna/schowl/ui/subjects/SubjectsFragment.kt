@@ -71,9 +71,8 @@ class SubjectsFragment : Fragment() {
 
         viewModel.subjects.observe(viewLifecycleOwner, Observer {
             it?.let{
-                adapter.data = it
+                adapter.submitList(it)
             }
-            //generateSubjectsList(it)
         })
 
         if (!darkMode) {
