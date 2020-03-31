@@ -65,11 +65,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun setDarkMode(darkMode: Boolean) {
-        (application as MainApplicationClass).setDarkMode(darkMode)
+        MainApplicationClass.setDarkMode(darkMode)
     }
 
     fun getDarkMode(): Boolean {
-        return (application as MainApplicationClass).getDarkMode()
+        return MainApplicationClass.getDarkMode()
     }
 
     fun dpToPx(dp: Int): Int {
@@ -80,5 +80,11 @@ class MainActivity : AppCompatActivity() {
     fun hideKeyboard(editText: EditText){
         val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(editText.windowToken, 0)
+    }
+
+    companion object {
+        fun getDarkMode(): Boolean {
+            return MainApplicationClass.getDarkMode()
+        }
     }
 }

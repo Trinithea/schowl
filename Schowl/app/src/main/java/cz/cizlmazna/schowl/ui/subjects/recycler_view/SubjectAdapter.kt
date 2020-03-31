@@ -18,16 +18,7 @@ class SubjectAdapter : ListAdapter<Subject, SubjectAdapter.SubjectViewHolder>(Su
 
     override fun onBindViewHolder(holder: SubjectViewHolder, position :Int){
         val item = getItem(position)
-        val res = holder.itemView.context.resources
-        //TODO do this in ViewHolder
-       holder.btnSubject.text = item.name
-       // holder.btnSubject.setOnClickListener { view: View ->
-         //   Navigation.findNavController(view).navigate(
-        //      SubjectsFragmentDirections.actionSubjectsFragmentToCategoriesFragment(item.id)
-          //  )
-        //}
-
-
+        holder.bind(item)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SubjectViewHolder {
@@ -40,6 +31,10 @@ class SubjectAdapter : ListAdapter<Subject, SubjectAdapter.SubjectViewHolder>(Su
         val btnRemove : ImageButton = binding.btnRemove
         val btnTest : ImageButton = binding.btnTest
 
+        fun bind(item: Subject){
+            binding.subject = item
+            binding.executePendingBindings()
+        }
         companion object {
             fun from(parent: ViewGroup): SubjectViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
