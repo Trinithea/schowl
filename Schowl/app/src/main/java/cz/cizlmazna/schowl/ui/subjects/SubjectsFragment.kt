@@ -102,6 +102,23 @@ class SubjectsFragment : Fragment() {
         }
     }
 
+    fun editButtonClicked(subject: Subject){
+        val mDialogView =
+            View.inflate(activity, R.layout.add_dialog, null)
+        val mBuilder =
+            AlertDialog.Builder(activity).setView(mDialogView)
+        val mAlertDialog = mBuilder.show()
+        mDialogView.TxtName.setText(subject.name)
+        mDialogView.BtnAdd.text = getString(R.string.edit)
+
+        setDialog(mDialogView.TxtName, mDialogView.llMain)
+        mDialogView.BtnAdd.setOnClickListener {
+            mAlertDialog.dismiss()
+            viewModel.editSubject(subject, mDialogView.TxtName.text.toString())
+        }
+    }
+
+
     private fun addSubject(subject: Subject) {
 
         val optionsLyt = LinearLayout(activity)

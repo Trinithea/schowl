@@ -1,9 +1,11 @@
 package cz.cizlmazna.schowl.ui.categories
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -34,6 +36,12 @@ class CategoryAdapter : ListAdapter<Category, CategoryAdapter.CategoryViewHolder
 
         fun bind(item: Category){
             binding.category = item
+            binding.btnNewCategory.setOnClickListener { view: View ->
+                Navigation.findNavController(view).navigate(
+                    CategoriesFragmentDirections.actionCategoriesFragmentToQuestionsFragment(
+                        item.id
+                    )
+                ) }
             binding.executePendingBindings()
         }
 

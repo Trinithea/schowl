@@ -1,9 +1,11 @@
 package cz.cizlmazna.schowl.ui.subjects
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -37,6 +39,11 @@ class SubjectAdapter : ListAdapter<Subject, SubjectAdapter.SubjectViewHolder>(
 
         fun bind(item: Subject){
             binding.subject = item
+            binding.btnNewSubject.setOnClickListener { view: View ->
+                Navigation.findNavController(view).navigate(
+                    SubjectsFragmentDirections.actionSubjectsFragmentToCategoriesFragment(item.id)
+                ) }
+
             binding.executePendingBindings()
         }
         companion object {

@@ -1,9 +1,11 @@
 package cz.cizlmazna.schowl.ui.questions
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -30,9 +32,17 @@ class QuestionAdapter : ListAdapter<Question, QuestionAdapter.QuestionViewHolder
 
     class QuestionViewHolder private constructor(val binding: QuestionItemBinding) : RecyclerView.ViewHolder(binding.root){
 
-
         fun bind(item: Question){
             binding.question = item
+            binding.btnNewQuestion.setOnClickListener { view: View ->
+                Navigation.findNavController(view).navigate(
+                QuestionsFragmentDirections.actionQuestionsFragmentToEditQuestionFragment(
+                    item.categoryId,
+                    item.id
+                )
+            )
+            }
+
             binding.executePendingBindings()
         }
 

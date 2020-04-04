@@ -7,6 +7,9 @@
         <variable
             name="subject"
             type="cz.cizlmazna.schowl.database.Subject" />
+        <variable
+            name="subjectFragment"
+            type="cz.cizlmazna.schowl.ui.subjects.SubjectsFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -40,6 +43,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:background="@drawable/transparent"
+                android:onClick="@{() -> subjectFragment.editButtonClicked(subject)}"
                 app:imageEditResource="@{subject}"
                 app:srcCompat="@drawable/ic_edit_yellow" />
 
