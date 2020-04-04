@@ -48,17 +48,17 @@ class SubjectsFragment : Fragment() {
         (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.subjects)
 
         binding.btnAddSubject.setOnClickListener {
-            val mDialogView =
+            val dialogView =
                 View.inflate(activity, R.layout.add_dialog, null)
-            val mBuilder =
-                AlertDialog.Builder(activity).setView(mDialogView)
-            mDialogView.TxtName.hint = getString(R.string.name_of_subject)
-            setDialog(mDialogView.TxtName, mDialogView.llMain)
-            val mAlertDialog = mBuilder.show()
+            val builder =
+                AlertDialog.Builder(activity).setView(dialogView)
+            dialogView.TxtName.hint = getString(R.string.name_of_subject)
+            setDialog(dialogView.TxtName, dialogView.llMain)
+            val alertDialog = builder.show()
 
-            mDialogView.BtnAdd.setOnClickListener {
-                mAlertDialog.dismiss()
-                val name = mDialogView.TxtName.text.toString()
+            dialogView.BtnAdd.setOnClickListener {
+                alertDialog.dismiss()
+                val name = dialogView.TxtName.text.toString()
                 viewModel.addSubject(name)
             }
         }
@@ -85,12 +85,6 @@ class SubjectsFragment : Fragment() {
 //        return NavigationUI.onNavDestinationSelected(item, view!!.findNavController()) || super.onOptionsItemSelected(item)
 //    }
 
-    private fun generateSubjectsList(subjects: List<Subject>) {
-       // binding.llMain.removeAllViews()
-        for (subject in subjects) {
-            addSubject(subject)
-        }
-    }
 
     private fun setDialog(textView: TextView, ll: LinearLayout) {
         if (!darkMode) {
@@ -103,18 +97,18 @@ class SubjectsFragment : Fragment() {
     }
 
     fun editButtonClicked(subject: Subject){
-        val mDialogView =
+        val dialogView =
             View.inflate(activity, R.layout.add_dialog, null)
-        val mBuilder =
-            AlertDialog.Builder(activity).setView(mDialogView)
-        val mAlertDialog = mBuilder.show()
-        mDialogView.TxtName.setText(subject.name)
-        mDialogView.BtnAdd.text = getString(R.string.edit)
+        val builder =
+            AlertDialog.Builder(activity).setView(dialogView)
+        val alertDialog = builder.show()
+        dialogView.TxtName.setText(subject.name)
+        dialogView.BtnAdd.text = getString(R.string.edit)
 
-        setDialog(mDialogView.TxtName, mDialogView.llMain)
-        mDialogView.BtnAdd.setOnClickListener {
-            mAlertDialog.dismiss()
-            viewModel.editSubject(subject, mDialogView.TxtName.text.toString())
+        setDialog(dialogView.TxtName, dialogView.llMain)
+        dialogView.BtnAdd.setOnClickListener {
+            alertDialog.dismiss()
+            viewModel.editSubject(subject, dialogView.TxtName.text.toString())
         }
     }
 

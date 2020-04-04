@@ -24,8 +24,6 @@ import cz.cizlmazna.schowl.MainActivity
 import cz.cizlmazna.schowl.R
 import cz.cizlmazna.schowl.database.Category
 import cz.cizlmazna.schowl.databinding.FragmentCategoriesBinding
-import cz.cizlmazna.schowl.ui.categories.CategoriesFragmentArgs
-import cz.cizlmazna.schowl.ui.categories.CategoriesFragmentDirections
 import kotlinx.android.synthetic.main.add_dialog.view.*
 import kotlinx.android.synthetic.main.remove_dialog.view.*
 
@@ -64,14 +62,14 @@ class CategoriesFragment : Fragment() {
 
 
         binding.btnAddCategory.setOnClickListener {
-            val mDialogView = View.inflate(activity, R.layout.add_dialog, null)
-            val mBuilder = AlertDialog.Builder(activity).setView(mDialogView)
-            val mAlertDialog = mBuilder.show()
-            mDialogView.TxtName.hint = getString(R.string.name_of_category)
-            setDialog(mDialogView.TxtName, mDialogView.llMain)
-            mDialogView.BtnAdd.setOnClickListener {
-                mAlertDialog.dismiss()
-                val name = mDialogView.TxtName.text.toString()
+            val dialogView = View.inflate(activity, R.layout.add_dialog, null)
+            val builder = AlertDialog.Builder(activity).setView(dialogView)
+            val alertDialog = builder.show()
+            dialogView.TxtName.hint = getString(R.string.name_of_category)
+            setDialog(dialogView.TxtName, dialogView.llMain)
+            dialogView.BtnAdd.setOnClickListener {
+                alertDialog.dismiss()
+                val name = dialogView.TxtName.text.toString()
                 viewModel.addCategory(name)
             }
 
@@ -88,9 +86,7 @@ class CategoriesFragment : Fragment() {
             }
         })
 
-        viewModel.categories.observe(viewLifecycleOwner, Observer {
-            generateCategoriesList(it)
-        })
+
 
         if (!darkMode) {
             setLayoutToLightMode()
@@ -98,12 +94,6 @@ class CategoriesFragment : Fragment() {
         return binding.root
     }
 
-    private fun generateCategoriesList(categories: List<Category>) {
-        //llMain.removeAllViews()
-        //for (category in categories) {
-          //  addCategory(category)
-        //}
-    }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)

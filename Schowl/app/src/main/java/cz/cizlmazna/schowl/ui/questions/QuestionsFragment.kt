@@ -73,10 +73,6 @@ class QuestionsFragment : Fragment() {
             }
         })
 
-        viewModel.questions.observe(viewLifecycleOwner, Observer {
-            generateQuestionsList(it)
-        })
-
         if (!darkMode) {
             setLayoutToLightMode()
         }
@@ -91,13 +87,6 @@ class QuestionsFragment : Fragment() {
         } else {
             ll.background = ContextCompat.getDrawable(context!!, R.color.navyBlue)
             textView.setTextColor(ContextCompat.getColor(context!!, R.color.ivoryYellow))
-        }
-    }
-
-    private fun generateQuestionsList(questions: List<Question>) {
-       // binding.llMain.removeAllViews()
-        for (question in questions) {
-            addQuestion(question)
         }
     }
 
