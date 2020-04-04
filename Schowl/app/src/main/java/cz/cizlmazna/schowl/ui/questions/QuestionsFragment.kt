@@ -1,4 +1,4 @@
-package cz.cizlmazna.schowl.ui.subjects
+package cz.cizlmazna.schowl.ui.questions
 
 import android.app.Activity
 import android.app.AlertDialog
@@ -24,6 +24,8 @@ import cz.cizlmazna.schowl.MainActivity
 import cz.cizlmazna.schowl.R
 import cz.cizlmazna.schowl.database.Question
 import cz.cizlmazna.schowl.databinding.FragmentQuestionsBinding
+import cz.cizlmazna.schowl.ui.subjects.QuestionsFragmentArgs
+import cz.cizlmazna.schowl.ui.subjects.QuestionsFragmentDirections
 import kotlinx.android.synthetic.main.remove_dialog.view.*
 
 class QuestionsFragment : Fragment() {

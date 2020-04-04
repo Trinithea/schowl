@@ -16,7 +16,7 @@
 
         <Button
             android:id="@+id/btnNewSubject"
-            android:layout_width="wrap_content"
+            android:layout_width="256dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
@@ -26,7 +26,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:subjectNamed="subject"/>
+            app:subjectNamed="@{subject}"/>
 
         <LinearLayout
             android:id="@+id/llOptions"
@@ -45,21 +45,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:background="@drawable/transparent"
-                app:srcCompat="@drawable/ic_edit_yellow" />
+                app:srcCompat="@drawable/ic_edit_yellow"
+                app:imageEditResource="@{subject}"/>
 
             <ImageButton
                 android:id="@+id/btnRemove"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:background="@drawable/transparent"
-                app:srcCompat="@drawable/ic_remove_yellow" />
+                app:srcCompat="@drawable/ic_remove_yellow"
+                app:imageRemoveResource="@{subject}"/>
 
             <ImageButton
                 android:id="@+id/btnTest"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:background="@drawable/transparent"
-                app:srcCompat="@drawable/ic_test_yellow" />
+                app:srcCompat="@drawable/ic_test_yellow"
+                app:imageTestResource="@{subject}"/>
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

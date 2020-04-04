@@ -25,7 +25,6 @@ import cz.cizlmazna.schowl.MainActivity
 import cz.cizlmazna.schowl.R
 import cz.cizlmazna.schowl.database.Subject
 import cz.cizlmazna.schowl.databinding.FragmentSubjectsBinding
-import cz.cizlmazna.schowl.ui.subjects.recycler_view.SubjectAdapter
 import kotlinx.android.synthetic.main.add_dialog.view.*
 import kotlinx.android.synthetic.main.remove_dialog.view.*
 

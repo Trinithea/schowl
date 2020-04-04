@@ -1,4 +1,4 @@
-package cz.cizlmazna.schowl.ui.subjects
+package cz.cizlmazna.schowl.ui.questions
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -15,6 +15,7 @@ import androidx.navigation.Navigation
 import cz.cizlmazna.schowl.MainActivity
 import cz.cizlmazna.schowl.R
 import cz.cizlmazna.schowl.databinding.FragmentEditQuestionBinding
+import cz.cizlmazna.schowl.ui.subjects.EditQuestionFragmentArgs
 
 class EditQuestionFragment : Fragment() {
 

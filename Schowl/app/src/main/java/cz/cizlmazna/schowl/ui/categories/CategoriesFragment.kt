@@ -1,4 +1,4 @@
-package cz.cizlmazna.schowl.ui.subjects
+package cz.cizlmazna.schowl.ui.categories
 
 import android.app.Activity
 import android.app.AlertDialog
@@ -24,8 +24,9 @@ import cz.cizlmazna.schowl.MainActivity
 import cz.cizlmazna.schowl.R
 import cz.cizlmazna.schowl.database.Category
 import cz.cizlmazna.schowl.databinding.FragmentCategoriesBinding
+import cz.cizlmazna.schowl.ui.subjects.CategoriesFragmentArgs
+import cz.cizlmazna.schowl.ui.subjects.CategoriesFragmentDirections
 import kotlinx.android.synthetic.main.add_dialog.view.*
-import kotlinx.android.synthetic.main.fragment_subjects.*
 import kotlinx.android.synthetic.main.remove_dialog.view.*
 
 class CategoriesFragment : Fragment() {

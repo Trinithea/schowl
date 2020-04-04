@@ -1,4 +1,4 @@
-package cz.cizlmazna.schowl.ui.subjects.recycler_view
+package cz.cizlmazna.schowl.ui.subjects
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -13,7 +13,9 @@ import cz.cizlmazna.schowl.databinding.SubjectItemBinding
 //TODO darkMode -> fontColor, different drawable resource
 //TODO setOnClickListeners
 // TODO databinding
-class SubjectAdapter : ListAdapter<Subject, SubjectAdapter.SubjectViewHolder>(SubjectDiffCallback()){
+class SubjectAdapter : ListAdapter<Subject, SubjectAdapter.SubjectViewHolder>(
+    SubjectDiffCallback()
+){
 
 
     override fun onBindViewHolder(holder: SubjectViewHolder, position :Int){
@@ -22,7 +24,9 @@ class SubjectAdapter : ListAdapter<Subject, SubjectAdapter.SubjectViewHolder>(Su
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SubjectViewHolder {
-        return SubjectViewHolder.from(parent)
+        return SubjectViewHolder.from(
+            parent
+        )
     }
 
     class SubjectViewHolder private constructor(val binding: SubjectItemBinding) : RecyclerView.ViewHolder(binding.root){
@@ -39,7 +43,9 @@ class SubjectAdapter : ListAdapter<Subject, SubjectAdapter.SubjectViewHolder>(Su
             fun from(parent: ViewGroup): SubjectViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = SubjectItemBinding.inflate(layoutInflater,parent,false)
-                return SubjectViewHolder(binding)
+                return SubjectViewHolder(
+                    binding
+                )
             }
         }
     }

@@ -5,7 +5,7 @@
     <data>
         <variable
             name="editQuestionViewModel"
-            type="cz.cizlmazna.schowl.ui.subjects.EditQuestionViewModel" />
+            type="cz.cizlmazna.schowl.ui.questions.EditQuestionViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
