@@ -1,12 +1,16 @@
-package cz.cizlmazna.schowl.ui.subjects
+package cz.cizlmazna.schowl.ui
 
 
+import android.icu.util.ICUUncheckedIOException
 import android.widget.Button
 import android.widget.ImageButton
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import cz.cizlmazna.schowl.MainActivity
 import cz.cizlmazna.schowl.R
+import cz.cizlmazna.schowl.database.Category
+import cz.cizlmazna.schowl.database.ICurriculum
+import cz.cizlmazna.schowl.database.Question
 import cz.cizlmazna.schowl.database.Subject
 
 
@@ -21,9 +25,28 @@ fun Button.setNameOfSubject(item: Subject?){
             setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
     }
 }
-
+@BindingAdapter("categoryNamed")
+fun Button.setNameOfCategory(item: Category?){
+    item?.let{
+        text = item.name
+        /**/ if(MainActivity.getDarkMode())
+        setTextColor(ContextCompat.getColor(context!!, R.color.white))
+    else
+        setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
+    }
+}
+@BindingAdapter("questionNamed")
+fun Button.setNameOfQuestion(item: Question?){
+    item?.let{
+        text = item.questionText
+        /**/ if(MainActivity.getDarkMode())
+        setTextColor(ContextCompat.getColor(context!!, R.color.white))
+    else
+        setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
+    }
+}
 @BindingAdapter("imageEditResource")
-fun ImageButton.setEditResourceImage(item: Subject?){
+fun ImageButton.setEditResourceImage(item: ICurriculum?){
     item?.let{
       /**/  if(MainActivity.getDarkMode())
             setImageResource(R.drawable.ic_edit_yellow)
@@ -34,7 +57,7 @@ fun ImageButton.setEditResourceImage(item: Subject?){
 }
 
 @BindingAdapter("imageRemoveResource")
-fun ImageButton.setRemoveResourceImage(item: Subject?){
+fun ImageButton.setRemoveResourceImage(item: ICurriculum?){
     item?.let{
       /**/  if(MainActivity.getDarkMode())
             setImageResource(R.drawable.ic_remove_yellow)
@@ -45,7 +68,7 @@ fun ImageButton.setRemoveResourceImage(item: Subject?){
 }
 
 @BindingAdapter("imageTestResource")
-fun ImageButton.setTestResourceImage(item: Subject?){
+fun ImageButton.setTestResourceImage(item: ICurriculum?){
     item?.let{
        /**/ if(MainActivity.getDarkMode())
             setImageResource(R.drawable.ic_test_yellow)

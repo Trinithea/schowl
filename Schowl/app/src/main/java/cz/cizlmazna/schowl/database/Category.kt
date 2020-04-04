@@ -22,4 +22,4 @@ data class Category(
 
     @ColumnInfo(name = "subject_id")
     var subjectId: Long
-)
+) : ICurriculum

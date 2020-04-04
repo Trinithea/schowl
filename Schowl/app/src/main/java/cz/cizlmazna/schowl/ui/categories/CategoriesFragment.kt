@@ -24,8 +24,8 @@ import cz.cizlmazna.schowl.MainActivity
 import cz.cizlmazna.schowl.R
 import cz.cizlmazna.schowl.database.Category
 import cz.cizlmazna.schowl.databinding.FragmentCategoriesBinding
-import cz.cizlmazna.schowl.ui.subjects.CategoriesFragmentArgs
-import cz.cizlmazna.schowl.ui.subjects.CategoriesFragmentDirections
+import cz.cizlmazna.schowl.ui.categories.CategoriesFragmentArgs
+import cz.cizlmazna.schowl.ui.categories.CategoriesFragmentDirections
 import kotlinx.android.synthetic.main.add_dialog.view.*
 import kotlinx.android.synthetic.main.remove_dialog.view.*
 
@@ -77,7 +77,16 @@ class CategoriesFragment : Fragment() {
 
         }
 
+        val adapter = CategoryAdapter()
+        binding.categoriesList.adapter = adapter
+
         binding.lifecycleOwner = this
+
+        viewModel.categories.observe(viewLifecycleOwner, Observer {
+            it?.let{
+                adapter.submitList(it)
+            }
+        })
 
         viewModel.categories.observe(viewLifecycleOwner, Observer {
             generateCategoriesList(it)
@@ -264,7 +273,7 @@ class CategoriesFragment : Fragment() {
             ConstraintSet.BOTTOM
         )
         set.applyTo(mainLyt)
-        binding.llMain.addView(mainLyt)
+       // binding.llMain.addView(mainLyt)
 
     }
 }

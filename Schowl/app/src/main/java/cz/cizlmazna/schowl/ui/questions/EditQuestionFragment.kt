@@ -15,7 +15,7 @@ import androidx.navigation.Navigation
 import cz.cizlmazna.schowl.MainActivity
 import cz.cizlmazna.schowl.R
 import cz.cizlmazna.schowl.databinding.FragmentEditQuestionBinding
-import cz.cizlmazna.schowl.ui.subjects.EditQuestionFragmentArgs
+import cz.cizlmazna.schowl.ui.questions.EditQuestionFragmentArgs
 
 class EditQuestionFragment : Fragment() {
 

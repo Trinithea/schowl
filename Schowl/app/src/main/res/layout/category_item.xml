@@ -1,21 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
         <variable
-            name="subject"
-            type="cz.cizlmazna.schowl.database.Subject" />
+        name="category"
+        type="cz.cizlmazna.schowl.database.Category"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/lytMain"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
+        android:layout_height="match_parent">
         <Button
-            android:id="@+id/btnNewSubject"
+            android:id="@+id/btnNewCategory"
             android:layout_width="248dp"
             android:layout_height="wrap_content"
             android:background="@drawable/transparent"
@@ -24,7 +21,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:subjectNamed="@{subject}" />
+            app:categoryNamed="@{category}" />
 
         <LinearLayout
             android:id="@+id/llOptions"
@@ -40,7 +37,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:background="@drawable/transparent"
-                app:imageEditResource="@{subject}"
+                app:imageEditResource="@{category}"
                 app:srcCompat="@drawable/ic_edit_yellow" />
 
             <ImageButton
@@ -48,7 +45,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:background="@drawable/transparent"
-                app:imageRemoveResource="@{subject}"
+                app:imageRemoveResource="@{category}"
                 app:srcCompat="@drawable/ic_remove_yellow" />
 
             <ImageButton
@@ -56,9 +53,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:background="@drawable/transparent"
-                app:imageTestResource="@{subject}"
+                app:imageTestResource="@{category}"
                 app:srcCompat="@drawable/ic_test_yellow" />
         </LinearLayout>
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

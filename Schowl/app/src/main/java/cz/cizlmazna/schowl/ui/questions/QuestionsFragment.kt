@@ -24,8 +24,8 @@ import cz.cizlmazna.schowl.MainActivity
 import cz.cizlmazna.schowl.R
 import cz.cizlmazna.schowl.database.Question
 import cz.cizlmazna.schowl.databinding.FragmentQuestionsBinding
-import cz.cizlmazna.schowl.ui.subjects.QuestionsFragmentArgs
-import cz.cizlmazna.schowl.ui.subjects.QuestionsFragmentDirections
+import cz.cizlmazna.schowl.ui.questions.QuestionsFragmentArgs
+import cz.cizlmazna.schowl.ui.questions.QuestionsFragmentDirections
 import kotlinx.android.synthetic.main.remove_dialog.view.*
 
 class QuestionsFragment : Fragment() {
@@ -62,8 +62,16 @@ class QuestionsFragment : Fragment() {
                 )
             )
         }
+        val adapter = QuestionAdapter()
+        binding.questionsList.adapter = adapter
 
         binding.lifecycleOwner = this
+
+        viewModel.questions.observe(viewLifecycleOwner, Observer {
+            it?.let{
+                adapter.submitList(it)
+            }
+        })
 
         viewModel.questions.observe(viewLifecycleOwner, Observer {
             generateQuestionsList(it)
@@ -87,7 +95,7 @@ class QuestionsFragment : Fragment() {
     }
 
     private fun generateQuestionsList(questions: List<Question>) {
-        binding.llMain.removeAllViews()
+       // binding.llMain.removeAllViews()
         for (question in questions) {
             addQuestion(question)
         }
@@ -185,7 +193,7 @@ class QuestionsFragment : Fragment() {
             ConstraintSet.BOTTOM
         )
         set.applyTo(mainLyt)
-        binding.llMain.addView(mainLyt)
+        //binding.llMain.addView(mainLyt)
     }
 
     private fun setLayoutToLightMode() {

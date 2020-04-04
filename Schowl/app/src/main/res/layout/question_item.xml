@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable
-            name="subject"
-            type="cz.cizlmazna.schowl.database.Subject" />
+            name="question"
+            type="cz.cizlmazna.schowl.database.Question" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -24,7 +23,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:subjectNamed="@{subject}" />
+            app:questionNamed="@{question}" />
 
         <LinearLayout
             android:id="@+id/llOptions"
@@ -35,29 +34,14 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <ImageButton
-                android:id="@+id/btnEdit"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:background="@drawable/transparent"
-                app:imageEditResource="@{subject}"
-                app:srcCompat="@drawable/ic_edit_yellow" />
 
             <ImageButton
                 android:id="@+id/btnRemove"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:background="@drawable/transparent"
-                app:imageRemoveResource="@{subject}"
+                app:imageRemoveResource="@{question}"
                 app:srcCompat="@drawable/ic_remove_yellow" />
-
-            <ImageButton
-                android:id="@+id/btnTest"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:background="@drawable/transparent"
-                app:imageTestResource="@{subject}"
-                app:srcCompat="@drawable/ic_test_yellow" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
