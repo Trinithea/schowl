@@ -6,6 +6,9 @@
         <variable
         name="category"
         type="cz.cizlmazna.schowl.database.Category"/>
+        <variable
+            name="categoriesFragment"
+            type="cz.cizlmazna.schowl.ui.categories.CategoriesFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
