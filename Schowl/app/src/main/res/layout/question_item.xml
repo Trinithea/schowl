@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="question"
+            type="cz.cizlmazna.schowl.database.Question" />
+        <variable
+            name="questionsFragment"
+            type="cz.cizlmazna.schowl.ui.questions.QuestionsFragment" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/lytMain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btnNewQuestion"
+            android:layout_width="232dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/transparent"
+            android:text="Button"
+            android:textAlignment="viewStart"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:questionNamed="@{question}" />
+
+        <LinearLayout
+            android:id="@+id/llOptions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <ImageButton
+                android:id="@+id/btnRemove"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/transparent"
+                android:onClick="@{() -> questionsFragment.removeButtonClicked(question)}"
+                app:imageRemoveResource="@{question}"
+                app:srcCompat="@drawable/ic_remove_yellow" />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

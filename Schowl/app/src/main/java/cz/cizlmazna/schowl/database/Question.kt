@@ -28,4 +28,4 @@ data class Question(
 
     @ColumnInfo(name = "category_id")
     var categoryId: Long
-)
+) : ICurriculum

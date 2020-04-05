@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+        name="category"
+        type="cz.cizlmazna.schowl.database.Category"/>
+        <variable
+            name="categoriesFragment"
+            type="cz.cizlmazna.schowl.ui.categories.CategoriesFragment" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btnNewCategory"
+            android:layout_width="232dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/transparent"
+            android:text="Button"
+            android:textAlignment="viewStart"
+            app:categoryNamed="@{category}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/llOptions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageButton
+                android:id="@+id/btnEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/transparent"
+                android:onClick="@{() -> categoriesFragment.editButtonClicked(category)}"
+                app:imageEditResource="@{category}"
+                app:srcCompat="@drawable/ic_edit_yellow" />
+
+            <ImageButton
+                android:id="@+id/btnRemove"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/transparent"
+                android:onClick="@{() -> categoriesFragment.removeButtonClicked(category)}"
+                app:imageRemoveResource="@{category}"
+                app:srcCompat="@drawable/ic_remove_yellow" />
+
+            <ImageButton
+                android:id="@+id/btnTest"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/transparent"
+                app:imageTestResource="@{category}"
+                app:srcCompat="@drawable/ic_test_yellow" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

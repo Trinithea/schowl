@@ -1,4 +1,4 @@
-package cz.cizlmazna.schowl.ui.subjects
+package cz.cizlmazna.schowl.ui.categories
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel

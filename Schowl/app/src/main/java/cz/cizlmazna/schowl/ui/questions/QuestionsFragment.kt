@@ -1,4 +1,4 @@
-package cz.cizlmazna.schowl.ui.subjects
+package cz.cizlmazna.schowl.ui.questions
 
 import android.app.Activity
 import android.app.AlertDialog
@@ -60,11 +60,15 @@ class QuestionsFragment : Fragment() {
                 )
             )
         }
+        val adapter = QuestionAdapter(this)
+        binding.questionsList.adapter = adapter
 
         binding.lifecycleOwner = this
 
         viewModel.questions.observe(viewLifecycleOwner, Observer {
-            generateQuestionsList(it)
+            it?.let{
+                adapter.submitList(it)
+            }
         })
 
         if (!darkMode) {
@@ -84,13 +88,6 @@ class QuestionsFragment : Fragment() {
         }
     }
 
-    private fun generateQuestionsList(questions: List<Question>) {
-        binding.llMain.removeAllViews()
-        for (question in questions) {
-            addQuestion(question)
-        }
-    }
-
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.question_menu, menu)
@@ -101,6 +98,23 @@ class QuestionsFragment : Fragment() {
             item,
             view!!.findNavController()
         ) || super.onOptionsItemSelected(item)
+    }
+
+    fun removeButtonClicked(question: Question){
+        val dialogView =
+            View.inflate(activity, R.layout.remove_dialog, null)
+        val builder =
+            AlertDialog.Builder(activity).setView(dialogView)
+        val alertDialog = builder.show()
+        dialogView.txtMessage.text = getString(R.string.remove_question_dialog)
+        setDialog(dialogView.txtMessage, dialogView.LlMainRemove)
+        dialogView.btnRemove.setOnClickListener {
+            alertDialog.dismiss()
+            viewModel.removeQuestion(question)
+        }
+        dialogView.btnCancel.setOnClickListener {
+            alertDialog.dismiss()
+        }
     }
 
     private fun addQuestion(question: Question) {
@@ -183,7 +197,7 @@ class QuestionsFragment : Fragment() {
             ConstraintSet.BOTTOM
         )
         set.applyTo(mainLyt)
-        binding.llMain.addView(mainLyt)
+        //binding.llMain.addView(mainLyt)
     }
 
     private fun setLayoutToLightMode() {

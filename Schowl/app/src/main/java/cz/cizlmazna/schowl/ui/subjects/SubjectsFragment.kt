@@ -48,25 +48,30 @@ class SubjectsFragment : Fragment() {
         (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.subjects)
 
         binding.btnAddSubject.setOnClickListener {
-            val mDialogView =
+            val dialogView =
                 View.inflate(activity, R.layout.add_dialog, null)
-            val mBuilder =
-                AlertDialog.Builder(activity).setView(mDialogView)
-            mDialogView.TxtName.hint = getString(R.string.name_of_subject)
-            setDialog(mDialogView.TxtName, mDialogView.llMain)
-            val mAlertDialog = mBuilder.show()
+            val builder =
+                AlertDialog.Builder(activity).setView(dialogView)
+            dialogView.TxtName.hint = getString(R.string.name_of_subject)
+            setDialog(dialogView.TxtName, dialogView.llMain)
+            val alertDialog = builder.show()
 
-            mDialogView.BtnAdd.setOnClickListener {
-                mAlertDialog.dismiss()
-                val name = mDialogView.TxtName.text.toString()
+            dialogView.BtnAdd.setOnClickListener {
+                alertDialog.dismiss()
+                val name = dialogView.TxtName.text.toString()
                 viewModel.addSubject(name)
             }
         }
 
+        val adapter = SubjectAdapter(this)
+        binding.subjectsList.adapter = adapter
+
         binding.lifecycleOwner = this
 
         viewModel.subjects.observe(viewLifecycleOwner, Observer {
-            generateSubjectsList(it)
+            it?.let{
+                adapter.submitList(it)
+            }
         })
 
         if (!darkMode) {
@@ -80,12 +85,6 @@ class SubjectsFragment : Fragment() {
 //        return NavigationUI.onNavDestinationSelected(item, view!!.findNavController()) || super.onOptionsItemSelected(item)
 //    }
 
-    private fun generateSubjectsList(subjects: List<Subject>) {
-        binding.llMain.removeAllViews()
-        for (subject in subjects) {
-            addSubject(subject)
-        }
-    }
 
     private fun setDialog(textView: TextView, ll: LinearLayout) {
         if (!darkMode) {
@@ -96,6 +95,44 @@ class SubjectsFragment : Fragment() {
             textView.setTextColor(ContextCompat.getColor(context!!, R.color.ivoryYellow))
         }
     }
+    
+    fun editButtonClicked(subject: Subject){
+        val dialogView =
+            View.inflate(activity, R.layout.add_dialog, null)
+        val builder =
+            AlertDialog.Builder(activity).setView(dialogView)
+        val alertDialog = builder.show()
+        dialogView.TxtName.setText(subject.name)
+        dialogView.BtnAdd.text = getString(R.string.edit)
+
+        setDialog(dialogView.TxtName, dialogView.llMain)
+        dialogView.BtnAdd.setOnClickListener {
+            alertDialog.dismiss()
+            viewModel.editSubject(subject, dialogView.TxtName.text.toString())
+        }
+    }
+    fun removeButtonClicked(subject: Subject){
+        val dialogView =
+            View.inflate(activity, R.layout.remove_dialog, null)
+        val builder =
+            AlertDialog.Builder(activity).setView(dialogView)
+        val alertDialog = builder.show()
+        dialogView.txtMessage.text = getString(R.string.remove_dialog, subject.name)
+
+        setDialog(dialogView.txtMessage, dialogView.LlMainRemove)
+        dialogView.btnRemove.setOnClickListener {
+            alertDialog.dismiss()
+            viewModel.removeSubject(subject)
+        }
+        dialogView.btnCancel.setOnClickListener {
+            alertDialog.dismiss()
+        }
+    }
+
+    fun testButtonClicked(subject: Subject){
+
+    }
+
 
     private fun addSubject(subject: Subject) {
 
@@ -234,7 +271,7 @@ class SubjectsFragment : Fragment() {
         )
         set.applyTo(mainLyt)
 
-        binding.llMain.addView(mainLyt)
+      //  binding.llMain.addView(mainLyt)
     }
 
 

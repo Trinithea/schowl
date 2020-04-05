@@ -1,4 +1,4 @@
-package cz.cizlmazna.schowl.ui.subjects
+package cz.cizlmazna.schowl.ui.categories
 
 import android.app.Activity
 import android.app.AlertDialog
@@ -25,7 +25,6 @@ import cz.cizlmazna.schowl.R
 import cz.cizlmazna.schowl.database.Category
 import cz.cizlmazna.schowl.databinding.FragmentCategoriesBinding
 import kotlinx.android.synthetic.main.add_dialog.view.*
-import kotlinx.android.synthetic.main.fragment_subjects.*
 import kotlinx.android.synthetic.main.remove_dialog.view.*
 
 class CategoriesFragment : Fragment() {
@@ -63,24 +62,31 @@ class CategoriesFragment : Fragment() {
 
 
         binding.btnAddCategory.setOnClickListener {
-            val mDialogView = View.inflate(activity, R.layout.add_dialog, null)
-            val mBuilder = AlertDialog.Builder(activity).setView(mDialogView)
-            val mAlertDialog = mBuilder.show()
-            mDialogView.TxtName.hint = getString(R.string.name_of_category)
-            setDialog(mDialogView.TxtName, mDialogView.llMain)
-            mDialogView.BtnAdd.setOnClickListener {
-                mAlertDialog.dismiss()
-                val name = mDialogView.TxtName.text.toString()
+            val dialogView = View.inflate(activity, R.layout.add_dialog, null)
+            val builder = AlertDialog.Builder(activity).setView(dialogView)
+            val alertDialog = builder.show()
+            dialogView.TxtName.hint = getString(R.string.name_of_category)
+            setDialog(dialogView.TxtName, dialogView.llMain)
+            dialogView.BtnAdd.setOnClickListener {
+                alertDialog.dismiss()
+                val name = dialogView.TxtName.text.toString()
                 viewModel.addCategory(name)
             }
 
         }
 
+        val adapter = CategoryAdapter(this)
+        binding.categoriesList.adapter = adapter
+
         binding.lifecycleOwner = this
 
         viewModel.categories.observe(viewLifecycleOwner, Observer {
-            generateCategoriesList(it)
+            it?.let{
+                adapter.submitList(it)
+            }
         })
+
+
 
         if (!darkMode) {
             setLayoutToLightMode()
@@ -88,12 +94,6 @@ class CategoriesFragment : Fragment() {
         return binding.root
     }
 
-    private fun generateCategoriesList(categories: List<Category>) {
-        llMain.removeAllViews()
-        for (category in categories) {
-            addCategory(category)
-        }
-    }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
@@ -118,6 +118,38 @@ class CategoriesFragment : Fragment() {
         } else {
             ll.background = ContextCompat.getDrawable(context!!, R.color.navyBlue)
             textView.setTextColor(ContextCompat.getColor(context!!, R.color.ivoryYellow))
+        }
+    }
+
+    fun editButtonClicked(category: Category){
+        val dialogView = View.inflate(activity, R.layout.add_dialog, null)
+        val builder = AlertDialog.Builder(activity).setView(dialogView)
+        val alertDialog = builder.show()
+        dialogView.TxtName.setText(category.name)
+        dialogView.BtnAdd.text = getString(R.string.edit)
+
+        setDialog(dialogView.TxtName, dialogView.llMain)
+        dialogView.BtnAdd.setOnClickListener {
+            alertDialog.dismiss()
+            viewModel.editCategory(category, dialogView.TxtName.text.toString())
+        }
+    }
+
+    fun removeButtonClicked(category: Category){
+        val dialogView =
+            View.inflate(activity, R.layout.remove_dialog, null)
+        val builder =
+            AlertDialog.Builder(activity).setView(dialogView)
+        val alertDialog = builder.show()
+        dialogView.txtMessage.text = getString(R.string.remove_dialog, category.name)
+
+        setDialog(dialogView.txtMessage, dialogView.LlMainRemove)
+        dialogView.btnRemove.setOnClickListener {
+            alertDialog.dismiss()
+            viewModel.removeCategory(category)
+        }
+        dialogView.btnCancel.setOnClickListener {
+            alertDialog.dismiss()
         }
     }
 
@@ -263,7 +295,7 @@ class CategoriesFragment : Fragment() {
             ConstraintSet.BOTTOM
         )
         set.applyTo(mainLyt)
-        binding.llMain.addView(mainLyt)
+       // binding.llMain.addView(mainLyt)
 
     }
 }
