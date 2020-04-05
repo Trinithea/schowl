@@ -52,6 +52,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:background="@drawable/transparent"
+                android:onClick="@{() -> subjectsFragment.removeButtonClicked(subject)}"
                 app:imageRemoveResource="@{subject}"
                 app:srcCompat="@drawable/ic_remove_yellow" />
 
