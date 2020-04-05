@@ -22,7 +22,6 @@
             android:layout_width="248dp"
             android:layout_height="wrap_content"
             android:background="@drawable/transparent"
-            android:text="Button"
             android:textAlignment="viewStart"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
