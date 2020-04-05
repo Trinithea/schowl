@@ -22,18 +22,18 @@ class SubjectAdapter(private val subjectsFragment: SubjectsFragment) : ListAdapt
 
     override fun onBindViewHolder(holder: SubjectViewHolder, position :Int){
         val item = getItem(position)
-        holder.bind(item, subjectsFragment)
+        holder.bind(item)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SubjectViewHolder {
         return SubjectViewHolder.from(
-            parent
+            parent, subjectsFragment
         )
     }
 
-    class SubjectViewHolder private constructor(val binding: SubjectItemBinding) : RecyclerView.ViewHolder(binding.root){
+    class SubjectViewHolder private constructor(private val binding: SubjectItemBinding, private val subjectsFragment: SubjectsFragment) : RecyclerView.ViewHolder(binding.root){
 
-        fun bind(item: Subject, subjectsFragment: SubjectsFragment){
+        fun bind(item: Subject){
             binding.subject = item
             binding.subjectsFragment = subjectsFragment
             binding.btnNewSubject.setOnClickListener { view: View ->
@@ -44,11 +44,11 @@ class SubjectAdapter(private val subjectsFragment: SubjectsFragment) : ListAdapt
             binding.executePendingBindings()
         }
         companion object {
-            fun from(parent: ViewGroup): SubjectViewHolder {
+            fun from(parent: ViewGroup, subjectsFragment: SubjectsFragment): SubjectViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = SubjectItemBinding.inflate(layoutInflater,parent,false)
                 return SubjectViewHolder(
-                    binding
+                    binding, subjectsFragment
                 )
             }
         }
