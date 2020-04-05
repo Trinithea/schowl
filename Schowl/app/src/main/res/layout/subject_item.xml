@@ -8,7 +8,7 @@
             name="subject"
             type="cz.cizlmazna.schowl.database.Subject" />
         <variable
-            name="subjectFragment"
+            name="subjectsFragment"
             type="cz.cizlmazna.schowl.ui.subjects.SubjectsFragment" />
     </data>
 
@@ -43,7 +43,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:background="@drawable/transparent"
-                android:onClick="@{() -> subjectFragment.editButtonClicked(subject)}"
+                android:onClick="@{() -> subjectsFragment.editButtonClicked(subject)}"
                 app:imageEditResource="@{subject}"
                 app:srcCompat="@drawable/ic_edit_yellow" />
 

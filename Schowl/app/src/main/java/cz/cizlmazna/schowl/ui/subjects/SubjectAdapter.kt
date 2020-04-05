@@ -15,14 +15,14 @@ import cz.cizlmazna.schowl.databinding.SubjectItemBinding
 //TODO darkMode -> fontColor, different drawable resource
 //TODO setOnClickListeners
 // TODO databinding
-class SubjectAdapter : ListAdapter<Subject, SubjectAdapter.SubjectViewHolder>(
+class SubjectAdapter(private val subjectsFragment: SubjectsFragment) : ListAdapter<Subject, SubjectAdapter.SubjectViewHolder>(
     SubjectDiffCallback()
 ){
 
 
     override fun onBindViewHolder(holder: SubjectViewHolder, position :Int){
         val item = getItem(position)
-        holder.bind(item)
+        holder.bind(item, subjectsFragment)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SubjectViewHolder {
@@ -37,8 +37,9 @@ class SubjectAdapter : ListAdapter<Subject, SubjectAdapter.SubjectViewHolder>(
         val btnRemove : ImageButton = binding.btnRemove
         val btnTest : ImageButton = binding.btnTest
 
-        fun bind(item: Subject){
+        fun bind(item: Subject, subjectsFragment: SubjectsFragment){
             binding.subject = item
+            binding.subjectsFragment = subjectsFragment
             binding.btnNewSubject.setOnClickListener { view: View ->
                 Navigation.findNavController(view).navigate(
                     SubjectsFragmentDirections.actionSubjectsFragmentToCategoriesFragment(item.id)

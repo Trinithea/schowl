@@ -63,7 +63,7 @@ class SubjectsFragment : Fragment() {
             }
         }
 
-        val adapter = SubjectAdapter()
+        val adapter = SubjectAdapter(this)
         binding.subjectsList.adapter = adapter
 
         binding.lifecycleOwner = this
