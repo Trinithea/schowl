@@ -95,7 +95,7 @@ class SubjectsFragment : Fragment() {
             textView.setTextColor(ContextCompat.getColor(context!!, R.color.ivoryYellow))
         }
     }
-
+    
     fun editButtonClicked(subject: Subject){
         val dialogView =
             View.inflate(activity, R.layout.add_dialog, null)
