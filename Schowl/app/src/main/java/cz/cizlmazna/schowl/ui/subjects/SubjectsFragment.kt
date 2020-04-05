@@ -111,6 +111,27 @@ class SubjectsFragment : Fragment() {
             viewModel.editSubject(subject, dialogView.TxtName.text.toString())
         }
     }
+    fun removeButtonClicked(subject: Subject){
+        val dialogView =
+            View.inflate(activity, R.layout.remove_dialog, null)
+        val builder =
+            AlertDialog.Builder(activity).setView(dialogView)
+        val alertDialog = builder.show()
+        dialogView.txtMessage.text = getString(R.string.remove_dialog, subject.name)
+
+        setDialog(dialogView.txtMessage, dialogView.LlMainRemove)
+        dialogView.btnRemove.setOnClickListener {
+            alertDialog.dismiss()
+            viewModel.removeSubject(subject)
+        }
+        dialogView.btnCancel.setOnClickListener {
+            alertDialog.dismiss()
+        }
+    }
+
+    fun testButtonClicked(subject: Subject){
+
+    }
 
 
     private fun addSubject(subject: Subject) {
