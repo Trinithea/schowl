@@ -121,6 +121,38 @@ class CategoriesFragment : Fragment() {
         }
     }
 
+    fun setEditButtonClick(category: Category){
+        val dialogView = View.inflate(activity, R.layout.add_dialog, null)
+        val builder = AlertDialog.Builder(activity).setView(dialogView)
+        val alertDialog = builder.show()
+        dialogView.TxtName.setText(category.name)
+        dialogView.BtnAdd.text = getString(R.string.edit)
+
+        setDialog(dialogView.TxtName, dialogView.llMain)
+        dialogView.BtnAdd.setOnClickListener {
+            alertDialog.dismiss()
+            viewModel.editCategory(category, dialogView.TxtName.text.toString())
+        }
+    }
+
+    fun setRemoveClick(category: Category){
+        val mDialogView =
+            View.inflate(activity, R.layout.remove_dialog, null)
+        val mBuilder =
+            AlertDialog.Builder(activity).setView(mDialogView)
+        val mAlertDialog = mBuilder.show()
+        mDialogView.txtMessage.text = getString(R.string.remove_dialog, category.name)
+
+        setDialog(mDialogView.txtMessage, mDialogView.LlMainRemove)
+        mDialogView.btnRemove.setOnClickListener {
+            mAlertDialog.dismiss()
+            viewModel.removeCategory(category)
+        }
+        mDialogView.btnCancel.setOnClickListener {
+            mAlertDialog.dismiss()
+        }
+    }
+
     private fun addCategory(category: Category) {
         val optionsLyt = LinearLayout(activity)
         val btnNewCategory = Button(activity)
