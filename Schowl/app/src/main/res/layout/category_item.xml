@@ -17,7 +17,7 @@
 
         <Button
             android:id="@+id/btnNewCategory"
-            android:layout_width="248dp"
+            android:layout_width="232dp"
             android:layout_height="wrap_content"
             android:background="@drawable/transparent"
             android:text="Button"
