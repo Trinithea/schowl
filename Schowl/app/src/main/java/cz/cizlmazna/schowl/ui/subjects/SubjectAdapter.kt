@@ -32,10 +32,6 @@ class SubjectAdapter : ListAdapter<Subject, SubjectAdapter.SubjectViewHolder>(
     }
 
     class SubjectViewHolder private constructor(val binding: SubjectItemBinding) : RecyclerView.ViewHolder(binding.root){
-        val btnSubject : Button = binding.btnNewSubject
-        val btnEdit : ImageButton = binding.btnEdit
-        val btnRemove : ImageButton = binding.btnRemove
-        val btnTest : ImageButton = binding.btnTest
 
         fun bind(item: Subject){
             binding.subject = item
