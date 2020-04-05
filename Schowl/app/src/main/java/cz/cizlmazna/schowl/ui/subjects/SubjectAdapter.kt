@@ -40,6 +40,9 @@ class SubjectAdapter(private val subjectsFragment: SubjectsFragment) : ListAdapt
                 Navigation.findNavController(view).navigate(
                     SubjectsFragmentDirections.actionSubjectsFragmentToCategoriesFragment(item.id)
                 ) }
+            binding.btnTest.setOnClickListener { view: View ->
+                Navigation.findNavController(view)
+                    .navigate(SubjectsFragmentDirections.actionNavSubjectsToNavTest(item.id, -1)) }
 
             binding.executePendingBindings()
         }
