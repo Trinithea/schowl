@@ -14,7 +14,7 @@ import cz.cizlmazna.schowl.database.Question
 import cz.cizlmazna.schowl.databinding.QuestionItemBinding
 import cz.cizlmazna.schowl.databinding.SubjectItemBinding
 
-class QuestionAdapter : ListAdapter<Question, QuestionAdapter.QuestionViewHolder>(
+class QuestionAdapter (private val questionsFragment: QuestionsFragment) : ListAdapter<Question, QuestionAdapter.QuestionViewHolder>(
     QuestionDiffCallback()
 ){
 
@@ -26,14 +26,15 @@ class QuestionAdapter : ListAdapter<Question, QuestionAdapter.QuestionViewHolder
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QuestionViewHolder {
         return QuestionViewHolder.from(
-            parent
+            parent, questionsFragment
         )
     }
 
-    class QuestionViewHolder private constructor(val binding: QuestionItemBinding) : RecyclerView.ViewHolder(binding.root){
+    class QuestionViewHolder private constructor(val binding: QuestionItemBinding, private val questionsFragment: QuestionsFragment) : RecyclerView.ViewHolder(binding.root){
 
         fun bind(item: Question){
             binding.question = item
+            binding.questionsFragment=questionsFragment
             binding.btnNewQuestion.setOnClickListener { view: View ->
                 Navigation.findNavController(view).navigate(
                 QuestionsFragmentDirections.actionQuestionsFragmentToEditQuestionFragment(
@@ -47,11 +48,11 @@ class QuestionAdapter : ListAdapter<Question, QuestionAdapter.QuestionViewHolder
         }
 
         companion object {
-            fun from(parent: ViewGroup): QuestionViewHolder {
+            fun from(parent: ViewGroup, questionsFragment: QuestionsFragment): QuestionViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = QuestionItemBinding.inflate(layoutInflater,parent,false)
                 return QuestionViewHolder(
-                    binding
+                    binding,questionsFragment
                 )
             }
         }

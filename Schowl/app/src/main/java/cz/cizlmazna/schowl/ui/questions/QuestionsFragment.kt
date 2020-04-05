@@ -24,8 +24,6 @@ import cz.cizlmazna.schowl.MainActivity
 import cz.cizlmazna.schowl.R
 import cz.cizlmazna.schowl.database.Question
 import cz.cizlmazna.schowl.databinding.FragmentQuestionsBinding
-import cz.cizlmazna.schowl.ui.questions.QuestionsFragmentArgs
-import cz.cizlmazna.schowl.ui.questions.QuestionsFragmentDirections
 import kotlinx.android.synthetic.main.remove_dialog.view.*
 
 class QuestionsFragment : Fragment() {
@@ -62,7 +60,7 @@ class QuestionsFragment : Fragment() {
                 )
             )
         }
-        val adapter = QuestionAdapter()
+        val adapter = QuestionAdapter(this)
         binding.questionsList.adapter = adapter
 
         binding.lifecycleOwner = this
@@ -100,6 +98,23 @@ class QuestionsFragment : Fragment() {
             item,
             view!!.findNavController()
         ) || super.onOptionsItemSelected(item)
+    }
+
+    fun removeButtonClicked(question: Question){
+        val dialogView =
+            View.inflate(activity, R.layout.remove_dialog, null)
+        val builder =
+            AlertDialog.Builder(activity).setView(dialogView)
+        val alertDialog = builder.show()
+        dialogView.txtMessage.text = getString(R.string.remove_question_dialog)
+        setDialog(dialogView.txtMessage, dialogView.LlMainRemove)
+        dialogView.btnRemove.setOnClickListener {
+            alertDialog.dismiss()
+            viewModel.removeQuestion(question)
+        }
+        dialogView.btnCancel.setOnClickListener {
+            alertDialog.dismiss()
+        }
     }
 
     private fun addQuestion(question: Question) {

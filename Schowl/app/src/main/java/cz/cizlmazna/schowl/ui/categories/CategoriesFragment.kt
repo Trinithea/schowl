@@ -75,7 +75,7 @@ class CategoriesFragment : Fragment() {
 
         }
 
-        val adapter = CategoryAdapter()
+        val adapter = CategoryAdapter(this)
         binding.categoriesList.adapter = adapter
 
         binding.lifecycleOwner = this
@@ -121,7 +121,7 @@ class CategoriesFragment : Fragment() {
         }
     }
 
-    fun setEditButtonClick(category: Category){
+    fun editButtonClicked(category: Category){
         val dialogView = View.inflate(activity, R.layout.add_dialog, null)
         val builder = AlertDialog.Builder(activity).setView(dialogView)
         val alertDialog = builder.show()
@@ -135,21 +135,21 @@ class CategoriesFragment : Fragment() {
         }
     }
 
-    fun setRemoveClick(category: Category){
-        val mDialogView =
+    fun removeButtonClicked(category: Category){
+        val dialogView =
             View.inflate(activity, R.layout.remove_dialog, null)
-        val mBuilder =
-            AlertDialog.Builder(activity).setView(mDialogView)
-        val mAlertDialog = mBuilder.show()
-        mDialogView.txtMessage.text = getString(R.string.remove_dialog, category.name)
+        val builder =
+            AlertDialog.Builder(activity).setView(dialogView)
+        val alertDialog = builder.show()
+        dialogView.txtMessage.text = getString(R.string.remove_dialog, category.name)
 
-        setDialog(mDialogView.txtMessage, mDialogView.LlMainRemove)
-        mDialogView.btnRemove.setOnClickListener {
-            mAlertDialog.dismiss()
+        setDialog(dialogView.txtMessage, dialogView.LlMainRemove)
+        dialogView.btnRemove.setOnClickListener {
+            alertDialog.dismiss()
             viewModel.removeCategory(category)
         }
-        mDialogView.btnCancel.setOnClickListener {
-            mAlertDialog.dismiss()
+        dialogView.btnCancel.setOnClickListener {
+            alertDialog.dismiss()
         }
     }
 

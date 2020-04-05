@@ -15,7 +15,7 @@ import cz.cizlmazna.schowl.databinding.CategoryItemBinding
 import cz.cizlmazna.schowl.databinding.SubjectItemBinding
 import cz.cizlmazna.schowl.ui.subjects.SubjectAdapter
 
-class CategoryAdapter : ListAdapter<Category, CategoryAdapter.CategoryViewHolder>(
+class CategoryAdapter (private val categoriesFragment: CategoriesFragment): ListAdapter<Category, CategoryAdapter.CategoryViewHolder>(
     CategoryDiffCallback()
 ){
 
@@ -27,12 +27,11 @@ class CategoryAdapter : ListAdapter<Category, CategoryAdapter.CategoryViewHolder
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
         return CategoryViewHolder.from(
-            parent
+            parent,categoriesFragment
         )
     }
 
-    class CategoryViewHolder private constructor(val binding: CategoryItemBinding) : RecyclerView.ViewHolder(binding.root){
-
+    class CategoryViewHolder private constructor(val binding: CategoryItemBinding,private val categoriesFragment: CategoriesFragment) : RecyclerView.ViewHolder(binding.root){
 
         fun bind(item: Category){
             binding.category = item
@@ -42,15 +41,23 @@ class CategoryAdapter : ListAdapter<Category, CategoryAdapter.CategoryViewHolder
                         item.id
                     )
                 ) }
+            binding.categoriesFragment = categoriesFragment
+            binding.btnTest.setOnClickListener { view: View ->
+                Navigation.findNavController(view).navigate(
+                    CategoriesFragmentDirections.actionCategoriesFragmentToNavTest(
+                        item.subjectId,
+                        item.id
+                    )
+                ) }
             binding.executePendingBindings()
         }
 
         companion object {
-            fun from(parent: ViewGroup): CategoryViewHolder {
+            fun from(parent: ViewGroup,categoriesFragment: CategoriesFragment): CategoryViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = CategoryItemBinding.inflate(layoutInflater,parent,false)
                 return CategoryViewHolder(
-                    binding
+                    binding, categoriesFragment
                 )
             }
         }

@@ -41,6 +41,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:background="@drawable/transparent"
+                android:onClick="@{() -> categoriesFragment.editButtonClicked(category)}"
                 app:imageEditResource="@{category}"
                 app:srcCompat="@drawable/ic_edit_yellow" />
 
@@ -49,6 +50,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:background="@drawable/transparent"
+                android:onClick="@{() -> categoriesFragment.removeButtonClicked(category)}"
                 app:imageRemoveResource="@{category}"
                 app:srcCompat="@drawable/ic_remove_yellow" />
 
