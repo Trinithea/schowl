@@ -4,14 +4,12 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import cz.cizlmazna.schowl.database.Category
 import cz.cizlmazna.schowl.database.Question
 import cz.cizlmazna.schowl.database.SchowlDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import java.security.InvalidParameterException
 
 class EditQuestionViewModel(
     application: Application
@@ -46,7 +44,7 @@ class EditQuestionViewModel(
                 questionSet = question.value != null
             }
         } else if (categoryId != this.categoryId || questionId != this.questionId) {
-            throw InvalidParameterException("Supplying a different id to the same ViewModel currently not supported.")
+            throw IllegalArgumentException("Supplying a different id to the same ViewModel currently not supported.")
         }
     }
 

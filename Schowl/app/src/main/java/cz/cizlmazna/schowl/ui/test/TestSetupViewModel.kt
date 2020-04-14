@@ -9,15 +9,11 @@ import androidx.lifecycle.Transformations
 import cz.cizlmazna.schowl.database.Category
 import cz.cizlmazna.schowl.database.SchowlDatabase
 import cz.cizlmazna.schowl.database.Subject
-import kotlinx.coroutines.*
-import java.security.InvalidParameterException
-import kotlin.collections.List
-import kotlin.collections.MutableList
-import kotlin.collections.MutableMap
-import kotlin.collections.hashMapOf
-import kotlin.collections.mutableListOf
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import kotlin.collections.set
-import kotlin.collections.toLongArray
 
 class TestSetupViewModel(
     application: Application
@@ -173,7 +169,7 @@ class TestSetupViewModel(
                 }
             }
         } else if (subjectId != this.subjectId || categoryId != this.categoryId) {
-            throw InvalidParameterException("Supplying a different id to the same ViewModel currently not supported.")
+            throw IllegalArgumentException("Supplying a different id to the same ViewModel currently not supported.")
         }
     }
 

@@ -4,12 +4,10 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import cz.cizlmazna.schowl.database.Category
 import cz.cizlmazna.schowl.database.SchowlDatabase
-import cz.cizlmazna.schowl.database.Subject
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import java.security.InvalidParameterException
 
 class CategoriesViewModel(
     application: Application
@@ -30,7 +28,7 @@ class CategoriesViewModel(
         if (this.subjectId == -1L) {
             this.subjectId = subjectId
         } else if (subjectId != this.subjectId) {
-            throw InvalidParameterException("Supplying a different id to the same ViewModel currently not supported.")
+            throw IllegalArgumentException("Supplying a different id to the same ViewModel currently not supported.")
         }
     }
 

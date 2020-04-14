@@ -9,8 +9,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import cz.cizlmazna.schowl.database.Question
 import cz.cizlmazna.schowl.database.SchowlDatabase
-import kotlinx.coroutines.*
-import java.security.InvalidParameterException
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 class TestViewModel(
     application: Application
@@ -129,7 +131,7 @@ class TestViewModel(
                 nextQuestion()
             }
         } else if (categoryIds != this.categoryIds || minDifficulty != this.minDifficulty || maxDifficulty != this.maxDifficulty) {
-            throw InvalidParameterException("Supplying a different id or a set of ids to the same ViewModel currently not supported.")
+            throw IllegalArgumentException("Supplying a different id or a set of ids to the same ViewModel currently not supported.")
         }
     }
 
