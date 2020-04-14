@@ -72,11 +72,6 @@ class MainActivity : AppCompatActivity() {
         return MainApplicationClass.getDarkMode()
     }
 
-    fun dpToPx(dp: Int): Int {
-        val displayMetrics = this.resources.displayMetrics
-        return (dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT)).roundToInt()
-    }
-
     fun hideKeyboard(editText: EditText){
         val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(editText.windowToken, 0)
