@@ -112,6 +112,8 @@ class TestSetupFragment : Fragment() {
                     TestSetupViewModel.ErrorMessage.NO_SUBJECT_SELECTED -> getString(R.string.no_subject_selected)
                     TestSetupViewModel.ErrorMessage.NO_CATEGORIES_SELECTED -> getString(R.string.no_categories_selected)
                     TestSetupViewModel.ErrorMessage.NO_QUESTIONS_IN_CATEGORIES -> getString(R.string.no_questions_in_categories)
+                    TestSetupViewModel.ErrorMessage.NO_RIGHT_DIFFICULTY_QUESTIONS_IN_CATEGORIES -> getString(
+                                            R.string.no_right_difficulty_questions_in_categories)
                 }
                 Toast.makeText(activity, text, Toast.LENGTH_SHORT).show()
                 viewModel.doneShowingErrorMessage()

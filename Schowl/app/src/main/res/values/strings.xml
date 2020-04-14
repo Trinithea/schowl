@@ -56,4 +56,5 @@
     <string name="no_subject_selected">No subject selected.</string>
     <string name="no_categories_selected">No categories selected.</string>
     <string name="no_questions_in_categories">No questions in selected categories.</string>
+    <string name="no_right_difficulty_questions_in_categories">No questions with the selected difficulty range in selected categories.</string>
 </resources>

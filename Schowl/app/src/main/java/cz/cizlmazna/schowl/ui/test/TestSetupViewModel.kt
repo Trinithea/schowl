@@ -129,7 +129,7 @@ class TestSetupViewModel(
     }
 
     enum class ErrorMessage {
-        NO_SUBJECT_SELECTED, NO_CATEGORIES_SELECTED, NO_QUESTIONS_IN_CATEGORIES
+        NO_SUBJECT_SELECTED, NO_CATEGORIES_SELECTED, NO_QUESTIONS_IN_CATEGORIES, NO_RIGHT_DIFFICULTY_QUESTIONS_IN_CATEGORIES
     }
 
     private val errorMessage = MutableLiveData<ErrorMessage>()
@@ -200,13 +200,18 @@ class TestSetupViewModel(
         }
 
         var questionsCount = 0
+        var rightDifficultyQuestionsCount = 0
         uiScope.launch {
             for (categoryId in categoryIds) {
                 questionsCount += database.getQuestionsRaw(categoryId).size
+                rightDifficultyQuestionsCount += database.getQuestionsLimited(categoryId, minDifficulty.value!!.toByte(), maxDifficulty.value!!.toByte()).size
             }
             if (questionsCount == 0) {
                 errorMessage.value = ErrorMessage.NO_QUESTIONS_IN_CATEGORIES
                 return@launch
+            }
+            if (rightDifficultyQuestionsCount == 0) {
+                errorMessage.value = ErrorMessage.NO_RIGHT_DIFFICULTY_QUESTIONS_IN_CATEGORIES
             }
 
             navigateToTest.value = true
