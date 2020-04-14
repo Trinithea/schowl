@@ -22,7 +22,9 @@ class CategoriesViewModel(
 
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-    val categories = database.getCategories(subjectId)
+    val categories by lazy {
+        database.getCategories(subjectId)
+    }
 
     fun loadData(subjectId: Long) {
         if (this.subjectId == -1L) {

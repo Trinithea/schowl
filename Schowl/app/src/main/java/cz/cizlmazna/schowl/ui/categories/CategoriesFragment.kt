@@ -35,8 +35,6 @@ class CategoriesFragment : Fragment() {
 
         darkMode = (activity as MainActivity).getDarkMode()
 
-        val application = requireNotNull(this.activity).application
-
         val arguments =
             CategoriesFragmentArgs.fromBundle(
                 arguments!!
