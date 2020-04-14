@@ -1,7 +1,6 @@
 package cz.cizlmazna.schowl.ui.test
 
 import android.app.Application
-import android.util.Log
 import android.view.View
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
@@ -116,7 +115,6 @@ class TestViewModel(
     }
 
     fun loadData(categoryIds: LongArray, minDifficulty: Int, maxDifficulty: Int) {
-        Log.i("asdf", "at least here")
         @Suppress("ReplaceArrayEqualityOpWithArraysEquals")
         if (this.categoryIds == null && this.minDifficulty == -1 && this.maxDifficulty == -1) {
             this.categoryIds = categoryIds
