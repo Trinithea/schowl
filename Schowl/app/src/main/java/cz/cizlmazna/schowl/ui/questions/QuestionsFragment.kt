@@ -66,7 +66,7 @@ class QuestionsFragment : Fragment() {
         binding.lifecycleOwner = this
 
         viewModel.questions.observe(viewLifecycleOwner, Observer {
-            it?.let{
+            it?.let {
                 adapter.submitList(it)
             }
         })
@@ -100,7 +100,7 @@ class QuestionsFragment : Fragment() {
         ) || super.onOptionsItemSelected(item)
     }
 
-    fun removeButtonClicked(question: Question){
+    fun removeButtonClicked(question: Question) {
         val dialogView =
             View.inflate(activity, R.layout.remove_dialog, null)
         val builder =
@@ -117,88 +117,6 @@ class QuestionsFragment : Fragment() {
         }
     }
 
-    private fun addQuestion(question: Question) {
-        val btnQuestion = Button(activity)
-        val btnRemove = ImageButton(activity)
-        val params = LinearLayout.LayoutParams(
-            ViewGroup.LayoutParams.WRAP_CONTENT,
-            ViewGroup.LayoutParams.MATCH_PARENT
-        )
-        params.weight = 1f
-        val mainLyt = ConstraintLayout(activity)
-        btnQuestion.layoutParams = params
-
-        if (!darkMode) {
-            btnQuestion.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
-            btnRemove.setImageResource(R.drawable.ic_remove_blue)
-        } else {
-            btnQuestion.setTextColor(ContextCompat.getColor(context!!, R.color.ivoryYellow))
-            btnRemove.setImageResource(R.drawable.ic_remove_yellow)
-        }
-        btnQuestion.background = ContextCompat.getDrawable(context!!, R.drawable.transparent)
-        btnQuestion.translationZ = 3f
-        btnQuestion.gravity = Gravity.START
-        btnQuestion.setOnClickListener { view: View ->
-            Navigation.findNavController(view).navigate(
-                QuestionsFragmentDirections.actionQuestionsFragmentToEditQuestionFragment(
-                    question.categoryId,
-                    question.id
-                )
-            )
-        }
-
-        btnQuestion.text = question.questionText
-        if (btnQuestion.text.length > 27) {
-            val displayMetrics = DisplayMetrics()
-            (context as Activity).windowManager
-                .defaultDisplay
-                .getMetrics(displayMetrics)
-            val param = LinearLayout.LayoutParams(
-                (activity as MainActivity).dpToPx(260),
-                ViewGroup.LayoutParams.MATCH_PARENT
-            )
-            btnQuestion.layoutParams = param
-        }
-        btnRemove.layoutParams = params
-        btnRemove.background = ContextCompat.getDrawable(context!!, R.drawable.transparent)
-        btnRemove.setOnClickListener {
-            val mDialogView =
-                View.inflate(activity, R.layout.remove_dialog, null)
-            val mBuilder =
-                AlertDialog.Builder(activity).setView(mDialogView)
-            val mAlertDialog = mBuilder.show()
-            mDialogView.txtMessage.text = getString(R.string.remove_question_dialog)
-            setDialog(mDialogView.txtMessage, mDialogView.LlMainRemove)
-            mDialogView.btnRemove.setOnClickListener {
-                mAlertDialog.dismiss()
-                viewModel.removeQuestion(question)
-            }
-            mDialogView.btnCancel.setOnClickListener {
-                mAlertDialog.dismiss()
-            }
-        }
-
-        mainLyt.id = View.generateViewId()
-        btnQuestion.id = View.generateViewId()
-        btnRemove.id = View.generateViewId()
-
-        mainLyt.addView(btnQuestion)
-        mainLyt.addView(btnRemove)
-        val set = ConstraintSet()
-        set.clone(mainLyt)
-        set.connect(btnQuestion.id, ConstraintSet.LEFT, ConstraintSet.PARENT_ID, ConstraintSet.LEFT)
-        set.connect(btnQuestion.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP)
-        set.connect(btnRemove.id, ConstraintSet.RIGHT, ConstraintSet.PARENT_ID, ConstraintSet.RIGHT)
-        set.connect(btnRemove.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP)
-        set.connect(
-            btnRemove.id,
-            ConstraintSet.BOTTOM,
-            ConstraintSet.PARENT_ID,
-            ConstraintSet.BOTTOM
-        )
-        set.applyTo(mainLyt)
-        //binding.llMain.addView(mainLyt)
-    }
 
     private fun setLayoutToLightMode() {
         binding.LytMain.background = ContextCompat.getDrawable(context!!, R.color.white)
