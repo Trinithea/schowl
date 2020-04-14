@@ -42,8 +42,6 @@ class EditQuestionFragment : Fragment() {
         setSeekBarListener(binding.LblDifficulty, binding.SbrDifficulty)
         (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.edit_question)
 
-//        binding.TxtQuestion.setOn
-
         binding.btnSent.setOnClickListener { view: View ->
             viewModel.confirm(
                 binding.TxtQuestion.text.toString(),
@@ -77,13 +75,13 @@ class EditQuestionFragment : Fragment() {
     }
 
     private fun setLayoutToLightMode() {
-        binding.LytBackground.background = ContextCompat.getDrawable(context!!, R.color.white)
-        binding.LblDifficulty.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
-        binding.LblDiff.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
-        binding.LblQueston.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
-        binding.LblSolution.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
-        binding.TxtAnswer.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
-        binding.TxtQuestion.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
+        binding.LytBackground.background = ContextCompat.getDrawable(binding.LytBackground.context, R.color.white)
+        binding.LblDifficulty.setTextColor(ContextCompat.getColor(binding.LblDifficulty.context, R.color.navyBlue))
+        binding.LblDiff.setTextColor(ContextCompat.getColor(binding.LblDiff.context, R.color.navyBlue))
+        binding.LblQueston.setTextColor(ContextCompat.getColor(binding.LblQueston.context, R.color.navyBlue))
+        binding.LblSolution.setTextColor(ContextCompat.getColor(binding.LblSolution.context, R.color.navyBlue))
+        binding.TxtAnswer.setTextColor(ContextCompat.getColor(binding.TxtAnswer.context, R.color.navyBlue))
+        binding.TxtQuestion.setTextColor(ContextCompat.getColor(binding.TxtQuestion.context, R.color.navyBlue))
     }
 
     override fun onStop() {

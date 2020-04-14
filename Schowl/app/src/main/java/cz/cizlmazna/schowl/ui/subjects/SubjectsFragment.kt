@@ -73,18 +73,13 @@ class SubjectsFragment : Fragment() {
         return binding.root
     }
 
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        return NavigationUI.onNavDestinationSelected(item, view!!.findNavController()) || super.onOptionsItemSelected(item)
-//    }
-
-
-    private fun setDialog(textView: TextView, ll: LinearLayout) {
+    private fun setDialog(textView: TextView, linearLayout: LinearLayout) {
         if (!darkMode) {
-            ll.background = ContextCompat.getDrawable(context!!, R.color.white)
-            textView.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
+            linearLayout.background = ContextCompat.getDrawable(linearLayout.context, R.color.white)
+            textView.setTextColor(ContextCompat.getColor(textView.context, R.color.navyBlue))
         } else {
-            ll.background = ContextCompat.getDrawable(context!!, R.color.navyBlue)
-            textView.setTextColor(ContextCompat.getColor(context!!, R.color.ivoryYellow))
+            linearLayout.background = ContextCompat.getDrawable(linearLayout.context, R.color.navyBlue)
+            textView.setTextColor(ContextCompat.getColor(textView.context, R.color.ivoryYellow))
         }
     }
 
@@ -121,9 +116,8 @@ class SubjectsFragment : Fragment() {
             alertDialog.dismiss()
         }
     }
-
     
     private fun setLayoutToLightMode() {
-        binding.LytMain.background = ContextCompat.getDrawable(context!!, R.color.white)
+        binding.LytMain.background = ContextCompat.getDrawable(binding.LytMain.context, R.color.white)
     }
 }

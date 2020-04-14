@@ -2,7 +2,9 @@ package cz.cizlmazna.schowl.ui.categories
 
 import android.app.AlertDialog
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -11,9 +13,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.navigation.ui.NavigationUI
 import cz.cizlmazna.schowl.MainActivity
 import cz.cizlmazna.schowl.R
 import cz.cizlmazna.schowl.database.Category
@@ -70,38 +70,23 @@ class CategoriesFragment : Fragment() {
             }
         })
 
-
-
         if (!darkMode) {
             setLayoutToLightMode()
         }
         return binding.root
     }
 
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.category_menu, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return NavigationUI.onNavDestinationSelected(
-            item,
-            view!!.findNavController()
-        ) || super.onOptionsItemSelected(item)
-    }
-
     private fun setLayoutToLightMode() {
-        binding.LytMain.background = ContextCompat.getDrawable(context!!, R.color.white)
+        binding.LytMain.background = ContextCompat.getDrawable(binding.LytMain.context, R.color.white)
     }
 
-    private fun setDialog(textView: TextView, ll: LinearLayout) {
+    private fun setDialog(textView: TextView, linearLayout: LinearLayout) {
         if (!darkMode) {
-            ll.background = ContextCompat.getDrawable(context!!, R.color.white)
-            textView.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
+            linearLayout.background = ContextCompat.getDrawable(linearLayout.context, R.color.white)
+            textView.setTextColor(ContextCompat.getColor(textView.context, R.color.navyBlue))
         } else {
-            ll.background = ContextCompat.getDrawable(context!!, R.color.navyBlue)
-            textView.setTextColor(ContextCompat.getColor(context!!, R.color.ivoryYellow))
+            linearLayout.background = ContextCompat.getDrawable(linearLayout.context, R.color.navyBlue)
+            textView.setTextColor(ContextCompat.getColor(textView.context, R.color.ivoryYellow))
         }
     }
 
@@ -136,6 +121,4 @@ class CategoriesFragment : Fragment() {
             alertDialog.dismiss()
         }
     }
-
-
 }

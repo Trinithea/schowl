@@ -12,9 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.navigation.ui.NavigationUI
 import cz.cizlmazna.schowl.MainActivity
 import cz.cizlmazna.schowl.R
 import cz.cizlmazna.schowl.database.Question
@@ -68,26 +66,14 @@ class QuestionsFragment : Fragment() {
 
     }
 
-    private fun setDialog(textView: TextView, ll: LinearLayout) {
+    private fun setDialog(textView: TextView, linearLayout: LinearLayout) {
         if (!darkMode) {
-            ll.background = ContextCompat.getDrawable(context!!, R.color.white)
-            textView.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
+            linearLayout.background = ContextCompat.getDrawable(linearLayout.context, R.color.white)
+            textView.setTextColor(ContextCompat.getColor(textView.context, R.color.navyBlue))
         } else {
-            ll.background = ContextCompat.getDrawable(context!!, R.color.navyBlue)
-            textView.setTextColor(ContextCompat.getColor(context!!, R.color.ivoryYellow))
+            linearLayout.background = ContextCompat.getDrawable(linearLayout.context, R.color.navyBlue)
+            textView.setTextColor(ContextCompat.getColor(textView.context, R.color.ivoryYellow))
         }
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.question_menu, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return NavigationUI.onNavDestinationSelected(
-            item,
-            view!!.findNavController()
-        ) || super.onOptionsItemSelected(item)
     }
 
     fun removeButtonClicked(question: Question) {
@@ -107,8 +93,7 @@ class QuestionsFragment : Fragment() {
         }
     }
 
-
     private fun setLayoutToLightMode() {
-        binding.LytMain.background = ContextCompat.getDrawable(context!!, R.color.white)
+        binding.LytMain.background = ContextCompat.getDrawable(binding.LytMain.context, R.color.white)
     }
 }

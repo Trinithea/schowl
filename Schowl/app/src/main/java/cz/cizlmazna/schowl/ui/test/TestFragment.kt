@@ -95,17 +95,17 @@ class TestFragment : Fragment() {
     }
 
     private fun setLayoutToLightMode() {
-        binding.LblMyAnswer.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
-        binding.LblQuestion.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
+        binding.LblMyAnswer.setTextColor(ContextCompat.getColor(binding.LblMyAnswer.context, R.color.navyBlue))
+        binding.LblQuestion.setTextColor(ContextCompat.getColor(binding.LblQuestion.context, R.color.navyBlue))
         binding.LblNumberOfQuestion.setTextColor(
             ContextCompat.getColor(
-                context!!,
+                binding.LblNumberOfQuestion.context,
                 R.color.navyBlue
             )
         )
-        binding.LblSolution.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
-        binding.LytMain.background = ContextCompat.getDrawable(context!!, R.color.white)
-        binding.TxtAnswer.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
+        binding.LblSolution.setTextColor(ContextCompat.getColor(binding.LblSolution.context, R.color.navyBlue))
+        binding.LytMain.background = ContextCompat.getDrawable(binding.LytMain.context, R.color.white)
+        binding.TxtAnswer.setTextColor(ContextCompat.getColor(binding.TxtAnswer.context, R.color.navyBlue))
     }
 
     override fun onStop() {
