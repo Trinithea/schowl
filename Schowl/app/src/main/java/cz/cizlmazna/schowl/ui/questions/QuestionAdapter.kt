@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import cz.cizlmazna.schowl.database.Question
 import cz.cizlmazna.schowl.databinding.QuestionItemBinding
-import cz.cizlmazna.schowl.databinding.SubjectItemBinding
 
 class QuestionAdapter(private val questionsFragment: QuestionsFragment) :
     ListAdapter<Question, QuestionAdapter.QuestionViewHolder>(
