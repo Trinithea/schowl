@@ -32,21 +32,13 @@ class EditQuestionFragment : Fragment() {
             DataBindingUtil.inflate(inflater, R.layout.fragment_edit_question, container, false)
         darkMode = (activity as MainActivity).getDarkMode()
 
-        val application = requireNotNull(this.activity).application
-
         val arguments =
             EditQuestionFragmentArgs.fromBundle(
                 arguments!!
             )
 
-        val viewModelFactory =
-            EditQuestionViewModelFactory(
-                application,
-                arguments.categoryId,
-                arguments.questionId
-            )
-
-        viewModel = ViewModelProvider(this, viewModelFactory).get(EditQuestionViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(EditQuestionViewModel::class.java)
+        viewModel.loadData(arguments.categoryId, arguments.questionId)
 
         binding.editQuestionViewModel = viewModel
         binding.lifecycleOwner = this

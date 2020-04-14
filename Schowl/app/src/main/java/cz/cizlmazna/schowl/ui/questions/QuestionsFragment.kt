@@ -40,8 +40,6 @@ class QuestionsFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_questions, container, false)
         darkMode = (activity as MainActivity).getDarkMode()
 
-        val application = requireNotNull(this.activity).application
-
         val arguments =
             QuestionsFragmentArgs.fromBundle(
                 arguments!!

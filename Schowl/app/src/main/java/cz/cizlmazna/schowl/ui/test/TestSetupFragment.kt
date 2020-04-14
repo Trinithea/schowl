@@ -34,7 +34,6 @@ class TestSetupFragment : Fragment() {
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_test_setup, container, false)
 
-        val application = requireNotNull(this.activity).application
         darkMode = (activity as MainActivity).getDarkMode()
         val subjectId: Long
         val categoryId: Long
@@ -47,9 +46,8 @@ class TestSetupFragment : Fragment() {
             categoryId = arguments.categoryId
         }
 
-        val viewModelFactory = TestSetupViewModelFactory(application, subjectId, categoryId)
-
-        viewModel = ViewModelProvider(this, viewModelFactory).get(TestSetupViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(TestSetupViewModel::class.java)
+        viewModel.loadInitialData(subjectId, categoryId)
 
         binding.lifecycleOwner = this
         binding.testSetupViewModel = viewModel

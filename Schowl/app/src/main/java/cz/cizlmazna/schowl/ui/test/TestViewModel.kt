@@ -1,6 +1,7 @@
 package cz.cizlmazna.schowl.ui.test
 
 import android.app.Application
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
@@ -9,13 +10,14 @@ import androidx.lifecycle.Transformations
 import cz.cizlmazna.schowl.database.Question
 import cz.cizlmazna.schowl.database.SchowlDatabase
 import kotlinx.coroutines.*
+import java.security.InvalidParameterException
 
 class TestViewModel(
-    application: Application,
-    categoryIds: LongArray,
-    minDifficulty: Int,
-    maxDifficulty: Int
+    application: Application
 ) : AndroidViewModel(application) {
+    private var categoryIds: LongArray? = null
+    private var minDifficulty: Int = -1
+    private var maxDifficulty: Int = -1
 
     private val database = SchowlDatabase.getInstance(application).schowlDatabaseDao
 
@@ -111,13 +113,23 @@ class TestViewModel(
         }
     }
 
-    init {
-        uiScope.launch {
-            for (categoryId in categoryIds) {
-                testedQuestions.addAll(database.getQuestionsLimited(categoryId, minDifficulty.toByte(), maxDifficulty.toByte()))
+    fun loadData(categoryIds: LongArray, minDifficulty: Int, maxDifficulty: Int) {
+        Log.i("asdf", "at least here")
+        @Suppress("ReplaceArrayEqualityOpWithArraysEquals")
+        if (this.categoryIds == null && this.minDifficulty == -1 && this.maxDifficulty == -1) {
+            this.categoryIds = categoryIds
+            this.minDifficulty = minDifficulty
+            this.maxDifficulty = maxDifficulty
+
+            uiScope.launch {
+                for (categoryId in categoryIds) {
+                    testedQuestions.addAll(database.getQuestionsLimited(categoryId, minDifficulty.toByte(), maxDifficulty.toByte()))
+                }
+                testedQuestions.shuffle()
+                nextQuestion()
             }
-            testedQuestions.shuffle()
-            nextQuestion()
+        } else if (categoryIds != this.categoryIds || minDifficulty != this.minDifficulty || maxDifficulty != this.maxDifficulty) {
+            throw InvalidParameterException("Supplying a different id or a set of ids to the same ViewModel currently not supported.")
         }
     }
 

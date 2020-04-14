@@ -42,13 +42,8 @@ class CategoriesFragment : Fragment() {
                 arguments!!
             )
 
-        val viewModelFactory =
-            CategoriesViewModelFactory(
-                application,
-                arguments.subjectId
-            )
-
-        viewModel = ViewModelProvider(this, viewModelFactory).get(CategoriesViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(CategoriesViewModel::class.java)
+        viewModel.loadData(arguments.subjectId)
 
         (activity as AppCompatActivity).supportActionBar?.title =
             getString(R.string.categories) // TODO should include Subject name

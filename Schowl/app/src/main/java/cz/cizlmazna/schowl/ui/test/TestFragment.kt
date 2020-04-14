@@ -31,18 +31,10 @@ class TestFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_test, container, false)
         darkMode = (activity as MainActivity).getDarkMode()
 
-        val application = requireNotNull(this.activity).application
-
         val arguments = TestFragmentArgs.fromBundle(arguments!!)
 
-        val viewModelFactory = TestViewModelFactory(
-            application,
-            arguments.categoryIds,
-            arguments.minDifficulty,
-            arguments.maxDifficulty
-        )
-
-        viewModel = ViewModelProvider(this, viewModelFactory).get(TestViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(TestViewModel::class.java)
+        viewModel.loadData(arguments.categoryIds, arguments.minDifficulty, arguments.maxDifficulty)
 
         binding.testViewModel = viewModel
 

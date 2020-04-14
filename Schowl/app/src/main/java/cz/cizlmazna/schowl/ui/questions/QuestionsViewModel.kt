@@ -9,6 +9,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import java.security.InvalidParameterException
 
 class QuestionsViewModel(
     application: Application
@@ -28,6 +29,8 @@ class QuestionsViewModel(
     fun loadData(categoryId: Long) {
         if (this.categoryId == -1L) {
             this.categoryId = categoryId
+        } else if (categoryId != this.categoryId) {
+            throw InvalidParameterException("Supplying a different id to the same ViewModel currently not supported.")
         }
     }
 

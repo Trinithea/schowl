@@ -11,12 +11,15 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import java.security.InvalidParameterException
 
 class EditQuestionViewModel(
-    application: Application,
-    val categoryId: Long,
-    private val questionId: Long
+    application: Application
 ) : AndroidViewModel(application) {
+
+    private var categoryId: Long = -1L
+
+    private var questionId: Long = -1L
 
     private val database = SchowlDatabase.getInstance(application).schowlDatabaseDao
 
@@ -24,23 +27,26 @@ class EditQuestionViewModel(
 
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-    private lateinit var category: Category
-
     private var question = MutableLiveData<Question>()
     fun getQuestion(): LiveData<Question> {
         return question
     }
     private var questionSet = false
 
-    init {
-        uiScope.launch {
-            category = database.getCategory(categoryId)
-            question.value = if (questionId != -1L) {
-                database.getQuestion(questionId)
-            } else {
-                null
+    fun loadData(categoryId: Long, questionId: Long) {
+        if (this.categoryId == -1L && this.questionId == -1L) {
+            this.categoryId = categoryId
+            this.questionId = questionId
+            uiScope.launch {
+                question.value = if (questionId != -1L) {
+                    database.getQuestion(questionId)
+                } else {
+                    null
+                }
+                questionSet = question.value != null
             }
-            questionSet = question.value != null
+        } else if (categoryId != this.categoryId || questionId != this.questionId) {
+            throw InvalidParameterException("Supplying a different id to the same ViewModel currently not supported.")
         }
     }
 
@@ -66,7 +72,7 @@ class EditQuestionViewModel(
                         questionText = questionText,
                         answerText = answerText,
                         difficulty = difficulty,
-                        categoryId = category.id
+                        categoryId = categoryId
                     )
                 )
             }

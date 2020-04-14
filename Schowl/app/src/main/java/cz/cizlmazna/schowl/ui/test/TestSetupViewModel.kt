@@ -10,6 +10,7 @@ import cz.cizlmazna.schowl.database.Category
 import cz.cizlmazna.schowl.database.SchowlDatabase
 import cz.cizlmazna.schowl.database.Subject
 import kotlinx.coroutines.*
+import java.security.InvalidParameterException
 import kotlin.collections.List
 import kotlin.collections.MutableList
 import kotlin.collections.MutableMap
@@ -19,15 +20,18 @@ import kotlin.collections.set
 import kotlin.collections.toLongArray
 
 class TestSetupViewModel(
-    application: Application,
-    subjectId: Long,
-    categoryId: Long
+    application: Application
 ) : AndroidViewModel(application) {
     companion object {
         const val DEFAULT_MIN_DIFFICULTY = 0
         const val DEFAULT_MAX_DIFFICULTY = 10
         const val DEFAULT_ALL_CATEGORIES_SELECTED = false
     }
+
+    // -2 instead of -1 as not to conflict with possible "empty" incoming values
+    private var subjectId: Long = -2L
+
+    private var categoryId: Long = -2L
 
     private val database = SchowlDatabase.getInstance(application).schowlDatabaseDao
 
@@ -139,6 +143,40 @@ class TestSetupViewModel(
 
     private val categoryIds: MutableList<Long> = mutableListOf()
 
+    // TODO merge (or something) with other functions that also load data
+    fun loadInitialData(subjectId: Long, categoryId: Long) {
+        if (this.subjectId == -2L && this.categoryId == -2L) {
+            this.subjectId = subjectId
+            this.categoryId = categoryId
+
+            uiScope.launch {
+                selectedSubject.value = if (subjectId != -1L) {
+                    database.getSubject(subjectId)
+                } else {
+                    null
+                }
+                if (selectedSubject.value == null) {
+                    selectedSubject.value = database.getFirstSubject()
+                }
+                if (selectedSubject.value != null) {
+                    selectedSubjectCategories.value = database.getCategoriesRaw(selectedSubject.value!!.id)
+                    val categoriesCheckedTemp = hashMapOf<Long, Boolean>()
+                    for (category in selectedSubjectCategories.value!!) {
+                        categoriesCheckedTemp[category.id] = false
+                    }
+                    if (categoryId == -1L) {
+                        allCategoriesSelected.value = true
+                    } else {
+                        categoriesCheckedTemp[categoryId] = true
+                    }
+                    categoriesChecked.value = categoriesCheckedTemp
+                }
+            }
+        } else if (subjectId != this.subjectId || categoryId != this.categoryId) {
+            throw InvalidParameterException("Supplying a different id to the same ViewModel currently not supported.")
+        }
+    }
+
     fun onConfirm() {
         if (selectedSubject.value == null) {
             errorMessage.value = ErrorMessage.NO_SUBJECT_SELECTED
@@ -177,32 +215,6 @@ class TestSetupViewModel(
 
     fun getCategoryIds(): LongArray {
         return categoryIds.toLongArray()
-    }
-
-    init {
-        uiScope.launch {
-            selectedSubject.value = if (subjectId != -1L) {
-                database.getSubject(subjectId)
-            } else {
-                null
-            }
-            if (selectedSubject.value == null) {
-                selectedSubject.value = database.getFirstSubject()
-            }
-            if (selectedSubject.value != null) {
-                selectedSubjectCategories.value = database.getCategoriesRaw(selectedSubject.value!!.id)
-                val categoriesCheckedTemp = hashMapOf<Long, Boolean>()
-                for (category in selectedSubjectCategories.value!!) {
-                    categoriesCheckedTemp[category.id] = false
-                }
-                if (categoryId == -1L) {
-                    allCategoriesSelected.value = true
-                } else {
-                    categoriesCheckedTemp[categoryId] = true
-                }
-                categoriesChecked.value = categoriesCheckedTemp
-            }
-        }
     }
 
     override fun onCleared() {
