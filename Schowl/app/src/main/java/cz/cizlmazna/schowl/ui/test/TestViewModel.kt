@@ -30,16 +30,16 @@ class TestViewModel(
 
     private val currentQuestionIndex = MutableLiveData(-1)
     val numberOfQuestion = Transformations.map(currentQuestionIndex) {
-        currentQuestionIndex.value!!.plus(1).toString() + "/" + testedQuestions.size
+        (currentQuestionIndex.value?.plus(1) ?: -1).toString() + "/" + testedQuestions.size
     }
 
     private val currentQuestion = MutableLiveData<Question>()
     fun getCurrentQuestionId(): Long {
-        return currentQuestion.value!!.id
+        return currentQuestion.value?.id ?: -1
     }
 
     fun getCurrentQuestionCategoryId(): Long {
-        return currentQuestion.value!!.categoryId
+        return currentQuestion.value?.categoryId ?: -1
     }
 
     val currentQuestionText = Transformations.map(currentQuestion) {
@@ -89,12 +89,14 @@ class TestViewModel(
 
     fun nextQuestion() {
         questionChange.value = true
-        if (currentQuestionIndex.value!! >= testedQuestions.size - 1) {
-            testOver.value = true
-        } else {
-            currentQuestionIndex.value = currentQuestionIndex.value!! + 1
-            currentQuestion.value = testedQuestions[currentQuestionIndex.value!!]
-            showSolution.value = false
+        currentQuestionIndex.value?.let {
+            if (it >= testedQuestions.size - 1) {
+                testOver.value = true
+            } else {
+                currentQuestionIndex.value = it + 1
+                currentQuestion.value = testedQuestions[it + 1]
+                showSolution.value = false
+            }
         }
     }
 

@@ -42,7 +42,7 @@ class SettingsFragment : Fragment() {
 
 
     private fun setLayoutToLightMode(binding: FragmentSettingsBinding) {
-        binding.SwitchDarkMode.setTextColor(ContextCompat.getColor(context!!, R.color.navyBlue))
+        binding.SwitchDarkMode.setTextColor(ContextCompat.getColor(binding.SwitchDarkMode.context, R.color.navyBlue))
         binding.SwitchDarkMode.text = getString(R.string.light_mode)
         binding.image.setImageResource(R.drawable.ic_settings_background_light)
 
@@ -50,7 +50,7 @@ class SettingsFragment : Fragment() {
 
     private fun setLayoutToDarkMode(binding: FragmentSettingsBinding) {
         binding.image.setImageResource(R.drawable.ic_settings_background_dark_3)
-        binding.SwitchDarkMode.setTextColor(ContextCompat.getColor(context!!, R.color.ivoryYellow))
+        binding.SwitchDarkMode.setTextColor(ContextCompat.getColor(binding.SwitchDarkMode.context, R.color.ivoryYellow))
         binding.SwitchDarkMode.text = getString(R.string.dark_mode)
     }
 

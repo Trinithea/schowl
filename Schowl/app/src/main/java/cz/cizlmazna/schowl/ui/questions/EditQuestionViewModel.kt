@@ -29,7 +29,6 @@ class EditQuestionViewModel(
     fun getQuestion(): LiveData<Question> {
         return question
     }
-    private var questionSet = false
 
     fun loadData(categoryId: Long, questionId: Long) {
         if (this.categoryId == -1L && this.questionId == -1L) {
@@ -41,7 +40,6 @@ class EditQuestionViewModel(
                 } else {
                     null
                 }
-                questionSet = question.value != null
             }
         } else if (categoryId != this.categoryId || questionId != this.questionId) {
             throw IllegalArgumentException("Supplying a different id to the same ViewModel currently not supported.")
@@ -49,21 +47,15 @@ class EditQuestionViewModel(
     }
 
     fun saveQuestion(questionText: String, answerText: String, difficulty: Byte) {
-        val id: Long
-        val categoryId: Long
-        if (questionSet) {
-            id = question.value!!.id
-            categoryId = question.value!!.categoryId
-        } else {
-            id = -1
-            categoryId = -1
-        }
+        val id: Long = question.value?.id ?: -1
+        val categoryId: Long = question.value?.categoryId ?: -1
 
         question.value = Question(id, questionText, answerText, difficulty, categoryId)
     }
 
     fun confirm(questionText: String, answerText: String, difficulty: Byte) {
-        if (!questionSet) {
+        val savedQuestion = question.value
+        if (savedQuestion == null) {
             uiScope.launch {
                 database.insertQuestion(
                     Question(
@@ -75,11 +67,11 @@ class EditQuestionViewModel(
                 )
             }
         } else {
-            question.value!!.questionText = questionText
-            question.value!!.answerText = answerText
-            question.value!!.difficulty = difficulty
+            savedQuestion.questionText = questionText
+            savedQuestion.answerText = answerText
+            savedQuestion.difficulty = difficulty
             uiScope.launch {
-                database.updateQuestion(question.value!!)
+                database.updateQuestion(savedQuestion)
             }
         }
     }

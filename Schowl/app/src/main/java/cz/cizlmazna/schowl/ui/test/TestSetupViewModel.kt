@@ -49,9 +49,10 @@ class TestSetupViewModel(
         if (subject != null && subject != selectedSubject.value) {
             selectedSubject.value = subject
             uiScope.launch {
-                selectedSubjectCategories.value = database.getCategoriesRaw(selectedSubject.value!!.id)
+                val categories = database.getCategoriesRaw(subject.id)
+                selectedSubjectCategories.value = categories
                 val categoriesCheckedTemp = hashMapOf<Long, Boolean>()
-                for (category in selectedSubjectCategories.value!!) {
+                for (category in categories) {
                     categoriesCheckedTemp[category.id] = false
                 }
                 categoriesChecked.value = categoriesCheckedTemp
@@ -92,7 +93,7 @@ class TestSetupViewModel(
     }
 
     fun onCategoryCheckedChange(category: Category, checked: Boolean) {
-        categoriesChecked.value!![category.id] = checked
+        categoriesChecked.value?.let { it[category.id] = checked }
     }
 
     private val minDifficulty = MutableLiveData(DEFAULT_MIN_DIFFICULTY)
@@ -146,18 +147,19 @@ class TestSetupViewModel(
             this.categoryId = categoryId
 
             uiScope.launch {
-                selectedSubject.value = if (subjectId != -1L) {
+                var subject = if (subjectId != -1L) {
                     database.getSubject(subjectId)
                 } else {
                     null
                 }
-                if (selectedSubject.value == null) {
-                    selectedSubject.value = database.getFirstSubject()
+                if (subject == null) {
+                    subject = database.getFirstSubject()
                 }
-                if (selectedSubject.value != null) {
-                    selectedSubjectCategories.value = database.getCategoriesRaw(selectedSubject.value!!.id)
+                if (subject != null) {
+                    val categories = database.getCategoriesRaw(subject.id)
+                    selectedSubjectCategories.value = categories
                     val categoriesCheckedTemp = hashMapOf<Long, Boolean>()
-                    for (category in selectedSubjectCategories.value!!) {
+                    for (category in categories) {
                         categoriesCheckedTemp[category.id] = false
                     }
                     if (categoryId == -1L) {
@@ -167,6 +169,7 @@ class TestSetupViewModel(
                     }
                     categoriesChecked.value = categoriesCheckedTemp
                 }
+                selectedSubject.value = subject
             }
         } else if (subjectId != this.subjectId || categoryId != this.categoryId) {
             throw IllegalArgumentException("Supplying a different id to the same ViewModel currently not supported.")
@@ -179,14 +182,18 @@ class TestSetupViewModel(
             return
         }
         categoryIds.clear()
-        if (allCategoriesSelected.value!!) {
-            for (category in selectedSubjectCategories.value!!) {
-                categoryIds.add(category.id)
+        if (allCategoriesSelected.value != false) {
+            selectedSubjectCategories.value?.let {
+                for (category in it) {
+                    categoryIds.add(category.id)
+                }
             }
         } else {
-            for (categoryIdCheck in categoriesChecked.value!!.entries) {
-                if (categoryIdCheck.value) {
-                    categoryIds.add(categoryIdCheck.key)
+            categoriesChecked.value?.let {
+                for (categoryIdCheck in it.entries) {
+                    if (categoryIdCheck.value) {
+                        categoryIds.add(categoryIdCheck.key)
+                    }
                 }
             }
         }
@@ -200,7 +207,11 @@ class TestSetupViewModel(
         uiScope.launch {
             for (categoryId in categoryIds) {
                 questionsCount += database.getQuestionsRaw(categoryId).size
-                rightDifficultyQuestionsCount += database.getQuestionsLimited(categoryId, minDifficulty.value!!.toByte(), maxDifficulty.value!!.toByte()).size
+                rightDifficultyQuestionsCount += database.getQuestionsLimited(
+                    categoryId,
+                    (minDifficulty.value ?: DEFAULT_MIN_DIFFICULTY).toByte(),
+                    (maxDifficulty.value ?: DEFAULT_MAX_DIFFICULTY).toByte()
+                ).size
             }
             if (questionsCount == 0) {
                 errorMessage.value = ErrorMessage.NO_QUESTIONS_IN_CATEGORIES
