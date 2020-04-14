@@ -14,6 +14,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.NavigationUI
 import cz.cizlmazna.schowl.MainActivity
 import cz.cizlmazna.schowl.R
@@ -37,7 +38,8 @@ class TestSetupFragment : Fragment() {
         darkMode = (activity as MainActivity).getDarkMode()
         val subjectId: Long
         val categoryId: Long
-        if (this.arguments!!.isEmpty) {
+
+        if (this.arguments?.isEmpty != false) {
             subjectId = -1L
             categoryId = -1L
         } else {

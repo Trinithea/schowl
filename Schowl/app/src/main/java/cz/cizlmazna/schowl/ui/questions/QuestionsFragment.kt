@@ -13,6 +13,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.NavigationUI
 import cz.cizlmazna.schowl.MainActivity
 import cz.cizlmazna.schowl.R
@@ -34,10 +35,7 @@ class QuestionsFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_questions, container, false)
         darkMode = (activity as MainActivity).getDarkMode()
 
-        val arguments =
-            QuestionsFragmentArgs.fromBundle(
-                arguments!!
-            )
+        val arguments: QuestionsFragmentArgs by navArgs()
 
         viewModel = ViewModelProvider(this).get(QuestionsViewModel::class.java)
         viewModel.loadData(arguments.categoryId)

@@ -1,7 +1,6 @@
 package cz.cizlmazna.schowl.ui.questions
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,12 +9,13 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.navArgs
 import cz.cizlmazna.schowl.MainActivity
 import cz.cizlmazna.schowl.R
 import cz.cizlmazna.schowl.databinding.FragmentEditQuestionBinding
-import cz.cizlmazna.schowl.ui.questions.EditQuestionFragmentArgs
 
 class EditQuestionFragment : Fragment() {
 
@@ -32,10 +32,7 @@ class EditQuestionFragment : Fragment() {
             DataBindingUtil.inflate(inflater, R.layout.fragment_edit_question, container, false)
         darkMode = (activity as MainActivity).getDarkMode()
 
-        val arguments =
-            EditQuestionFragmentArgs.fromBundle(
-                arguments!!
-            )
+        val arguments: EditQuestionFragmentArgs by navArgs()
 
         viewModel = ViewModelProvider(this).get(EditQuestionViewModel::class.java)
         viewModel.loadData(arguments.categoryId, arguments.questionId)

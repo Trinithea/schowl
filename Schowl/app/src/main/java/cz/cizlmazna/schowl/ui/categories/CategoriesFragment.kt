@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.NavigationUI
 import cz.cizlmazna.schowl.MainActivity
 import cz.cizlmazna.schowl.R
@@ -35,10 +36,7 @@ class CategoriesFragment : Fragment() {
 
         darkMode = (activity as MainActivity).getDarkMode()
 
-        val arguments =
-            CategoriesFragmentArgs.fromBundle(
-                arguments!!
-            )
+        val arguments: CategoriesFragmentArgs by navArgs()
 
         viewModel = ViewModelProvider(this).get(CategoriesViewModel::class.java)
         viewModel.loadData(arguments.subjectId)

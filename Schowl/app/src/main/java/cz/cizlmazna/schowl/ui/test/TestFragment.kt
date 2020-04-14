@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import cz.cizlmazna.schowl.MainActivity
 import cz.cizlmazna.schowl.R
 import cz.cizlmazna.schowl.databinding.FragmentTestBinding
@@ -31,7 +32,7 @@ class TestFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_test, container, false)
         darkMode = (activity as MainActivity).getDarkMode()
 
-        val arguments = TestFragmentArgs.fromBundle(arguments!!)
+        val arguments: TestFragmentArgs by navArgs()
 
         viewModel = ViewModelProvider(this).get(TestViewModel::class.java)
         viewModel.loadData(arguments.categoryIds, arguments.minDifficulty, arguments.maxDifficulty)
